@@ -1,0 +1,274 @@
+|TInterface\\Icons\\inv_misc_herb_evergreenmoss.blp:16|t%s施放了|cFF00FF00可延展黏液！|r
+
+
+Message: Interface\AddOns\DBM-Core\DBM-Core.lua:3353: attempt to index local 'option' (a number value)
+Time: 01/06/21 20:09:42
+Count: 1
+Stack: (tail call): ?
+[C]: ?
+Interface\AddOns\DBM-Core\DBM-Core.lua:3353: in function `LoadModOptions'
+Interface\AddOns\DBM-Core\DBM-Core.lua:4115: in function `func'
+Interface\AddOns\DBM-Core\DBM-Core.lua:1724: in function <Interface\AddOns\DBM-Core\DBM-Core.lua:1715>
+
+Locals: 
+
+
+Message: Interface\AddOns\DBM-GUI\DBM-GUI.lua:355: attempt to index local 'v' (a number value)
+Time: 01/06/21 20:11:05
+Count: 1
+Stack: (tail call): ?
+[C]: ?
+Interface\AddOns\DBM-GUI\DBM-GUI.lua:355: in function `CreateBossModPanel'
+Interface\AddOns\DBM-GUI\DBM-GUI.lua:788: in function `UpdateModList'
+Interface\AddOns\DBM-GUI\DBM-GUI.lua:293: in function `ShowHide'
+Interface\AddOns\DBM-Core\DBM-Core.lua:2738: in function `LoadGUI'
+Interface\AddOns\DBM-Core\DBM-Core.lua:2770: in function `OnClick'
+...AddOns\DBM-Core\Libs\LibDBIcon-1.0\LibDBIcon-1.0.lua:144: in function <...AddOns\DBM-Core\Libs\LibDBIcon-1.0\LibDBIcon-1.0.lua:142>
+
+Locals: 
+
+Message: ...\AddOns\DBM-Icecrown\TheLowerSpire\LordMarrowgar.lua:66: attempt to index global 'soundWhirlwind' (a nil value)
+Time: 01/06/21 20:25:09
+Count: 2
+Stack: (tail call): ?
+[C]: ?
+...\AddOns\DBM-Icecrown\TheLowerSpire\LordMarrowgar.lua:66: in function `?'
+Interface\AddOns\DBM-Core\DBM-Core.lua:961: in function <Interface\AddOns\DBM-Core\DBM-Core.lua:957>
+(tail call): ?
+Interface\AddOns\DBM-Core\DBM-Core.lua:961: in function <Interface\AddOns\DBM-Core\DBM-Core.lua:957>
+
+Locals: (*temporary) = "COMBAT_LOG_EVENT"
+(*temporary) = "COMBAT_LOG_EVENT_UNFILTERED"
+(*temporary) = 1609935913.341
+(*temporary) = "SPELL_AURA_APPLIED"
+(*temporary) = "0xF130008F040E3239"
+(*temporary) = "?ê???ó??áì?÷"
+(*temporary) = 68168
+(*temporary) = "0xF130008F040E3239"
+(*temporary) = "?ê???ó??áì?÷"
+(*temporary) = 68168
+(*temporary) = 69076
+(*temporary) = "°×1?·?±?"
+(*temporary) = 1
+(*temporary) = "BUFF"
+(*temporary) = "COMBAT_LOG_EVENT_UNFILTERED"
+(*temporary) = 1609935913.341
+(*temporary) = "SPELL_AURA_APPLIED"
+(*temporary) = "0xF130008F040E3239"
+(*temporary) = "?ê???ó??áì?÷"
+(*temporary) = 68168
+(*temporary) = "0xF130008F040E3239"
+(*temporary) = "?ê???ó??áì?÷"
+(*temporary) = 68168
+(*temporary) = 69076
+(*temporary) = "°×1?·?±?"
+(*temporary) = 1
+(*temporary) = "BUFF"
+(*temporary) = nil
+(*temporary) = nil
+(*temporary) = nil
+(*temporary) = nil
+(*temporary) = nil
+(*temporary) = nil
+(*temporary) = nil
+(*temporary) = nil
+(*temporary) = nil
+(*temporary) = nil
+(*temporary) = nil
+(*temporary) = nil
+(*temporary) = nil
+(*temporary) = nil
+(*temporary) = <function> defined =[C]:-1
+
+
+
+Message: ...\AddOns\DBM-Icecrown\TheLowerSpire\LordMarrowgar.lua:66: attempt to index global 'soundWhirlwind' (a nil value)
+Time: 01/06/21 20:25:09
+Count: 2
+Stack: (tail call): ?
+[C]: ?
+...\AddOns\DBM-Icecrown\TheLowerSpire\LordMarrowgar.lua:66: in function `?'
+Interface\AddOns\DBM-Core\DBM-Core.lua:961: in function <Interface\AddOns\DBM-Core\DBM-Core.lua:957>
+(tail call): ?
+Interface\AddOns\DBM-Core\DBM-Core.lua:961: in function <Interface\AddOns\DBM-Core\DBM-Core.lua:957>
+
+Locals: (*temporary) = "COMBAT_LOG_EVENT"
+(*temporary) = "COMBAT_LOG_EVENT_UNFILTERED"
+(*temporary) = 1609935913.341
+(*temporary) = "SPELL_AURA_APPLIED"
+(*temporary) = "0xF130008F040E3239"
+(*temporary) = "玛洛加尔领主"
+(*temporary) = 68168
+(*temporary) = "0xF130008F040E3239"
+(*temporary) = "玛洛加尔领主"
+(*temporary) = 68168
+(*temporary) = 69076
+(*temporary) = "白骨风暴"
+(*temporary) = 1
+(*temporary) = "BUFF"
+(*temporary) = "COMBAT_LOG_EVENT_UNFILTERED"
+(*temporary) = 1609935913.341
+(*temporary) = "SPELL_AURA_APPLIED"
+(*temporary) = "0xF130008F040E3239"
+(*temporary) = "玛洛加尔领主"
+(*temporary) = 68168
+(*temporary) = "0xF130008F040E3239"
+(*temporary) = "玛洛加尔领主"
+(*temporary) = 68168
+(*temporary) = 69076
+(*temporary) = "白骨风暴"
+(*temporary) = 1
+(*temporary) = "BUFF"
+(*temporary) = nil
+(*temporary) = nil
+(*temporary) = nil
+(*temporary) = nil
+(*temporary) = nil
+(*temporary) = nil
+(*temporary) = nil
+(*temporary) = nil
+(*temporary) = nil
+(*temporary) = nil
+(*temporary) = nil
+(*temporary) = nil
+(*temporary) = nil
+(*temporary) = nil
+(*temporary) = <function> defined =[C]:-1
+
+
+Message: ...ace\AddOns\DBM-Icecrown\FrostwingHalls\Valithria.lua:213: attempt to call method 'IsManaUser' (a nil value)
+Time: 01/06/21 20:55:43
+Count: 2
+Stack: (tail call): ?
+[C]: in function `IsManaUser'
+...ace\AddOns\DBM-Icecrown\FrostwingHalls\Valithria.lua:213: in function `?'
+Interface\AddOns\DBM-Core\DBM-Core.lua:961: in function <Interface\AddOns\DBM-Core\DBM-Core.lua:957>
+(tail call): ?
+Interface\AddOns\DBM-Core\DBM-Core.lua:961: in function <Interface\AddOns\DBM-Core\DBM-Core.lua:957>
+
+Locals: (*temporary) = "COMBAT_LOG_EVENT"
+(*temporary) = "COMBAT_LOG_EVENT_UNFILTERED"
+(*temporary) = 1609937747.459
+(*temporary) = "SPELL_MISSED"
+(*temporary) = "0xF1300094B41028A8"
+(*temporary) = "法力虚空"
+(*temporary) = 2632
+(*temporary) = "0x000000000000399C"
+(*temporary) = "Udyr"
+(*temporary) = 1297
+(*temporary) = 71743
+(*temporary) = "法力黑洞"
+(*temporary) = 32
+(*temporary) = "ABSORB"
+(*temporary) = 1000
+(*temporary) = "COMBAT_LOG_EVENT_UNFILTERED"
+(*temporary) = 1609937747.459
+(*temporary) = "SPELL_MISSED"
+(*temporary) = "0xF1300094B41028A8"
+(*temporary) = "法力虚空"
+(*temporary) = 2632
+(*temporary) = "0x000000000000399C"
+(*temporary) = "Udyr"
+(*temporary) = 1297
+(*temporary) = 71743
+(*temporary) = "法力黑洞"
+(*temporary) = 32
+(*temporary) = "ABSORB"
+(*temporary) = 1000
+(*temporary) = nil
+(*temporary) = nil
+(*temporary) = nil
+(*temporary) = nil
+(*temporary) = nil
+(*temporary) = nil
+(*temporary) = nil
+(*temporary) = nil
+(*temporary) = nil
+(*temporary) = nil
+(*temporary) = nil
+(*temporary) = nil
+(*temporary) = nil
+(*temporary) = nil
+(*temporary) = nil
+(*temporary) = <function> defined =[C]:-1
+
+
+Message: ...ace\AddOns\DBM-Icecrown\FrostwingHalls\Valithria.lua:203: attempt to call method 'IsManaUser' (a nil value)
+Time: 01/06/21 20:56:39
+Count: 2
+Stack: (tail call): ?
+[C]: in function `IsManaUser'
+...ace\AddOns\DBM-Icecrown\FrostwingHalls\Valithria.lua:203: in function `?'
+Interface\AddOns\DBM-Core\DBM-Core.lua:961: in function <Interface\AddOns\DBM-Core\DBM-Core.lua:957>
+(tail call): ?
+Interface\AddOns\DBM-Core\DBM-Core.lua:961: in function <Interface\AddOns\DBM-Core\DBM-Core.lua:957>
+
+Locals: (*temporary) = "COMBAT_LOG_EVENT"
+(*temporary) = "COMBAT_LOG_EVENT_UNFILTERED"
+(*temporary) = 1609937803.485
+(*temporary) = "SPELL_DAMAGE"
+(*temporary) = "0xF1300094B4102D1F"
+(*temporary) = "法力虚空"
+(*temporary) = 2632
+(*temporary) = "0x000000000000399C"
+(*temporary) = "Udyr"
+(*temporary) = 1297
+(*temporary) = 71743
+(*temporary) = "法力黑洞"
+(*temporary) = 32
+(*temporary) = 1000
+(*temporary) = 0
+(*temporary) = 32
+(*temporary) = nil
+(*temporary) = nil
+(*temporary) = nil
+(*temporary) = nil
+(*temporary) = nil
+(*temporary) = nil
+(*temporary) = "COMBAT_LOG_EVENT_UNFILTERED"
+(*temporary) = 1609937803.485
+(*temporary) = "SPELL_DAMAGE"
+(*temporary) = "0xF1300094B4102D1F"
+(*temporary) = "法力虚空"
+(*temporary) = 2632
+(*temporary) = "0x000000000000399C"
+(*temporary) = "Udyr"
+(*temporary) = 1297
+(*temporary) = 71743
+(*temporary) = "法力黑洞"
+(*temporary) = 32
+(*temporary) = 1000
+(*temporary) = 0
+(*temporary) = 32
+(*temporary) = nil
+(*temporary) = nil
+(*temporary) = nil
+(*temporary) = nil
+(*temporary) = nil
+(*temporary) = nil
+(*temporary) = nil
+(*temporary) = nil
+(*temporary) = nil
+(*temporary) = nil
+(*temporary) = nil
+(*temporary) = nil
+(*temporary) = nil
+(*temporary) = nil
+(*temporary) = nil
+(*temporary) = nil
+(*temporary) = nil
+(*temporary) = nil
+(*temporary) = nil
+(*temporary) = nil
+(*temporary) = nil
+(*temporary) = nil
+(*temporary) = nil
+(*temporary) = nil
+(*temporary) = nil
+(*temporary) = nil
+(*temporary) = nil
+(*temporary) = nil
+(*temporary) = <function> defined =[C]:-1
+
+
+
