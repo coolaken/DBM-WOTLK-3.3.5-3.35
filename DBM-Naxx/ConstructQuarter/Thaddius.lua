@@ -15,7 +15,7 @@ mod:RegisterEvents(
 )
 
 local warnShiftSoon			= mod:NewPreWarnAnnounce(28089, 5, 3)
-local warnShiftCasting		= mod:NewCastAnnounce(28089, 4)
+local warnShiftCasting		= mod:NewCastAnnounce(28089, 4, 3)
 local warnChargeChanged		= mod:NewSpecialWarning("WarningChargeChanged")
 local warnChargeNotChanged	= mod:NewSpecialWarning("WarningChargeNotChanged", false)
 local warnThrow				= mod:NewSpellAnnounce(28338, 2)

@@ -232,7 +232,9 @@ function mod:SPELL_CAST_START(args)
 		end
 		if mod:IsDifficulty("normal10") or mod:IsDifficulty("normal25") then
 			timerAdds:Cancel() 
-			warnAdds:Cancel() 
+			warnAdds:Cancel()
+			sndWOP:CancelVoice("bigmobsoon")
+			sndWOP:CancelVoice("bigmob")
 			self:UnscheduleMethod("Adds")
 		end
 	elseif args:IsSpellID(66134) then							-- Shadow Strike

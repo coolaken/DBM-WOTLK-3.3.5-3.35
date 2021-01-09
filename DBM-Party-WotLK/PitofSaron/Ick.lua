@@ -15,7 +15,7 @@ mod:RegisterEvents(
 	"SPELL_PERIODIC_DAMAGE"
 )
 
-local warnPursuitCast			= mod:NewCastAnnounce(68987, 3)
+local warnPursuitCast			= mod:NewCastAnnounce(68987, 3, 5)
 local warnPoisonNova			= mod:NewCastAnnounce(68989, 3, 5)
 local warnPursuit				= mod:NewAnnounce("warnPursuit", 4, 68987)
 

@@ -49,7 +49,7 @@ local warnPhase3Soon		= mod:NewAnnounce("WarnPhase3Soon", 1, "Interface\\Icons\\
 local warnSummonVileSpirit	= mod:NewSpellAnnounce(70498, 2) --Phase 3 Add
 local warnHarvestSoul		= mod:NewTargetAnnounce(74325, 4) --Phase 3 Ability
 local warnTrapCast			= mod:NewTargetAnnounce(73539, 3) --Phase 1 Heroic Ability
-local warnRestoreSoul		= mod:NewCastAnnounce(73650, 2) --Phase 3 Heroic
+local warnRestoreSoul		= mod:NewCastAnnounce(73650, 2, 5) --Phase 3 Heroic
 
 local specWarnSoulreaper	= mod:NewSpecialWarningYou(73797) --Phase 1+ Ability
 local specWarnNecroticPlague= mod:NewSpecialWarningYou(73912) --Phase 1+ Ability

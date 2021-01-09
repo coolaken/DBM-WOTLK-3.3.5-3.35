@@ -41,7 +41,7 @@ local timerNextAirphase			= mod:NewTimer(110, "TimerNextAirphase", 43810, nil, n
 local timerNextGroundphase		= mod:NewTimer(45, "TimerNextGroundphase", 43810, nil, nil, 6)
 local timerNextFrostBreath		= mod:NewNextTimer(22, 71056, nil, "Tank|Healer", nil, 2, nil, DBM_CORE_L.TANK_ICON)
 local timerNextBlisteringCold	= mod:NewCDTimer(67, 70123, nil, nil, nil, 2, nil, DBM_CORE_L.DEADLY_ICON)
-local timerNextBeacon			= mod:NewNextTimer(20, 70126, nil, nil, nil, 1)
+local timerNextBeacon			= mod:NewCDCountTimer(20, 70126, nil, nil, nil, 1, nil, DBM_CORE_L.IMPORTANT_ICON)               --NewNextTimer(20, 70126, nil, nil, nil, 1)
 local timerBlisteringCold		= mod:NewCastTimer(6, 70123, nil, nil, nil, 2, nil, DBM_CORE_L.DEADLY_ICON)
 local timerUnchainedMagic		= mod:NewBuffActiveTimer(30, 69762, nil, nil, nil, 3)
 local timerInstability			= mod:NewBuffActiveTimer(5, 69766, nil, nil, nil, 3)
@@ -72,6 +72,7 @@ local unchainedIcons = 7
 local spamBeaconIcon = 0
 local activeBeacons	= false
 local beaconIcons = 0
+local beaconCount = 0
 
 mod.vb.phase = 0
 
@@ -217,7 +218,8 @@ function mod:SPELL_AURA_APPLIED(args)
 			end
 		end
 		if phase == 2 then--Phase 2 there is only one icon/beacon, don't use sorting method if we don't have to.
-			timerNextBeacon:Start()
+			beaconCount = beaconCount + 1
+			timerNextBeacon:Start(nil, beaconCount)
 			if self.Options.SetIconOnFrostBeacon then
 				self:SetIcon(args.destName, 8)
 --				if self.Options.AnnounceFrostBeaconIcons then
@@ -371,10 +373,11 @@ function mod:CHAT_MSG_MONSTER_YELL(msg)
 		warnGroundphaseSoon:Schedule(40)
 		activeBeacons = true
 	elseif (msg == L.YellPhase2 or msg:find(L.YellPhase2)) or (msg == L.YellPhase2Dem or msg:find(L.YellPhase2Dem)) then
+		beaconCount = 1
 		phase = phase + 1
 		self.vb.phase = self.vb.phase + 1
 		warnPhase2:Show()
-		timerNextBeacon:Start(7)
+		timerNextBeacon:Start(7, beaconCount)
 		timerNextAirphase:Cancel()
 		timerNextGroundphase:Cancel()
 		warnGroundphaseSoon:Cancel()

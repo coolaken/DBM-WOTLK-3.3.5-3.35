@@ -19,8 +19,8 @@ mod:RegisterEvents(
 
 mod:SetUsedIcons(4, 6, 7, 8)
 
-local warnMadness 					= mod:NewCastAnnounce(64059, 2)
-local warnFervorCast 				= mod:NewCastAnnounce(63138, 3)
+local warnMadness 					= mod:NewCastAnnounce(64059, 2, 60)
+local warnFervorCast 				= mod:NewCastAnnounce(63138, 3, 4)
 local warnSqueeze					= mod:NewTargetAnnounce(64125, 3)
 local warnFervor					= mod:NewTargetAnnounce(63138, 4)
 local warnDeafeningRoarSoon			= mod:NewPreWarnAnnounce(64189, 5, 3)

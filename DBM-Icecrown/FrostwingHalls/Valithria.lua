@@ -32,7 +32,7 @@ local specWarnLayWaste	= mod:NewSpecialWarningSpell(71730)
 local specWarnManaVoid	= mod:NewSpecialWarningMove(71741)
 
 local timerLayWaste		= mod:NewBuffActiveTimer(12, 69325)
-local timerNextPortal	= mod:NewCDTimer(46.5, 72483, nil, nil, nil, 5)
+local timerNextPortal	= mod:NewCDCountTimer(46.5, 72483, nil, nil, nil, 5)
 local timerPortalsOpen	= mod:NewTimer(10, "TimerPortalsOpen", 72483, nil, nil, 5, nil, DBM_CORE_L.HEALER_ICON)
 local timerOutPortal	= mod:NewTimer(20,"TimerOutPortal", "Interface\\Icons\\spell_arcane_portalshattrath", nil, nil, 5)
 local timerHealerBuff	= mod:NewBuffActiveTimer(40, 70873, nil, nil, nil, 3)
@@ -53,6 +53,7 @@ local BlazingSkeletonTimer = 60
 local AbomSpawn = 0
 local AbomTimer = 60
 local blazingSkeleton = nil
+local portalCount = 0
 
 local function warnGutSprayTargets()
 	warnGutSpray:Show(table.concat(GutSprayTargets, "<, >"))
@@ -92,7 +93,8 @@ function mod:OnCombatStart(delay)
 	if mod:IsDifficulty("heroic10") or mod:IsDifficulty("heroic25") then
 		berserkTimer:Start(-delay)
 	end
-	timerNextPortal:Start()
+	portalCount = 1
+	timerNextPortal:Start(nil, portalCount)
 	warnPortalSoon:Schedule(41)
 	self:ScheduleMethod(46.5, "Portals")--This will never be perfect, since it's never same. 45-48sec variations
 	BlazingSkeletonTimer = 60
@@ -116,7 +118,8 @@ function mod:Portals()
 	warnPortalOpen:Schedule(15)
 	timerPortalsOpen:Schedule(15)
 	warnPortalSoon:Schedule(41)
-	timerNextPortal:Start()
+	portalCount = portalCount + 1
+	timerNextPortal:Start(nil, portalCount)
 	self:UnscheduleMethod("Portals")
 	self:ScheduleMethod(46.5, "Portals")--This will never be perfect, since it's never same. 45-48sec variations
 end

@@ -25,13 +25,13 @@ local specWarnGastricBloat	= mod:NewSpecialWarningStack(72551, nil, 9)
 local specWarnInhaled3		= mod:NewSpecialWarningStack(71912, "Tank", 3)
 local specWarnGoo			= mod:NewSpecialWarningSpell(72549, "Melee")
 
-local timerGasSpore			= mod:NewBuffActiveTimer(12, 69279)
-local timerVileGas			= mod:NewBuffActiveTimer(6, 71218, nil, "Ranged")
-local timerGasSporeCD		= mod:NewNextTimer(40, 69279)		-- Every 40 seconds except after 3rd and 6th cast, then it's 50sec CD
-local timerPungentBlight	= mod:NewNextTimer(33, 71219)		-- 33 seconds after 3rd stack of inhaled
-local timerInhaledBlight	= mod:NewNextTimer(34, 71912)		-- 34 seconds'ish
-local timerGastricBloat		= mod:NewTargetTimer(100, 72551, nil, "Tank|Healer")	-- 100 Seconds until expired
-local timerGastricBloatCD	= mod:NewCDTimer(11, 72551, nil, "Tank|Healer") 		-- 10 to 14 seconds
+local timerGasSpore			= mod:NewBuffActiveTimer(12, 69279, nil, nil, nil, 7)
+local timerVileGas			= mod:NewBuffActiveTimer(6, 71218, nil, "Ranged", nil, 3)
+local timerGasSporeCD		= mod:NewCDCountTimer(40, 69279, nil, nil, nil, 3)		-- Every 40 seconds except after 3rd and 6th cast, then it's 50sec CD
+local timerPungentBlight	= mod:NewNextTimer(33, 71219, nil, nil, nil, 2, nil, DBM_CORE_L.HEALER_ICON)		-- 33 seconds after 3rd stack of inhaled
+local timerInhaledBlight	= mod:NewNextTimer(34, 71912, nil, nil, nil, 3, nil, DBM_CORE_L.ENRAGE_ICON)		-- 34 seconds'ish
+local timerGastricBloat		= mod:NewTargetTimer(100, 72551, nil, "Tank|Healer", nil, 3)	-- 100 Seconds until expired
+local timerGastricBloatCD	= mod:NewCDTimer(11, 72551, nil, "Tank|Healer", nil, 3, nil, DBM_CORE_L.TANK_ICON) 		-- 10 to 14 seconds
 
 local sndWOP					= mod:NewAnnounce("SoundWOP", nil, nil, true)
 
@@ -51,6 +51,7 @@ local vileGasTargets	= {}
 local gasSporeCast 	= 0
 local lastGoo = 0
 local warnedfailed = false
+local gasSpore = 0
 
 local function ClearSporeTargets()
 	table.wipe(gasSporeIconTargets)
@@ -94,9 +95,10 @@ local function warnVileGasTargets()
 end
 
 function mod:OnCombatStart(delay)
+	gasSpore = 1
 	berserkTimer:Start(-delay)
 	timerInhaledBlight:Start(-delay)
-	timerGasSporeCD:Start(20-delay)--This may need tweaking
+	timerGasSporeCD:Start(20-delay, gasSpore)--This may need tweaking
 	table.wipe(gasSporeTargets)
 	table.wipe(vileGasTargets)
 	table.wipe(gasSporeIconTargets)
@@ -153,9 +155,11 @@ function mod:SPELL_AURA_APPLIED(args)
 		gasSporeTargets[#gasSporeTargets + 1] = args.destName
 		gasSporeCast = gasSporeCast + 1
 		if (gasSporeCast < 9 and (mod:IsDifficulty("normal25") or mod:IsDifficulty("heroic25"))) or (gasSporeCast < 6 and (mod:IsDifficulty("normal10") or mod:IsDifficulty("heroic10"))) then
-			timerGasSporeCD:Start()
+			gasSpore = gasSpore + 1
+			timerGasSporeCD:Start(nil, gasSpore)
 		elseif (gasSporeCast >= 9 and (mod:IsDifficulty("normal25") or mod:IsDifficulty("heroic25"))) or (gasSporeCast >= 6 and (mod:IsDifficulty("normal10") or mod:IsDifficulty("heroic10"))) then
-			timerGasSporeCD:Start(50)--Basically, the third time spores are placed on raid, it'll be an extra 10 seconds before he applies first set of spores again.
+			gasSpore = gasSpore + 1
+			timerGasSporeCD:Start(50, gasSpore)--Basically, the third time spores are placed on raid, it'll be an extra 10 seconds before he applies first set of spores again.
 			gasSporeCast = 0
 		end
 		if args:IsPlayer() then

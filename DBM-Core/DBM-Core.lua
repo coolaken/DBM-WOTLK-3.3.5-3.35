@@ -5230,7 +5230,7 @@ do
 	end
 
 	function DBM:ShowUpdateReminder(newVersion, newRevision, text, url)
-		urlText = url or "https://github.com/DeadlyBossMods/DeadlyBossMods/wiki"
+		urlText = url or "https://github.com/coolaken/DBM-WOTLK-3.3.5-3.35"
 		if not frame then
 			createFrame()
 		else
@@ -5817,6 +5817,16 @@ do
 				SetCVar("Sound_EnableSFX", 0)
 			end
 			--boss health info scheduler
+			if (self.Options.AlwaysShowHealthFrame or mod.Options.HealthFrame) and mod.Options.Enabled then
+				DBM.BossHealth:Show(mod.localization.general.name)
+				if mod.bossHealthInfo then
+					for i = 1, #mod.bossHealthInfo, 2 do
+						DBM.BossHealth:AddBoss(mod.bossHealthInfo[i], mod.bossHealthInfo[i + 1])
+					end
+				else
+					DBM.BossHealth:AddBoss(mod.combatInfo.mob, mod.localization.general.name)
+				end
+			end
 			if mod.CustomHealthUpdate then
 				self:Schedule(1, checkCustomBossHealth, self, mod)
 			else
@@ -6199,6 +6209,8 @@ do
 				self:TransitionToDungeonBGM(false, true)
 				self:Schedule(22, self.TransitionToDungeonBGM, self)
 			end
+			DBM.BossHealth:Hide()
+			DBM.Arrow:Hide(true)
 		end
 	end
 end

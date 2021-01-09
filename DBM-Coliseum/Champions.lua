@@ -16,9 +16,13 @@ mod:RegisterEvents(
 )
 mod:SetBossHPInfoToHighest()
 
+mod:RegisterKill("yell", L.AllianceVictory or L.HordeVictory)
+
+
+--[[
 if UnitFactionGroup("player") == "Alliance" then
 	mod:RegisterKill("yell", L.AllianceVictory)
-	--[[
+
 	mod:SetBossHealthInfo(
 	-- Horde
 		34458, L.Gorgrim,
@@ -36,10 +40,10 @@ if UnitFactionGroup("player") == "Alliance" then
 		34450, L.Harkzog,
 		34453, L.Narrhok
 	)
-	]]
+
 else
 	mod:RegisterKill("yell", L.HordeVictory)
-	--[[
+
 	mod:SetBossHealthInfo(
 	-- Alliance
 		34461, L.Tyrius,
@@ -57,8 +61,9 @@ else
 		34474, L.Serissa,
 		34475, L.Shocuul
 	)
-	]]
+	
 end
+]]
 
 local isDispeller = select(2, UnitClass("player")) == "WARRIOR"
 				or select(2, UnitClass("player")) == "PRIEST"
