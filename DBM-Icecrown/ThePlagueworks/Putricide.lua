@@ -478,7 +478,7 @@ function mod:CHAT_MSG_RAID_BOSS_EMOTE(msg)
 		warnMalleableGoo:Show()
 		specWarnMalleableGooCast:Show()
 		SendChatMessage("\124cff71d5ff\124Hspell:70852\124h[可延展黏液]\124h\124r".." 快躲开", "SAY")
-		self:SendSync("GooOn", "真心希望")
+		self:SendSync("GooOn", "化羽")
 		sndWOP:Play("greenball")
 		if mod:IsDifficulty("heroic10") or mod:IsDifficulty("heroic25") then
 			timerMalleableGooCD:Start(20)

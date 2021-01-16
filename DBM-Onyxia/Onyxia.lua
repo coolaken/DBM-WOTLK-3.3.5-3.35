@@ -23,16 +23,16 @@ local warnPhase3Soon		= mod:NewAnnounce("WarnPhase3Soon", 1, "Interface\\Icons\\
 
 --local preWarnDeepBreath     = mod:NewSoonAnnounce(17086, 2)--Experimental, if it is off please let me know.
 local specWarnBreath		= mod:NewSpecialWarningRun(17086)
-local specWarnBlastNova		= mod:NewSpecialWarningRun(68958, mod:IsMelee())
+local specWarnBlastNova		= mod:NewSpecialWarningRun(68958, "Melee")
 
-local timerNextFlameBreath	= mod:NewCDTimer(20, 68970)--Breath she does on ground in frontal cone.
-local timerNextDeepBreath	= mod:NewCDTimer(35, 17086)--Range from 35-60seconds in between based on where she moves to.
-local timerBreath			= mod:NewCastTimer(8, 17086)
-local timerBellowingRoarCD	= mod:NewCDTimer(22, 18431) -- 低沉咆哮 CD大概22
-local timerBellowingRoar	= mod:NewCastTimer(2.5, 18431)
-local timerWhelps			= mod:NewTimer(105, "TimerWhelps", 10697)
-local timerAchieve			= mod:NewAchievementTimer(300, 4405, "TimerSpeedKill") 
-local timerAchieveWhelps	= mod:NewAchievementTimer(10, 4406, "TimerWhelps") 
+local timerNextFlameBreath	= mod:NewCDTimer(20, 68970, nil, nil, nil, 2)--Breath she does on ground in frontal cone.
+local timerNextDeepBreath	= mod:NewCDTimer(35, 17086, nil, nil, nil, 3)--Range from 35-60seconds in between based on where she moves to.
+local timerBreath			= mod:NewCastTimer(8, 17086, nil, nil, nil, 2, nil, DBM_CORE_L.DEADLY_ICON)
+local timerBellowingRoarCD	= mod:NewCDTimer(22, 18431, nil, nil, nil, 2, nil, DBM_CORE_L.TANK_ICON) -- 低沉咆哮 CD大概22
+local timerBellowingRoar	= mod:NewCastTimer(2.5, 18431, nil, nil, nil, 2, nil, DBM_CORE_L.HEALER_ICON)
+local timerWhelps			= mod:NewTimer(105, "TimerWhelps", 10697, nil, nil, 1)
+local timerAchieve			= mod:NewAchievementTimer(300, 4405) 
+local timerAchieveWhelps	= mod:NewAchievementTimer(10, 4406) 
 
 --local soundBlastNova		= mod:NewSound(68958, nil, mod:IsMelee())
 --local soundDeepBreath 		= mod:NewSound(17086)
@@ -105,6 +105,7 @@ end
 function mod:CHAT_MSG_RAID_BOSS_EMOTE(msg)
 	if (msg == L.Breath or msg:find(L.Breath)) or (msg == L.Breath2 or msg:find(L.Breath2)) then
 		sndWOP:Play("breathsoon")
+
 	end
 end
 

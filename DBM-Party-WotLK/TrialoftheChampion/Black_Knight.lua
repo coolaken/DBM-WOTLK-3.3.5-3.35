@@ -43,7 +43,7 @@ function mod:SPELL_CAST_START(args)
 	if args:IsSpellID(67729, 67886) and GetTime() - lastexplode > 2 then
 		warnExplode:Show()
 		specWarnExplode:Show()
-		soundExplode:Play()
+		--soundExplode:Play()
 		timerExplode:Start()
 		lastexplode = GetTime()
 	end
@@ -83,7 +83,7 @@ function mod:SPELL_AURA_APPLIED(args)
 	elseif args:IsSpellID(67751) and GetTime() - lastexplode > 2 then	-- Ghoul Explode (BK exlodes Army of the dead. Phase 3)
 		warnGhoulExplode:Show(args.destName)
 		specWarnExplode:Show()
-		soundExplode:Play()
+		--soundExplode:Play()
 		lastexplode = GetTime()
 	end
 end

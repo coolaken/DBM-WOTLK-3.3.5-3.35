@@ -121,13 +121,13 @@ local function sendIconMsg()
 	elseif FrostBeaconIndex == 5 then
 		SendChatMessage(Myname.."{rt5}".."左←", "SAY")
 		sndWOP:ScheduleVoice(0.32, "backleft")
-	elseif FrostBeaconIndex == 6  then
+	elseif FrostBeaconIndex == 7  then
 		SendChatMessage(Myname.."{rt6}".."中", "SAY")
 		sndWOP:ScheduleVoice(0.32, "backcenter")
 	elseif FrostBeaconIndex == 4 then
 		SendChatMessage(Myname.."{rt4}".."右→", "SAY")
 		sndWOP:ScheduleVoice(0.32, "backright")
-	elseif FrostBeaconIndex == 7 then
+	elseif FrostBeaconIndex == 6 then
 		SendChatMessage(Myname.."{rt7}".."右→", "SAY")
 		sndWOP:ScheduleVoice(0.32, "backright")
 	elseif FrostBeaconIndex == 3 then

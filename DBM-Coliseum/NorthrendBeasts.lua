@@ -36,7 +36,7 @@ local specWarnImpale3		= mod:NewSpecialWarning("SpecialWarningImpale3")
 
 
 local specWarnAnger			= mod:NewSpecialWarningCount(66636)
-local specWarnImpale		= mod:NewSpecialWarningStack(67477, "Tank", 3, nil, nil, 2, nil) --3是层数 nil 默认就是3
+local specWarnImpale		= mod:NewSpecialWarningTargetCount(67477, "Tank") --3是层数 nil 默认就是3
 local specWarnFireBomb		= mod:NewSpecialWarningMove(66317)
 local specWarnSlimePool		= mod:NewSpecialWarningMove(67640)
 local specWarnToxin			= mod:NewSpecialWarningMove(67620)
@@ -202,7 +202,7 @@ end
 
 function mod:SPELL_AURA_APPLIED(args)
 	if args:IsSpellID(67477, 66331, 67478, 67479) then		-- Impale
-		warnImpaleOn:CombinedShow(0.3, 1, args.destName)
+		warnImpaleOn:CombinedShow(nil, 1, args.destName)
 		timerNextImpale:Start()
 	elseif args:IsSpellID(67657, 66759, 67658, 67659) then    -- Frothing Rage
 		local target = self:GetBossTarget(34797)
@@ -255,11 +255,11 @@ end
 
 function mod:SPELL_AURA_APPLIED_DOSE(args)
 	if args:IsSpellID(67477, 66331, 67478, 67479) then		-- Impale
-		warnImpaleOn:CombinedShow(0.3, args.amount, args.destName)
+		warnImpaleOn:CombinedShow(nil, args.amount, args.destName)
 		timerNextImpale:Start()
 		if (args.amount >= 3 and not self:IsDifficulty("heroic10", "heroic25") ) or ( args.amount >= 2 and self:IsDifficulty("heroic10", "heroic25") ) then 
 			if mod:IsTank() or mod:IsHealer() then
-
+				specWarnImpale:Show(args.amount, args.destName)
 			end
 		end
 	elseif args:IsSpellID(66636) then						-- Rising Anger

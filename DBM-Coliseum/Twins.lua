@@ -24,7 +24,7 @@ mod:SetBossHealthInfo(
 local warnSpecial					= mod:NewAnnounce("WarnSpecialSpellSoon", 3)
 local warnTouchDebuff				= mod:NewAnnounce("WarningTouchDebuff", 2, 66823)
 local warnPoweroftheTwins			= mod:NewAnnounce("WarningPoweroftheTwins", 4)		
-local specWarnSpecial				= mod:NewSpecialWarning("SpecWarnSpecial")
+local specWarnSpecial				= mod:NewSpecialWarning("SpecWarnSpecial", nil, nil, nil, 5)
 local specWarnSwitch				= mod:NewSpecialWarning("SpecWarnSwitchTarget")
 local specWarnKickNow 				= mod:NewSpecialWarning("SpecWarnKickNow")
 local specWarnPoweroftheTwins		= mod:NewSpecialWarning("SpecWarnPoweroftheTwins")

@@ -2,6 +2,11 @@ local mod = DBM:NewMod("LichKingEvent", "DBM-Party-WotLK", 16)
 local L = mod:GetLocalizedStrings()
 
 mod:SetRevision(("$Revision: 2153 $"):sub(12, -3))
+
+mod:RegisterCombat("yell", L.Wave1)
+mod:RegisterKill("yell", L.YellCombatEnd)
+
+
 mod:RegisterEvents(
 	"SPELL_AURA_REMOVED",
 	"CHAT_MSG_MONSTER_YELL"

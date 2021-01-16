@@ -33,7 +33,7 @@ function mod:SPELL_AURA_APPLIED(args)
 		warningWhirlwind:Show()
 		timerWhirlwindCD:Start()
 		specWarnWhirlwind:Show()
-		soundWhirlwind:Play()
+		--soundWhirlwind:Play()
 	end
 end
 

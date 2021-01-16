@@ -17,7 +17,7 @@ local warnMortalWound	= mod:NewAnnounce("WarnMortalWound", 2, 71127, false)
 local warnDecimateSoon	= mod:NewSoonAnnounce(71123, 3)
 
 local specWarnDecimate		= mod:NewSpecialWarningSpell(71123)
-local specWarnMortalWound	= mod:NewSpecialWarningStack(71127, nil, 5)
+local specWarnMortalWound	= mod:NewSpecialWarningTargetCount(71127, nil)
 local specWarnTrap			= mod:NewSpecialWarning("SpecWarnTrap")
 local specWarnBlightBomb	= mod:NewSpecialWarningSpell(71088)
 
@@ -38,7 +38,7 @@ function mod:SPELL_AURA_APPLIED(args)
 		timerMortalWound:Start(args.destName)
 --		if args:IsPlayer() and (args.amount or 1) >= 5 then
 		if (args.amount or 1) >= 5 then
-			specWarnMortalWound:Show(args.amount)
+			specWarnMortalWound:Show(args.amount, args.destName)
 			if args.amount == 7 or args.amount == 9 then	
 				if mod:IsTank() or mod:IsHealer() then		
 					sndWOP:Play("changemt")
