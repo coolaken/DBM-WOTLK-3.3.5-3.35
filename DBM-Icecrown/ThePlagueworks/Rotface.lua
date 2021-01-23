@@ -20,12 +20,12 @@ mod:RegisterEvents(
 local InfectionIcon	-- alternating between 2 icons (2 debuffs can be up at the same time in 25man at least)
 
 local warnSlimeSpray			= mod:NewSpellAnnounce(69508, 2)
-local warnMutatedInfection		= mod:NewTargetAnnounce(71224, 4)
+local warnMutatedInfection		= mod:NewTargetNoFilterAnnounce(71224, 4)
 local warnRadiatingOoze			= mod:NewSpellAnnounce(69760, 3)
 local warnOozeSpawn				= mod:NewAnnounce("WarnOozeSpawn", 1)
 local warnStickyOoze			= mod:NewSpellAnnounce(69774, 1)
 local warnUnstableOoze			= mod:NewAnnounce("WarnUnstableOoze", 2, 69558)
-local warnVileGas				= mod:NewTargetAnnounce(72272, 3)
+local warnVileGas				= mod:NewTargetNoFilterAnnounce(72272, 3)
 
 local specWarnMutatedInfection	= mod:NewSpecialWarningYou(71224)
 local specWarnStickyOoze		= mod:NewSpecialWarningMove(69774)
@@ -42,7 +42,7 @@ local timerMutatedInfection		= mod:NewTargetTimer(12, 71224, nil, nil, nil, 3, n
 local timerOozeExplosion		= mod:NewCastTimer(4, 69839, nil, nil, nil, 2, nil, DBM_CORE_L.DEADLY_ICON)
 local timerVileGasCD			= mod:NewNextTimer(30, 72272, nil, nil, nil, 3, nil, DBM_CORE_L.HEROIC_ICON)
 
-local sndWOP					= mod:NewAnnounce("SoundWOP", nil, nil, true)
+local sndWOP					= mod:NewSpecialWarning("SoundWOP", nil, nil, nil, 4, 2)
 
 --local soundMutatedInfection			= mod:NewSound(71224)
 mod:AddBoolOption("RangeFrame", "Melee")

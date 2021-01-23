@@ -28,8 +28,8 @@ mod:RegisterEvents(
 
 local warnPhase2			= mod:NewPhaseAnnounce(2, 3)
 local warnSimulKill			= mod:NewAnnounce("WarnSimulKill", 1)
-local warnFury				= mod:NewTargetAnnounce(63571, 2)
-local warnRoots				= mod:NewTargetAnnounce(62438, 2)
+local warnFury				= mod:NewTargetNoFilterAnnounce(63571, 2)
+local warnRoots				= mod:NewTargetNoFilterAnnounce(62438, 2)
 
 local specWarnFury			= mod:NewSpecialWarningYou(63571)
 local specWarnTree		= mod:NewSpecialWarning("WarningTree")
@@ -39,11 +39,11 @@ local specWarnBeam			= mod:NewSpecialWarningMove(62865)	-- Hard mode
 local enrage 				= mod:NewBerserkTimer(600)
 local timerAlliesOfNature	= mod:NewNextTimer(60, 62678)
 local timerSimulKill		= mod:NewTimer(12, "TimerSimulKill")
-local timerFury				= mod:NewTargetTimer(10, 63571)
+local timerFury				= mod:NewTargetTimer(10, 63571, nil, nil, nil, 3)
 local timerTremorCD 		= mod:NewCDTimer(28, 62859)
 local timerEonarsGiftCD     = mod:NewCDTimer(40, 62584)
 
-local sndWOP					= mod:NewAnnounce("SoundWOP", nil, nil, true)
+local sndWOP					= mod:NewSpecialWarning("SoundWOP", nil, nil, nil, 4, 2)
 
 mod:AddBoolOption("HealthFrame", true)
 mod:AddBoolOption("PlaySoundOnFury")

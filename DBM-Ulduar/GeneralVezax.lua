@@ -16,8 +16,8 @@ mod:RegisterEvents(
 	"CHAT_MSG_RAID_BOSS_EMOTE"
 )
 
-local warnShadowCrash			= mod:NewTargetAnnounce(62660, 4)
-local warnLeechLife				= mod:NewTargetAnnounce(63276, 3)
+local warnShadowCrash			= mod:NewTargetNoFilterAnnounce(62660, 4)
+local warnLeechLife				= mod:NewTargetNoFilterAnnounce(63276, 3)
 
 local specWarnShadowCrash		= mod:NewSpecialWarning("SpecialWarningShadowCrash")
 local specWarnShadowCrashNear	= mod:NewSpecialWarning("SpecialWarningShadowCrashNear")
@@ -30,7 +30,7 @@ local timerSearingFlamesCast	= mod:NewCastTimer(2, 62661)
 local timerSurgeofDarkness		= mod:NewBuffActiveTimer(10, 62662)
 local timerNextSurgeofDarkness	= mod:NewBuffActiveTimer(62, 62662)
 local timerSaroniteVapors		= mod:NewNextTimer(30, 63322)
-local timerLifeLeech			= mod:NewTargetTimer(10, 63276)
+local timerLifeLeech			= mod:NewTargetTimer(10, 63276, nil, nil, nil, 3)
 local timerHardmode				= mod:NewTimer(189, "hardmodeSpawn")
 
 mod:AddBoolOption("YellOnLifeLeech", true, "announce")
@@ -40,7 +40,7 @@ mod:AddBoolOption("SetIconOnLifeLeach", true)
 mod:AddBoolOption("CrashArrow")
 mod:AddBoolOption("BypassLatencyCheck", false)--Use old scan method without syncing or latency check (less reliable but not dependant on other DBM users in raid)
 
-local sndWOP					= mod:NewAnnounce("SoundWOP", nil, nil, true)
+local sndWOP					= mod:NewSpecialWarning("SoundWOP", nil, nil, nil, 4, 2)
 
 function mod:OnCombatStart(delay)
 	timerEnrage:Start(-delay)

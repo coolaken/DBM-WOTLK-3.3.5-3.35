@@ -22,20 +22,20 @@ mod:SetBossHealthInfo(
 	32933, L.Health_Left_Arm
 )
 
-local warnFocusedEyebeam		= mod:NewTargetAnnounce(63346, 3)
-local warnGrip					= mod:NewTargetAnnounce(64292, 2)
-local warnCrunchArmor			= mod:NewTargetAnnounce(64002, 2)
+local warnFocusedEyebeam		= mod:NewTargetNoFilterAnnounce(63346, 3)
+local warnGrip					= mod:NewTargetNoFilterAnnounce(64292, 2)
+local warnCrunchArmor			= mod:NewTargetNoFilterAnnounce(64002, 2)
 
-local specWarnCrunchArmor2		= mod:NewSpecialWarningStack(64002, false, 2)
+local specWarnCrunchArmor2		= mod:NewSpecialWarningTargetCount(64002, "Tank|Healer", nil, nil, 1, 2)
 local specWarnEyebeam			= mod:NewSpecialWarningYou(63346)
 
-local timerCrunch10             = mod:NewTargetTimer(6, 63355)
+local timerCrunch10             = mod:NewTargetTimer(6, 63355, nil, nil, nil, 3)
 local timerNextShockwave		= mod:NewCDTimer(18, 63982)
 local timerRespawnLeftArm		= mod:NewTimer(48, "timerLeftArm")
 local timerRespawnRightArm		= mod:NewTimer(48, "timerRightArm")
 local timerTimeForDisarmed		= mod:NewTimer(10, "achievementDisarmed")	-- 10 HC / 12 nonHC
 
-local sndWOP					= mod:NewAnnounce("SoundWOP", nil, nil, true)
+local sndWOP					= mod:NewSpecialWarning("SoundWOP", nil, nil, nil, 4, 2)
 
 mod:AddBoolOption("HealthFrame", true)
 mod:AddBoolOption("SetIconOnGripTarget", true)
@@ -125,10 +125,8 @@ function mod:SPELL_AURA_APPLIED_DOSE(args)
 		warnCrunchArmor:Show(args.destName)
         if args.amount >= 2 then 
             --if args:IsPlayer() then
-      			if mod:IsTank() or mod:IsHealer() then
-                specWarnCrunchArmor2:Show(args.amount)
-                sndWOP:Play("changemt")
-            end
+                specWarnCrunchArmor2:Show(args.amount, args.destName)
+                specWarnCrunchArmor2:Play("changemt")
 		end
 	end
 end

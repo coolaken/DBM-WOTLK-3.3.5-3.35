@@ -21,9 +21,9 @@ local warnAddsSoon			= mod:NewPreWarnAnnounce(72173, 10, 3)
 local warnAdds				= mod:NewSpellAnnounce(72173, 4)
 local warnFrenzy			= mod:NewSpellAnnounce(72737, 2, nil, "Tank|Healer")
 local warnBloodNova			= mod:NewSpellAnnounce(73058, 2)
-local warnMark				= mod:NewTargetAnnounce(72444, 4)
-local warnBoilingBlood		= mod:NewTargetAnnounce(72441, 2, nil, "Healer")
-local warnRuneofBlood		= mod:NewTargetAnnounce(72410, 3, nil, "Tank|Healer")
+local warnMark				= mod:NewTargetNoFilterAnnounce(72444, 4)
+local warnBoilingBlood		= mod:NewTargetNoFilterAnnounce(72441, 2, nil, "Healer")
+local warnRuneofBlood		= mod:NewTargetNoFilterAnnounce(72410, 3, nil, "Tank|Healer")
 
 local specwarnMark			= mod:NewSpecialWarningTarget(72444, false)
 local specwarnRuneofBlood	= mod:NewSpecialWarningTarget(72410, "Tank")
@@ -34,7 +34,7 @@ local timerBoilingBlood		= mod:NewNextTimer(15.5, 72441, nil, nil, nil, 3, nil, 
 local timerBloodNova		= mod:NewNextTimer(20, 73058, nil, nil, nil, 2)
 local timerCallBloodBeast	= mod:NewNextTimer(40, 72173, nil, nil, nil, 1, nil, DBM_CORE_L.DAMAGE_ICON)
 
-local sndWOP					= mod:NewAnnounce("SoundWOP", nil, nil, true)
+local sndWOP					= mod:NewSpecialWarning("SoundWOP", nil, nil, nil, 4, 2)
 
 local enrageTimer			= mod:NewBerserkTimer(480)
 

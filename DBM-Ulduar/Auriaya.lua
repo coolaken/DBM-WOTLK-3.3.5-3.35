@@ -23,7 +23,7 @@ do
 		or class == "MAGE"
 end
 
-local warnSwarm 		= mod:NewTargetAnnounce(64396, 2)
+local warnSwarm 		= mod:NewTargetNoFilterAnnounce(64396, 2)
 local warnFear 			= mod:NewSpellAnnounce(64386, 3)
 local warnFearSoon	 	= mod:NewSoonAnnounce(64386, 1)
 local warnCatDied 		= mod:NewAnnounce("WarnCatDied", 3, 64455)
@@ -41,7 +41,7 @@ local timerNextSwarm 	= mod:NewNextTimer(36, 64396)
 local timerNextSonic 	= mod:NewNextTimer(27, 64688)
 local timerSonic		= mod:NewCastTimer(64688)
 
-local sndWOP					= mod:NewAnnounce("SoundWOP", nil, nil, true)
+local sndWOP					= mod:NewSpecialWarning("SoundWOP", nil, nil, nil, 4, 2)
 
 mod:AddBoolOption("HealthFrame", true)
 

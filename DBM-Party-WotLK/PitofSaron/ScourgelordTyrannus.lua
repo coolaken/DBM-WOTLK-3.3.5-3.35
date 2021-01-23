@@ -19,54 +19,28 @@ mod:RegisterEvents(
 
 local warnUnholyPower			= mod:NewSpellAnnounce(69629, 3)
 local warnForcefulSmash			= mod:NewSpellAnnounce(69627, 2)
-local warnOverlordsBrand		= mod:NewTargetAnnounce(69172, 4)
-local warnHoarfrost				= mod:NewTargetAnnounce(69246, 2)
+local warnOverlordsBrand		= mod:NewTargetNoFilterAnnounce(69172, 4)
+local warnHoarfrost				= mod:NewTargetNoFilterAnnounce(69246, 2)
 
-local specWarnHoarfrost			= mod:NewSpecialWarning("specWarnHoarfrost")
-local specWarnHoarfrostNear		= mod:NewSpecialWarning("specWarnHoarfrostNear")
+--local specWarnGluttonousMiasma					= mod:NewSpecialWarningYouPos(48451, nil, nil, nil, 1, 2)
+--local yellGluttonousMiasma						= mod:NewShortPosYell(48451, nil, false, 2)
+local specWarnHoarfrost			= mod:NewSpecialWarningMoveAway(69246, nil, nil, nil, 4, 3)
+local specWarnHoarfrostNear		= mod:NewSpecialWarningClose(69246, nil, nil, nil, 1, 3)
 local specWarnIcyBlast			= mod:NewSpecialWarningMove(69628)
 local specWarnOverlordsBrand	= mod:NewSpecialWarningYou(69172)
 
 local timerCombatStart			= mod:NewCombatTimer(40)
-local timerOverlordsBrand		= mod:NewTargetTimer(8, 69172)
+local timerOverlordsBrand		= mod:NewTargetTimer(8, 69172, nil, nil, nil, 3)
 local timerUnholyPower			= mod:NewBuffActiveTimer(10, 69629)
-local timerForcefulSmash		= mod:NewCDTimer(50, 69627, 69627, 69627, nil, 3, nil, DBM_CORE_L.IMPORTANT_ICON) --hotfixed? new combat logs show it every 50 seconds'ish.(16.0, 24814, nil, nil, nil, 3)
--- mod:NewCDTimer(25, 20566, nil, nil, nil, 2, nil, DBM_CORE_L.IMPORTANT_ICON, nil, mod:IsMelee() and 1, 4)
+local timerForcefulSmash		= mod:NewCDTimer(50, 69155, nil, nil, nil, 3, nil, DBM_CORE_L.TANK_ICON) --hotfixed? new combat logs show it every 50 seconds'ish.(16.0, 24814, nil, nil, nil, 3)
 
-local timerForcefulSmash1		= mod:NewCDTimer(10, 69627, 69627, 69627, nil, 3, nil, DBM_CORE_L.TANK_ICON)
-local timerForcefulSmash2		= mod:NewCDTimer(20, 69627, 69627, 69627, nil, 3, nil, DBM_CORE_L.DAMAGE_ICON)
-local timerForcefulSmash3		= mod:NewCDTimer(30, 69627, 69627, 69627, nil, 3, nil, DBM_CORE_L.HEALER_ICON)
-local timerForcefulSmash4		= mod:NewCDTimer(40, 69627, 69627, 69627, nil, 3, nil, DBM_CORE_L.TANK_ICON_SMALL)
-local timerForcefulSmash5		= mod:NewCDTimer(50, 69627, 69627, 69627, nil, 3, nil, DBM_CORE_L.DAMAGE_ICON_SMALL)
-local timerForcefulSmash6		= mod:NewCDTimer(60, 69627, 69627, 69627, nil, 3, nil, DBM_CORE_L.HEALER_ICON_SMALL)
-local timerForcefulSmash7		= mod:NewCDTimer(70, 69627, 69627, 69627, nil, 3, nil, DBM_CORE_L.HEROIC_ICON)
-local timerForcefulSmash8		= mod:NewCDTimer(80, 69627, 69627, 69627, nil, 3, nil, DBM_CORE_L.DEADLY_ICON)
-local timerForcefulSmash9		= mod:NewCDTimer(90, 69627, 69627, 69627, nil, 3, nil, DBM_CORE_L.HEROIC_ICON_SMALL)
-local timerForcefulSmash10		= mod:NewCDTimer(100, 69627, 69627, 69627, nil, 3, nil, DBM_CORE_L.POISON_ICON)
-local timerForcefulSmash11		= mod:NewCDTimer(110, 69627, 69627, 69627, nil, 3, nil, DBM_CORE_L.IMPORTANT_ICON)
-local timerForcefulSmash12		= mod:NewCDTimer(120, 69627, 69627, 69627, nil, 3, nil, DBM_CORE_L.IMPORTANT_ICON)
-local timerForcefulSmash13		= mod:NewCDTimer(120, 69627, 69627, 69627, nil, 3, nil, DBM_CORE_L.DISEASE_ICON)
-
-local sndWOP					= mod:NewAnnounce("SoundWOP", nil, nil, true)
 
 mod:AddBoolOption("SetIconOnHoarfrostTarget", true)
 
 
 function mod:OnCombatStart(delay)
 	timerCombatStart:Start(-delay)
-	timerForcefulSmash1:Start(-delay)
-	timerForcefulSmash2:Start(-delay)
-	timerForcefulSmash3:Start(-delay)
-	timerForcefulSmash4:Start(-delay)
-	timerForcefulSmash5:Start(-delay)
-	timerForcefulSmash6:Start(-delay)
-	timerForcefulSmash7:Start(-delay)
-	timerForcefulSmash8:Start(-delay)
-	timerForcefulSmash9:Start(-delay)
-	timerForcefulSmash10:Start(-delay)
-	timerForcefulSmash11:Start(-delay)
-	timerForcefulSmash12:Start(-delay)
-	timerForcefulSmash13:Start(-delay)
+	timerForcefulSmash:Start(-delay)
 end
 
 function mod:SPELL_CAST_START(args)
@@ -100,58 +74,30 @@ function mod:SPELL_AURA_APPLIED(args)
 		if args:IsPlayer() then
 			specWarnOverlordsBrand:Show()
 		end
+	--elseif args:IsSpellID(48451) then
+	--	specWarnGluttonousMiasma:Show(self:IconNumToTexture(1))
+		--yellGluttonousMiasma:Yell(1, 1)
 	end
 end
 
 
---[[
-function mod:CHAT_MSG_RAID_BOSS_EMOTE(msg)
-	local target = msg and msg:match(L.HoarfrostTarget)
-	if target then
-		SendChatMessage("doudou", "SAY") --测试
-		warnHoarfrost:Show(target)
-		if target == UnitName("player") then
-			specWarnHoarfrost:Show()
-			sndWOP:Play("Interface\\AddOns\\DBM-Core\\DBM-VPYike\\targetyou.ogg")
-		elseif target then
-			local uId = DBM:GetRaidUnitId(target)
-			if uId then
-				local inRange = CheckInteractDistance(uId, 2)
-				if inRange then
-					specWarnHoarfrostNear:Show()
-					sndWOP:Play("Interface\\AddOns\\DBM-Core\\DBM-VPYike\\watchorb.ogg")
-				end
-			end
-		end
-		if self.Options.SetIconOnHoarfrostTarget then
-			self:SetIcon(target, 8, 5)
-		end
-	end
-end
-]]
 
 
-function mod:CHAT_MSG_RAID_BOSS_EMOTE(msg, _, _, _, target) --测试!
-	--if target and (msg:match(L.HoarfrostTarget) or msg:find(L.HoarfrostTarget)) then
-	--if msg == L.HoarfrostTarget or msg:match(L.HoarfrostTarget) or msg:find(L.HoarfrostTarget) then
-		--SendChatMessage("sdsd", "SAY") --测试不通过
-	--end
+
+function mod:CHAT_MSG_RAID_BOSS_EMOTE(msg, _, _, _, target)
 	if msg == L.HoarfrostTarget or msg:match(L.HoarfrostTarget) or msg:find(L.HoarfrostTarget) then
-		--SendChatMessage("abba", "SAY") --测试通过
-		if target then --可以
+		if target then
 			warnHoarfrost:Show(target)
-			--SendChatMessage(target, "SAY")
 			if target == UnitName("player") then
-				--SendChatMessage(target, "SAY")
 				specWarnHoarfrost:Show()
-				sndWOP:Play("targetyou")
+				specWarnHoarfrost:Play("targetyou")
 			elseif target then
 				local uId = DBM:GetRaidUnitId(target)
 				if uId then
-					local inRange = CheckInteractDistance(uId, 2)
+					local inRange = CheckInteractDistance(uId, 3)
 					if inRange then
 						specWarnHoarfrostNear:Show()
-						sndWOP:Play("watchorb")
+						specWarnHoarfrostNear:Play("watchorb")
 					end
 				end
 			end

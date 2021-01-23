@@ -20,28 +20,28 @@ mod:RegisterEvents(
 )
 
 local warnCorrosion		= mod:NewAnnounce("WarnCorrosion", 2, 70751, false)
-local warnGutSpray		= mod:NewTargetAnnounce(71283, 3, nil, "Tank|Healer")
+local warnGutSpray		= mod:NewTargetNoFilterAnnounce(71283, 3, nil, "Tank|Healer")
 local warnManaVoid		= mod:NewSpellAnnounce(71741, 2, nil, "ManaUser")
 local warnManaVoid		= mod:NewSpellAnnounce(71741, 2, nil, "-Melee")
 local warnSupression	= mod:NewSpellAnnounce(70588, 3)
 local warnPortalSoon	= mod:NewSoonAnnounce(72483, 2, nil)
-local warnPortal		= mod:NewSpellAnnounce(72483, 3, nil)
+local warnPortal		= mod:NewSpellAnnounce(72483, 3, nil, true)
 local warnPortalOpen	= mod:NewAnnounce("WarnPortalOpen", 4, 72483)
 
-local specWarnLayWaste	= mod:NewSpecialWarningSpell(71730)
-local specWarnManaVoid	= mod:NewSpecialWarningMove(71741)
+local specWarnLayWaste	= mod:NewSpecialWarningSpell(71730, nil, nil, nil, 1, 2)
+local specWarnManaVoid	= mod:NewSpecialWarningMove(71741, nil, nil, nil, 1, 2)
 
 local timerLayWaste		= mod:NewBuffActiveTimer(12, 69325)
 local timerNextPortal	= mod:NewCDCountTimer(46.5, 72483, nil, nil, nil, 5)
 local timerPortalsOpen	= mod:NewTimer(10, "TimerPortalsOpen", 72483, nil, nil, 5, nil, DBM_CORE_L.HEALER_ICON)
 local timerOutPortal	= mod:NewTimer(20,"TimerOutPortal", "Interface\\Icons\\spell_arcane_portalshattrath", nil, nil, 5)
 local timerHealerBuff	= mod:NewBuffActiveTimer(40, 70873, nil, nil, nil, 3)
-local timerGutSpray		= mod:NewTargetTimer(12, 71283, nil, "Tank|Healer")
-local timerCorrosion	= mod:NewTargetTimer(6, 70751, nil, false)
+local timerGutSpray		= mod:NewTargetTimer(12, 71283, nil, "Tank|Healer", nil, 3)
+local timerCorrosion	= mod:NewTargetTimer(6, 70751, nil, false, nil, 3)
 local timerBlazingSkeleton	= mod:NewTimer(50, "TimerBlazingSkeleton", 17204, nil, nil, 1)
 local timerAbom				= mod:NewTimer(50, "TimerAbom", 43392, nil, nil, 1)--Experimental
 
-local sndWOP					= mod:NewAnnounce("SoundWOP", nil, nil, true)
+local sndWOP					= mod:NewSpecialWarning("SoundWOP", nil, nil, nil, 4, 2)
 
 local berserkTimer		= mod:NewBerserkTimer(420)
 
@@ -111,7 +111,7 @@ end
 
 function mod:Portals()
 	warnPortal:Show()
-	sndWOP:ScheduleVoice(10, "indoorsoon")
+	warnPortal:ScheduleVoice(10, "indoorsoon")
 	warnPortalOpen:Cancel()
 	timerPortalsOpen:Cancel()
 	warnPortalSoon:Cancel()
@@ -168,23 +168,14 @@ function mod:SPELL_AURA_APPLIED(args)
 	elseif args:IsSpellID(69325, 71730) then--Lay Waste
 		specWarnLayWaste:Show()
 		timerLayWaste:Start()
-		sndWOP:Play("firebone")
+		specWarnLayWaste:Play("firebone")
 	elseif args:IsSpellID(70873, 71941) then	--Emerald Vigor/Twisted Nightmares (portal healers)
 		if args:IsPlayer() then
 			timerHealerBuff:Start()
-			sndWOP:CancelVoice("countthree")
-			sndWOP:CancelVoice("counttwo")
-			sndWOP:CancelVoice("countone")
-			sndWOP:ScheduleVoice(37, "countthree")
-			sndWOP:ScheduleVoice(38, "counttwo")
-			sndWOP:ScheduleVoice(39, "countone")
 		end
 	elseif args:IsPlayer() and (args:IsSpellID(70766) or args:IsSpellID(71196)) then
 		timerOutPortal:Start()
-		sndWOP:ScheduleVoice(16, "telesoon")
-		sndWOP:ScheduleVoice(17, "countthree")
-		sndWOP:ScheduleVoice(18, "counttwo")
-		sndWOP:ScheduleVoice(19, "countone")
+		--sndWOP:ScheduleVoice(16, "telesoon")
 	end
 end
 
@@ -204,7 +195,7 @@ do
 		if args:IsSpellID(71086, 71743, 72029, 72030) and args:IsPlayer() and time() - lastVoid > 2 then		-- Mana Void
 			specWarnManaVoid:Show()
 			if mod:IsManaUser() then
-				sndWOP:Play("runaway")
+				specWarnManaVoid:Play("runaway")
 			end
 			lastVoid = time()
 		end
@@ -214,7 +205,7 @@ do
 		if args:IsSpellID(71086, 71743, 72029, 72030) and args:IsPlayer() and time() - lastVoid > 2 then		-- Mana Void
 			specWarnManaVoid:Show()
 			if mod:IsManaUser() then
-				sndWOP:Play("runaway")
+				specWarnManaVoid:Play("runaway")
 			end
 			lastVoid = time()
 		end

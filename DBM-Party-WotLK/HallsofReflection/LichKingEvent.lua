@@ -3,7 +3,7 @@ local L = mod:GetLocalizedStrings()
 
 mod:SetRevision(("$Revision: 2153 $"):sub(12, -3))
 
-mod:RegisterCombat("yell", L.Wave1)
+mod:RegisterCombat("yell", L.ACombatStart, L.HCombatStart)
 mod:RegisterKill("yell", L.YellCombatEnd)
 
 

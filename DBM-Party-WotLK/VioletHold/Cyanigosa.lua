@@ -9,9 +9,9 @@ mod:RegisterCombat("combat")
 
 local warningVacuum		= mod:NewSpellAnnounce(58694, 1)
 local warningBlizzard	= mod:NewSpellAnnounce(58693, 3)
-local warningMana		= mod:NewTargetAnnounce(59374, 2)
+local warningMana		= mod:NewTargetNoFilterAnnounce(59374, 2)
 local timerVacuumCD		= mod:NewCDTimer(35, 58694)
-local timerMana			= mod:NewTargetTimer(8, 59374)
+local timerMana			= mod:NewTargetTimer(8, 59374, nil, nil, nil, 3)
 local timerCombat		= mod:NewCombatTimer(13)
 
 mod:RegisterEvents(

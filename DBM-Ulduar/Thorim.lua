@@ -16,10 +16,10 @@ mod:RegisterEvents(
 )
 
 local warnPhase2				= mod:NewPhaseAnnounce(2, 1)
-local warnStormhammer			= mod:NewTargetAnnounce(62470, 2)
+local warnStormhammer			= mod:NewTargetNoFilterAnnounce(62470, 2)
 local warnLightningCharge		= mod:NewSpellAnnounce(62466, 2)
-local warnUnbalancingStrike		= mod:NewTargetAnnounce(62130, 4)	-- nice blizzard, very new stuff, hmm or not? ^^ aq40 4tw :)
-local warningBomb				= mod:NewTargetAnnounce(62526, 4)
+local warnUnbalancingStrike		= mod:NewTargetNoFilterAnnounce(62130, 4)	-- nice blizzard, very new stuff, hmm or not? ^^ aq40 4tw :)
+local warningBomb				= mod:NewTargetNoFilterAnnounce(62526, 4)
 
 local specWarnOrb				= mod:NewSpecialWarningMove(62017)
 
@@ -31,7 +31,7 @@ local timerLightningCharge	 	= mod:NewCDTimer(16, 62466)
 local timerUnbalancingStrike	= mod:NewCastTimer(26, 62130)
 local timerHardmode				= mod:NewTimer(175, "TimerHardmode", 62042)
 
-local sndWOP					= mod:NewAnnounce("SoundWOP", nil, nil, true)
+local sndWOP					= mod:NewSpecialWarning("SoundWOP", nil, nil, nil, 4, 2)
 
 mod:AddBoolOption("RangeFrame")
 

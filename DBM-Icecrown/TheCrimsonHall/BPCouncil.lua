@@ -27,9 +27,9 @@ local warnTargetSwitch			= mod:NewAnnounce("WarnTargetSwitch", 3, 70952)
 local warnTargetSwitchSoon		= mod:NewAnnounce("WarnTargetSwitchSoon", 2, 70952)
 local warnConjureFlames			= mod:NewCastAnnounce(71718, 2, 3)
 local warnEmpoweredFlamesCast	= mod:NewCastAnnounce(72040, 3, 3)
-local warnEmpoweredFlames		= mod:NewTargetAnnounce(72040, 4)
-local warnGliteringSparks		= mod:NewTargetAnnounce(72798, 2)
-local warnShockVortex			= mod:NewTargetAnnounce(72037, 3)				-- 1,5sec cast
+local warnEmpoweredFlames		= mod:NewTargetNoFilterAnnounce(72040, 4)
+local warnGliteringSparks		= mod:NewTargetNoFilterAnnounce(72798, 2)
+local warnShockVortex			= mod:NewTargetNoFilterAnnounce(72037, 3)				-- 1,5sec cast
 local warnEmpoweredShockVortex	= mod:NewCastAnnounce(72039, 4, 4.5)					-- 4,5sec cast
 local warnKineticBomb			= mod:NewSpellAnnounce(72053, 3, nil, "Ranged")
 local warnDarkNucleus			= mod:NewSpellAnnounce(71943, 1, nil, false)	-- instant cast
@@ -50,7 +50,7 @@ local timerShadowPrison			= mod:NewBuffActiveTimer(10, 72999, nil, nil, nil, 3, 
 
 local berserkTimer				= mod:NewBerserkTimer(600)
 
-local sndWOP					= mod:NewAnnounce("SoundWOP", nil, nil, true)
+local sndWOP					= mod:NewSpecialWarning("SoundWOP", nil, nil, nil, 4, 2)
 
 --local soundEmpoweredFlames		= mod:NewSound(72040)
 mod:AddBoolOption("EmpoweredFlameIcon", true)

@@ -24,17 +24,18 @@ local warnPhase2				= mod:NewPhaseAnnounce(2, 2)
 local warnInstability			= mod:NewAnnounce("WarnInstability", 2, 69766, false)
 local warnChilledtotheBone		= mod:NewAnnounce("WarnChilledtotheBone", 2, 70106, false)
 local warnMysticBuffet			= mod:NewAnnounce("WarnMysticBuffet", 2, 70128, false)
-local warnFrostBeacon			= mod:NewTargetAnnounce(70126, 4)
 local warnBlisteringCold		= mod:NewSpellAnnounce(70123, 3)
 local warnFrostBreath			= mod:NewSpellAnnounce(71056, 2, nil, "Tank|Healer")
-local warnUnchainedMagic		= mod:NewTargetAnnounce(69762, 2, nil, "-Melee")
 
-local specWarnUnchainedMagic	= mod:NewSpecialWarningYou(69762)
-local specWarnFrostBeacon		= mod:NewSpecialWarningYou(70126)
-local specWarnInstability		= mod:NewSpecialWarningStack(69766, nil, 4)
-local specWarnChilledtotheBone	= mod:NewSpecialWarningStack(70106, nil, 4)
+local warnFrostBeacon			= mod:NewTargetNoFilterAnnounce(70126, 4)
+local warnUnchainedMagic		= mod:NewTargetNoFilterAnnounce(69762, 2, nil, "-Melee")
+
+local specWarnUnchainedMagic	= mod:NewSpecialWarningYou(69762, nil, nil, nil, 4, 2)
+local specWarnFrostBeacon		= mod:NewSpecialWarningMoveAway(70126, nil, nil, nil, 1, 2)
+local specWarnInstability		= mod:NewSpecialWarningStack(69766, nil, 4, nil, nil, 1, 2)
+local specWarnChilledtotheBone	= mod:NewSpecialWarningStack(70106, nil, 4, nil, nil, 1, 2)
 local specWarnMysticBuffet		= mod:NewSpecialWarningStack(70128, false, 5)
-local specWarnBlisteringCold	= mod:NewSpecialWarningRun(70123)
+local specWarnBlisteringCold	= mod:NewSpecialWarningRun(70123, nil, nil, nil, 1, 2)
 
 
 local timerNextAirphase			= mod:NewTimer(110, "TimerNextAirphase", 43810, nil, nil, 6)
@@ -50,11 +51,11 @@ local timerMysticBuffet			= mod:NewBuffActiveTimer(8, 70128, nil, nil, nil, 2)
 local timerNextMysticBuffet		= mod:NewNextTimer(6, 70128, nil, nil, nil, 2)
 local timerMysticAchieve		= mod:NewAchievementTimer(30, 4620)
 
-local sndWOP					= mod:NewAnnounce("SoundWOP", nil, nil, true)
+
 
 local berserkTimer				= mod:NewBerserkTimer(600)
 local isPAL = select(2, UnitClass("player")) == "PALADIN"
---local soundBlisteringCold = mod:NewSound(70123)
+
 mod:AddBoolOption("SetIconOnFrostBeacon", true)
 mod:AddBoolOption("SetIconOnUnchainedMagic", true)
 mod:AddBoolOption("ClearIconsOnAirphase", true)
@@ -117,22 +118,22 @@ local function sendIconMsg()
 	local Myname = UnitName("player")
 	if FrostBeaconIndex == 8 then
 		SendChatMessage(Myname.."{rt8}".."左←", "SAY")
-		sndWOP:ScheduleVoice(0.32, "backleft")
+		specWarnFrostBeacon:ScheduleVoice(0.32, "backleft")
 	elseif FrostBeaconIndex == 5 then
 		SendChatMessage(Myname.."{rt5}".."左←", "SAY")
-		sndWOP:ScheduleVoice(0.32, "backleft")
+		specWarnFrostBeacon:ScheduleVoice(0.32, "backleft")
 	elseif FrostBeaconIndex == 7  then
-		SendChatMessage(Myname.."{rt6}".."中", "SAY")
-		sndWOP:ScheduleVoice(0.32, "backcenter")
+		SendChatMessage(Myname.."{rt7}".."中↓", "SAY")
+		specWarnFrostBeacon:ScheduleVoice(0.32, "backcenter")
 	elseif FrostBeaconIndex == 4 then
 		SendChatMessage(Myname.."{rt4}".."右→", "SAY")
-		sndWOP:ScheduleVoice(0.32, "backright")
+		specWarnFrostBeacon:ScheduleVoice(0.32, "backright")
 	elseif FrostBeaconIndex == 6 then
-		SendChatMessage(Myname.."{rt7}".."右→", "SAY")
-		sndWOP:ScheduleVoice(0.32, "backright")
+		SendChatMessage(Myname.."{rt6}".."右→", "SAY")
+		specWarnFrostBeacon:ScheduleVoice(0.32, "backright")
 	elseif FrostBeaconIndex == 3 then
-		SendChatMessage(Myname.."{rt3}".."中", "SAY")
-		sndWOP:ScheduleVoice(0.32, "backcenter")
+		SendChatMessage(Myname.."{rt3}".."中↓", "SAY")
+		specWarnFrostBeacon:ScheduleVoice(0.32, "backcenter")
 	end
 end
 
@@ -141,7 +142,7 @@ function mod:OnCombatStart(delay)
 	berserkTimer:Start(-delay)
 	timerNextAirphase:Start(50-delay)
 	timerNextBlisteringCold:Start(33-delay)
-	sndWOP:ScheduleVoice(29, "gripsoon")
+	specWarnBlisteringCold:ScheduleVoice(29, "gripsoon")
 	warned_P2 = false
 	warnedfailed = false
 	table.wipe(beaconTargets)
@@ -178,16 +179,15 @@ function mod:SPELL_AURA_APPLIED(args)
 		beaconTargets[#beaconTargets + 1] = args.destName
 		if args:IsPlayer() then
 			specWarnFrostBeacon:Show()
-			sndWOP:CancelVoice("findshelter")
-			sndWOP:Play("ex_so_xbdn")
-			sndWOP:ScheduleVoice(4, "countthree")
-			sndWOP:ScheduleVoice(5, "counttwo")
-			sndWOP:ScheduleVoice(6, "countone")
+			specWarnFrostBeacon:CancelVoice("findshelter")
+			specWarnFrostBeacon:Play("ex_so_xbdn")
+			specWarnFrostBeacon:ScheduleVoice(4, "countthree")
+			specWarnFrostBeacon:ScheduleVoice(5, "counttwo")
+			specWarnFrostBeacon:ScheduleVoice(6, "countone")
 			if phase == 1 then
 				self:Schedule(0.31, sendIconMsg)
-			end
-			if phase == 2 then
-				sndWOP:ScheduleVoice(1, "backcenter")
+			elseif phase == 2 then
+				specWarnFrostBeacon:ScheduleVoice(1, "backcenter")
 				if mod:IsHealer() and isPAL then
 					SendChatMessage("NQ被点,注意刷坦!", "SAY")
 				end
@@ -238,7 +238,7 @@ function mod:SPELL_AURA_APPLIED(args)
 		if args:IsPlayer() then
 			specWarnUnchainedMagic:Show()
 			if mod:IsDifficulty("heroic10") or mod:IsDifficulty("heroic25") then
-				sndWOP:Play("runout")
+				specWarnUnchainedMagic:Play("runout")
 			end		
 		end
 		if self.Options.SetIconOnUnchainedMagic then
@@ -258,7 +258,7 @@ function mod:SPELL_AURA_APPLIED(args)
 			if (args.amount or 1) >= 4 then
 				specWarnChilledtotheBone:Show(args.amount)
 				if args.amount == 4 or args.amount == 6 or args.amount == 8 or args.amount == 10 then
-					sndWOP:Play("stopatk")
+					specWarnChilledtotheBone:Play("stopatk")
 				end
 			end
 		end
@@ -269,7 +269,7 @@ function mod:SPELL_AURA_APPLIED(args)
 			if (args.amount or 1) >= 4 then
 				specWarnInstability:Show(args.amount)
 				if args.amount == 4 or args.amount == 6 or args.amount == 8 or args.amount == 10 then
-					sndWOP:Play("stopatk")
+					specWarnInstability:Play("stopatk")
 				end
 			end
 		end
@@ -281,7 +281,7 @@ function mod:SPELL_AURA_APPLIED(args)
 			if (args.amount or 1) >= 5 then
 				specWarnMysticBuffet:Show(args.amount)
 				if args.amount == 5 or args.amount == 7 or args.amount == 9 or args.amount == 11 or args.amount == 13 then
-					sndWOP:Play("stackhigh")
+					DBM:PlaySoundFile("Interface\\AddOns\\DBM-VPYike\\stackhigh.ogg")
 				end
 			end
 			if (args.amount or 1) < 2 then
@@ -307,10 +307,10 @@ function mod:SPELL_CAST_SUCCESS(args)
 	if args:IsSpellID(70117) then--Icy Grip Cast, not blistering cold, but adds an extra 1sec to the warning
 		warnBlisteringCold:Show()
 		specWarnBlisteringCold:Show()
-		sndWOP:Play("boomrun")
+		specWarnBlisteringCold:Play("boomrun")
 		timerBlisteringCold:Start()
 		timerNextBlisteringCold:Start()
-		sndWOP:ScheduleVoice(63, "gripsoon")
+		specWarnBlisteringCold:ScheduleVoice(63, "gripsoon")
 	end
 end	
 
@@ -345,7 +345,7 @@ function mod:UNIT_HEALTH(uId)
 	if not warned_P2 and self:GetUnitCreatureId(uId) == 36853 and UnitHealth(uId) / UnitHealthMax(uId) <= 0.38 then
 		warned_P2 = true
 		warnPhase2soon:Show()	
-		sndWOP:Play("ptwo")
+		warnPhase2soon:Play("ptwo")
 	end
 end
 
@@ -356,18 +356,18 @@ function mod:CHAT_MSG_MONSTER_YELL(msg)
 		end
 		warnAirphase:Show()
 		timerNextFrostBreath:Cancel()
-		sndWOP:CancelVoice("gripsoon")
+		specWarnBlisteringCold:CancelVoice("gripsoon")
 		if phase == 1 then
-			sndWOP:ScheduleVoice(13, "findshelter") 
-			sndWOP:ScheduleVoice(19, "countone")
-			sndWOP:ScheduleVoice(25, "counttwo")
-			sndWOP:ScheduleVoice(30, "countthree")
-			sndWOP:ScheduleVoice(36, "countfour")
-			sndWOP:ScheduleVoice(37, "ex_so_bmkd")
+			specWarnFrostBeacon:ScheduleVoice(13, "findshelter") 
+			specWarnFrostBeacon:ScheduleVoice(19, "countone")
+			specWarnFrostBeacon:ScheduleVoice(25, "counttwo")
+			specWarnFrostBeacon:ScheduleVoice(30, "countthree")
+			specWarnFrostBeacon:ScheduleVoice(36, "countfour")
+			specWarnFrostBeacon:ScheduleVoice(37, "ex_so_bmkd")
 		end
 		timerUnchainedMagic:Start(55)
 		timerNextBlisteringCold:Start(80)--Not exact anywhere from 80-110seconds after airphase begin
-		sndWOP:ScheduleVoice(76, "gripsoon")
+		specWarnBlisteringCold:ScheduleVoice(76, "gripsoon")
 		timerNextAirphase:Start()
 		timerNextGroundphase:Start()
 		warnGroundphaseSoon:Schedule(40)
@@ -381,8 +381,8 @@ function mod:CHAT_MSG_MONSTER_YELL(msg)
 		timerNextAirphase:Cancel()
 		timerNextGroundphase:Cancel()
 		warnGroundphaseSoon:Cancel()
-		sndWOP:CancelVoice("gripsoon")
+		specWarnBlisteringCold:CancelVoice("gripsoon")
 		timerNextBlisteringCold:Start(35)
-		sndWOP:ScheduleVoice(31, "gripsoon")
+		specWarnBlisteringCold:ScheduleVoice(31, "gripsoon")
 	end
 end

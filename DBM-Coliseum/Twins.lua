@@ -38,7 +38,7 @@ local timerLightTouch				= mod:NewTargetTimer(20, 67298, nil, nil, nil, 3, nil, 
 local timerDarkTouch				= mod:NewTargetTimer(20, 67283, nil, nil, nil, 3, nil, DBM_CORE_L.DEADLY_ICON)
 local timerAchieve					= mod:NewAchievementTimer(180, 3815)
 
-local sndWOP					= mod:NewAnnounce("SoundWOP", nil, nil, true)
+local sndWOP					= mod:NewSpecialWarning("SoundWOP", nil, nil, nil, 4, 2)
 
 mod:AddBoolOption("SpecialWarnOnDebuff", true, "announce")
 mod:AddBoolOption("SetIconOnDebuffTarget", true)

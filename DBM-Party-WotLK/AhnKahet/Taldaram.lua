@@ -13,10 +13,10 @@ mod:RegisterEvents(
 	"SPELL_AURA_REMOVED"
 )
 
-local warningEmbrace	= mod:NewTargetAnnounce(55959, 2)
+local warningEmbrace	= mod:NewTargetNoFilterAnnounce(55959, 2)
 local warningFlame		= mod:NewSpellAnnounce(55931, 3)
 
-local timerEmbrace		= mod:NewTargetTimer(20, 55959)
+local timerEmbrace		= mod:NewTargetTimer(20, 55959, nil, nil, nil, 3)
 local timerFlameCD		= mod:NewCDTimer(17, 55959)
 
 

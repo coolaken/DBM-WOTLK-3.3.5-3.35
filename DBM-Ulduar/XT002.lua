@@ -14,8 +14,8 @@ mod:RegisterEvents(
 	"SPELL_DAMAGE"
 )
 
-local warnLightBomb					= mod:NewTargetAnnounce(65121, 3)
-local warnGravityBomb				= mod:NewTargetAnnounce(64234, 3)
+local warnLightBomb					= mod:NewTargetNoFilterAnnounce(65121, 3)
+local warnGravityBomb				= mod:NewTargetNoFilterAnnounce(64234, 3)
 
 local specWarnLightBomb				= mod:NewSpecialWarningYou(65121)
 local specWarnGravityBomb			= mod:NewSpecialWarningYou(64234)
@@ -26,11 +26,11 @@ local timerTympanicTantrumCast		= mod:NewCastTimer(62776)
 local timerTympanicTantrum			= mod:NewBuffActiveTimer(8, 62776)
 local timerTympanicTantrumCD		= mod:NewCDTimer(60, 62776)
 local timerHeart					= mod:NewCastTimer(30, 63849)
-local timerLightBomb				= mod:NewTargetTimer(9, 65121)
-local timerGravityBomb				= mod:NewTargetTimer(9, 64234)
+local timerLightBomb				= mod:NewTargetTimer(9, 65121, nil, nil, nil, 3)
+local timerGravityBomb				= mod:NewTargetTimer(9, 64234, nil, nil, nil, 3)
 local timerAchieve					= mod:NewAchievementTimer(205, 2937, "TimerSpeedKill")
 
-local sndWOP					= mod:NewAnnounce("SoundWOP", nil, nil, true)
+local sndWOP					= mod:NewSpecialWarning("SoundWOP", nil, nil, nil, 4, 2)
 
 mod:AddBoolOption("SetIconOnLightBombTarget", true)
 mod:AddBoolOption("SetIconOnGravityBombTarget", true)

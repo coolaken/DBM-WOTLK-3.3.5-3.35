@@ -6,6 +6,7 @@ mod:SetCreatureID(34458, 34451, 34459, 34448, 34449, 34445, 34456, 34447, 34441,
 
 mod:RegisterCombat("combat")
 --mod:RegisterKill("yell", L.YellKill)
+mod:RegisterKill("yell", L.AllianceVictory, L.HordeVictory)
 
 
 mod:RegisterEvents(
@@ -16,7 +17,7 @@ mod:RegisterEvents(
 )
 mod:SetBossHPInfoToHighest()
 
-mod:RegisterKill("yell", L.AllianceVictory or L.HordeVictory)
+
 
 
 --[[
@@ -74,14 +75,14 @@ local preWarnBladestorm 	= mod:NewSoonAnnounce(65947, 3)
 local warnBladestorm		= mod:NewSpellAnnounce(65947, 4)
 local warnHeroism			= mod:NewSpellAnnounce(65983, 3)
 local warnBloodlust			= mod:NewSpellAnnounce(65980, 3)
-local warnHandofFreedom		= mod:NewTargetAnnounce(68758, 2)
-local warnHandofProt		= mod:NewTargetAnnounce(66009, 3)
+local warnHandofFreedom		= mod:NewTargetNoFilterAnnounce(68758, 2)
+local warnHandofProt		= mod:NewTargetNoFilterAnnounce(66009, 3)
 local warnDivineShield		= mod:NewSpellAnnounce(66010, 3)
 local warnIceBlock			= mod:NewSpellAnnounce(65802, 3)
 local warnShadowstep		= mod:NewSpellAnnounce(66178, 2)
-local warnDeathgrip			= mod:NewTargetAnnounce(66017, 2)
-local warnCyclone			= mod:NewTargetAnnounce(65859, 1, nil, false)
-local warnSheep				= mod:NewTargetAnnounce(65801, 1, nil, false)
+local warnDeathgrip			= mod:NewTargetNoFilterAnnounce(66017, 2)
+local warnCyclone			= mod:NewTargetNoFilterAnnounce(65859, 1, nil, false)
+local warnSheep				= mod:NewTargetNoFilterAnnounce(65801, 1, nil, false)
 
 local timerBladestorm		= mod:NewBuffActiveTimer(8, 65947)
 local timerShadowstepCD		= mod:NewCDTimer(30, 66178)
@@ -95,7 +96,7 @@ local specWarnIceBlock		= mod:NewSpecialWarningDispel(65802, isDispeller)
 
 mod:AddBoolOption("PlaySoundOnBladestorm", true)
 
-local sndWOP					= mod:NewAnnounce("SoundWOP", nil, nil, true)
+local sndWOP					= mod:NewSpecialWarning("SoundWOP", nil, nil, nil, 4, 2)
 
 function mod:OnCombatStart(delay)
 end

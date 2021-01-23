@@ -18,7 +18,7 @@ function mod:UNIT_DIED(args)
 		if self.Options.MakeitCountTimer and not DBM.Bars:GetBar(L.MakeitCountTimer) then
 			local guid = tonumber(args.destGUID:sub(9, 12), 16)
 			if guid == 27654 then		-- Drakos The Interrogator
-				DBM.Bars:CreateBar(1200, L.MakeitCountTimer)
+				DBM.Bars:CreateBar(1200, L.MakeitCountTimer, 1868)
 			end
 		end
 	end

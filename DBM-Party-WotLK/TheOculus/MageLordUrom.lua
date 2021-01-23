@@ -7,15 +7,17 @@ mod:SetMinSyncRevision(2824)
 
 mod:RegisterCombat("yell", L.CombatStart)
 
+mod:RegisterKill("yell", L.YellCombatEnd)
+
 mod:RegisterEvents(
 	"SPELL_AURA_APPLIED",
 	"SPELL_CAST_START"
 )
 
-local warningTimeBomb		= mod:NewTargetAnnounce(51121, 2)
+local warningTimeBomb		= mod:NewTargetNoFilterAnnounce(51121, 2)
 local warningExplosion		= mod:NewCastAnnounce(51110, 3, 8)
-local timerTimeBomb			= mod:NewTargetTimer(6, 51121)
-local timerExplosion		= mod:NewTargetTimer(8, 51110)
+local timerTimeBomb			= mod:NewTargetTimer(6, 51121, nil, nil, nil, 3)
+local timerExplosion		= mod:NewTargetTimer(8, 51110, nil, nil, nil, 3)
 local specWarnBombYou		= mod:NewSpecialWarningYou(51121)
 
 function mod:SPELL_CAST_START(args)

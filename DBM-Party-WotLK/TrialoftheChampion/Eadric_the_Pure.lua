@@ -19,7 +19,7 @@ local isDispeller = select(2, UnitClass("player")) == "PRIEST"
 
 local warnHammerofRighteous		= mod:NewSpellAnnounce(66867, 3)
 local warnVengeance             = mod:NewSpellAnnounce(66889, 3)
-local warnHammerofJustice		= mod:NewTargetAnnounce(66940, 2)
+local warnHammerofJustice		= mod:NewTargetNoFilterAnnounce(66940, 2)
 local timerVengeance			= mod:NewBuffActiveTimer(6, 66889)
 local specwarnRadiance			= mod:NewSpecialWarning("specwarnRadiance")
 local specwarnHammerofJustice	= mod:NewSpecialWarningDispel(66940, isDispeller)

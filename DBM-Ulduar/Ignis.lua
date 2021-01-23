@@ -12,7 +12,7 @@ mod:RegisterEventsInCombat(
 	"SPELL_AURA_REMOVED 63477",
 	"SPELL_CAST_SUCCESS 28240"
 )
-local announceSlagPot			= mod:NewTargetAnnounce(63477, 3)
+local announceSlagPot			= mod:NewTargetNoFilterAnnounce(63477, 3)
 
 local warnFlameJetsCast			= mod:NewSpecialWarningCast(63472)
 
@@ -20,10 +20,10 @@ local timerFlameJetsCast		= mod:NewCastTimer(2.7, 63472)
 local timerFlameJetsCooldown	= mod:NewCDTimer(35, 63472)
 local timerScorchCooldown		= mod:NewNextTimer(25, 63473)
 local timerScorchCast			= mod:NewCastTimer(3, 63473)
-local timerSlagPot				= mod:NewTargetTimer(10, 63477)
+local timerSlagPot				= mod:NewTargetTimer(10, 63477, nil, nil, nil, 3)
 local timerAchieve				= mod:NewAchievementTimer(240, 2930, "TimerSpeedKill")
 
-local sndWOP					= mod:NewAnnounce("SoundWOP", nil, nil, true)
+local sndWOP					= mod:NewSpecialWarning("SoundWOP", nil, nil, nil, 4, 2)
 
 --mod:AddBoolOption("SoundWTF3", true, "sound")
 mod:AddSetIconOption("SlagPotIcon", 63477, false, false, {1, 2, 3, 4})

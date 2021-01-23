@@ -12,10 +12,10 @@ mod:RegisterEvents(
 	"SPELL_AURA_REMOVED"
 )
 
-local warningChains		= mod:NewTargetAnnounce(50997, 4)
+local warningChains		= mod:NewTargetNoFilterAnnounce(50997, 4)
 local warningNova		= mod:NewSpellAnnounce(48179, 3)
 local warningEnrage		= mod:NewSpellAnnounce(8599, 3)
-local timerChains		= mod:NewTargetTimer(10, 50997)
+local timerChains		= mod:NewTargetTimer(10, 50997, nil, nil, nil, 3)
 local timerChainsCD		= mod:NewCDTimer(25, 50997)
 local timerNova			= mod:NewBuffActiveTimer(10, 48179)
 local timerNovaCD		= mod:NewCDTimer(25, 48179)

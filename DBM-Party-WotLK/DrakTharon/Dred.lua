@@ -13,11 +13,11 @@ mod:RegisterEvents(
 )
 
 local warningSlash	= mod:NewSpellAnnounce(48873, 3)
-local warningBite	= mod:NewTargetAnnounce(48920, 2)
+local warningBite	= mod:NewTargetNoFilterAnnounce(48920, 2)
 local warningFear	= mod:NewSpellAnnounce(22686, 1)
 
 local timerFearCD	= mod:NewCDTimer(15, 22686)  -- cooldown ??
-local timerSlash	= mod:NewTargetTimer(10, 48873)
+local timerSlash	= mod:NewTargetTimer(10, 48873, nil, nil, nil, 3)
 local timerSlashCD	= mod:NewCDTimer(18, 48873)
 
 function mod:SPELL_CAST_SUCCESS(args)

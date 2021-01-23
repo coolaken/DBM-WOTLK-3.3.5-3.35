@@ -10,8 +10,8 @@ mod:RegisterEvents(
 )
 
 local warningWaveNow	= mod:NewAnnounce("WarningWaveNow", 3)
-local timerWaveIn		= mod:NewTimer(20, "TimerWaveIn")
-local timerRoleplay		= mod:NewTimer(162, "TimerRoleplay")
+local timerWaveIn		= mod:NewAddsTimer(20, nil, "TimerWaveIn", nil, "TimerWaveIn")
+local timerRoleplay		= mod:NewRPTimer(162)
 
 local wavesNormal = {
 	{2, L.Devouring},

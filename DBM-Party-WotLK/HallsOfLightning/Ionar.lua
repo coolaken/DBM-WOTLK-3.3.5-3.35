@@ -10,8 +10,8 @@ mod:RegisterCombat("combat")
 
 local warningDisperseSoon	= mod:NewSoonAnnounce(52770, 2)
 local warningDisperse		= mod:NewSpellAnnounce(52770, 3)
-local warningOverload		= mod:NewTargetAnnounce(52658, 2)
-local timerOverload			= mod:NewTargetTimer(10, 52658)
+local warningOverload		= mod:NewTargetNoFilterAnnounce(52658, 2)
+local timerOverload			= mod:NewTargetTimer(10, 52658, nil, nil, nil, 3)
 
 mod:AddBoolOption("SetIconOnOverloadTarget", true)
 

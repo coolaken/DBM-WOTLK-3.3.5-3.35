@@ -16,9 +16,9 @@ mod:RegisterEvents(
 
 local warningSmash		= mod:NewSpellAnnounce(42723, 1)
 local warningGrowl		= mod:NewSpellAnnounce(42708, 3)
-local warningWoeStrike	= mod:NewTargetAnnounce(42730, 2)
+local warningWoeStrike	= mod:NewTargetNoFilterAnnounce(42730, 2)
 local timerSmash		= mod:NewCastTimer(3, 42723)
-local timerWoeStrike	= mod:NewTargetTimer(10, 42723)
+local timerWoeStrike	= mod:NewTargetTimer(10, 42723, nil, nil, nil, 3)
 
 local specWarnSpelllock	= mod:NewSpecialWarningCast(42729)
 

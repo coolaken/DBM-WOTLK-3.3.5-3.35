@@ -21,12 +21,12 @@ local specWarnMortalWound	= mod:NewSpecialWarningTargetCount(71127, nil)
 local specWarnTrap			= mod:NewSpecialWarning("SpecWarnTrap")
 local specWarnBlightBomb	= mod:NewSpecialWarningSpell(71088)
 
-local timerZombies		= mod:NewNextTimer(20, 71159)
-local timerMortalWound	= mod:NewTargetTimer(15, 71127)
-local timerDecimate		= mod:NewNextTimer(33, 71123)
-local timerBlightBomb	= mod:NewCastTimer(5, 71088)
+local timerZombies		= mod:NewNextTimer(20, 71159, nil, nil, nil, 1)
+local timerMortalWound	= mod:NewTargetTimer(15, 71127, nil, nil, nil, 3)
+local timerDecimate		= mod:NewNextTimer(33, 71123, nil, nil, nil, 2, nil, DBM_CORE_L.HEALER_ICON)
+local timerBlightBomb	= mod:NewCastTimer(5, 71088, nil, nil, nil, 7)
 
-local sndWOP					= mod:NewAnnounce("SoundWOP", nil, nil, true)
+local sndWOP					= mod:NewSpecialWarning("SoundWOP", nil, nil, nil, 4, 2)
 
 mod:RemoveOption("HealthFrame")
 

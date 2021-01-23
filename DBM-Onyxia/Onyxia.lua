@@ -39,7 +39,7 @@ local timerAchieveWhelps	= mod:NewAchievementTimer(10, 4406)
 
 --local sndFunny				= mod:NewAnnounce("SoundWTF", nil, nil, false)
 
-local sndWOP					= mod:NewAnnounce("SoundWOP", nil, nil, true)
+local sndWOP					= mod:NewSpecialWarning("SoundWOP", nil, nil, nil, 4, 2)
 
 local warned_preP2 = false
 local warned_preP3 = false

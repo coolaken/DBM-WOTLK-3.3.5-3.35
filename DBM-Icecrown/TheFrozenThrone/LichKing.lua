@@ -31,24 +31,24 @@ local isPRI = select(2, UnitClass("player")) == "PRIEST"
 
 local warnRemorselessWinter = mod:NewSpellAnnounce(74270, 3) --Phase Transition Start Ability
 local warnQuake				= mod:NewSpellAnnounce(72262, 4) --Phase Transition End Ability
-local warnRagingSpirit		= mod:NewTargetAnnounce(69200, 3) --Transition Add
+local warnRagingSpirit		= mod:NewTargetNoFilterAnnounce(69200, 3) --Transition Add
 local warnShamblingSoon		= mod:NewSoonAnnounce(70372, 2) --Phase 1 Add
 local warnShamblingHorror	= mod:NewSpellAnnounce(70372, 3) --Phase 1 Add
 local warnDrudgeGhouls		= mod:NewSpellAnnounce(70358, 2) --Phase 1 Add
-local warnShamblingEnrage	= mod:NewTargetAnnounce(72143, 3, nil, "RemoveEnrage|Healer|Tank") --Phase 1 Add Ability
-local warnNecroticPlague	= mod:NewTargetAnnounce(73912, 4) --Phase 1+ Ability
+local warnShamblingEnrage	= mod:NewTargetNoFilterAnnounce(72143, 3, nil, "RemoveEnrage|Healer|Tank") --Phase 1 Add Ability
+local warnNecroticPlague	= mod:NewTargetNoFilterAnnounce(73912, 4) --Phase 1+ Ability
 local warnNecroticPlagueJump= mod:NewAnnounce("WarnNecroticPlagueJump", 4, 73912) --Phase 1+ Ability
 local warnInfest			= mod:NewSpellAnnounce(73779, 3, nil, "Healer") --Phase 1 & 2 Ability
 local warnPhase2Soon		= mod:NewAnnounce("WarnPhase2Soon", 1, "Interface\\Icons\\Spell_Nature_WispSplode")
 local valkyrWarning			= mod:NewAnnounce("ValkyrWarning", 3, 71844)--Phase 2 Ability
 local warnDefileSoon		= mod:NewSoonAnnounce(73708, 3)	--Phase 2+ Ability
 local warnSoulreaper		= mod:NewSpellAnnounce(73797, 4, nil, "Tank|Healer") --Phase 2+ Ability
-local warnDefileCast		= mod:NewTargetAnnounce(72762, 4) --Phase 2+ Ability
+local warnDefileCast		= mod:NewTargetNoFilterAnnounce(72762, 4) --Phase 2+ Ability
 local warnSummonValkyr		= mod:NewSpellAnnounce(69037, 3, 71844) --Phase 2 Add
 local warnPhase3Soon		= mod:NewAnnounce("WarnPhase3Soon", 1, "Interface\\Icons\\Spell_Nature_WispSplode")
 local warnSummonVileSpirit	= mod:NewSpellAnnounce(70498, 2) --Phase 3 Add
-local warnHarvestSoul		= mod:NewTargetAnnounce(74325, 4) --Phase 3 Ability
-local warnTrapCast			= mod:NewTargetAnnounce(73539, 3) --Phase 1 Heroic Ability
+local warnHarvestSoul		= mod:NewTargetNoFilterAnnounce(74325, 4) --Phase 3 Ability
+local warnTrapCast			= mod:NewTargetNoFilterAnnounce(73539, 3) --Phase 1 Heroic Ability
 local warnRestoreSoul		= mod:NewCastAnnounce(73650, 2, 5) --Phase 3 Heroic
 
 local specWarnSoulreaper	= mod:NewSpecialWarningYou(73797) --Phase 1+ Ability
@@ -70,30 +70,30 @@ local specWarnTrapNear		= mod:NewSpecialWarning("SpecWarnTrapNear") --Heroic Abi
 local specWarnHarvestSouls	= mod:NewSpecialWarningSpell(74297) --Heroic Ability
 local specWarnValkyrLow		= mod:NewSpecialWarning("SpecWarnValkyrLow")
 
-local timerCombatStart		= mod:NewCombatTimer(53.5)
-local timerPhaseTransition	= mod:NewTimer(62.5, "PhaseTransition", 72262)
-local timerSoulreaper	 	= mod:NewTargetTimer(5.1, 73797, nil, "Tank|Healer")
-local timerSoulreaperCD	 	= mod:NewTimer(30.5, "TimerSoulreaperCD", 73797, "Tank|Healer")
-local timerHarvestSoul	 	= mod:NewTargetTimer(6, 74325)
-local timerHarvestSoulCD	= mod:NewNextTimer(75, 74325)
-local timerInfestCD			= mod:NewTimer(22.5, "TimerInfestCD", 73779, "Healer")
+local timerCombatStart		= mod:NewCombatTimer(55)
+local timerPhaseTransition	= mod:NewPhaseTimer(62.5)
+local timerSoulreaper	 	= mod:NewBuffFadesTimer(5.1, 73797, nil, "Tank|Healer", nil, 3, nil, DBM_CORE_L.TANK_ICON..DBM_CORE_L.HEALER_ICON)
+local timerSoulreaperCD	 	= mod:NewCDCountTimer(30.5, 73797, nil, "Tank|Healer", nil, 3)
+local timerHarvestSoul	 	= mod:NewBuffFadesTimer(6, 74325, nil, nil, nil, 3, nil, DBM_CORE_L.HEALER_ICON)
+local timerHarvestSoulCD	= mod:NewNextTimer(75, 74325, nil, nil, nil, 3)
+local timerInfestCD			= mod:NewCDCountTimer(22.5, 73779, nil, "Healer", nil, 2, nil, DBM_CORE_L.HEALER_ICON, nil, 3, 4)
 local timerNecroticPlagueCleanse = mod:NewTimer(5, "TimerNecroticPlagueCleanse", 73912, false)
-local timerNecroticPlagueCD	= mod:NewNextTimer(30, 73912)
-local timerDefileCD			= mod:NewNextTimer(32.5, 72762)
-local timerEnrageCD			= mod:NewCDTimer(20, 72143, nil, "RemoveEnrage|Healer|Tank")
-local timerShamblingHorror 	= mod:NewNextTimer(60, 70372)
-local timerDrudgeGhouls 	= mod:NewNextTimer(20, 70358)
-local timerRagingSpiritCD	= mod:NewNextTimer(22, 69200)
-local timerSummonValkyr 	= mod:NewCDTimer(45, 71844)
-local timerVileSpirit 		= mod:NewNextTimer(30.5, 70498)
-local timerVileSpiritMove 		= mod:NewTimer(15, "TimerVileSpiritMove", 70498)
-local timerTrapCD		 	= mod:NewNextTimer(15.5, 73539)
-local timerRestoreSoul 		= mod:NewCastTimer(40, 73650)
-local timerRoleplay			= mod:NewTimer(162, "TimerRoleplay", 72350)
+local timerNecroticPlagueCD	= mod:NewNextTimer(30, 73912, nil, nil, nil, 3, nil, DBM_CORE_L.DISEASE_ICON)
+local timerDefileCD			= mod:NewNextTimer(32.5, 72762, nil, nil, nil, 3, nil, DBM_CORE_L.DEADLY_ICON, nil, 2, 4)
+local timerEnrageCD			= mod:NewCDTimer(20, 72143, nil, "RemoveEnrage|Healer|Tank", nil, 3, nil, DBM_CORE_L.ENRAGE_ICON)
+local timerShamblingHorror 	= mod:NewNextTimer(60, 70372, nil, nil, nil, 1)
+local timerDrudgeGhouls 	= mod:NewNextTimer(20, 70358, nil, nil, nil, 1)
+local timerRagingSpiritCD	= mod:NewNextTimer(22, 69200, nil, nil, nil, 1)
+local timerSummonValkyr 	= mod:NewCDTimer(45, 71844, nil, nil, nil, 1)
+local timerVileSpirit 		= mod:NewNextTimer(30.5, 70498, nil, nil, nil, 1)
+local timerVileSpiritMove 		= mod:NewTimer(15, "TimerVileSpiritMove", 70498, nil, nil, 1)
+local timerTrapCD		 	= mod:NewNextTimer(15.5, 73539, nil, nil, nil, 3, nil, DBM_CORE_L.HEROIC_ICON)
+local timerRestoreSoul 		= mod:NewCastTimer(40, 73650, nil, nil, nil, 6)
+local timerRoleplay			= mod:NewRPTimer(162)
 
 local berserkTimer			= mod:NewBerserkTimer(900)
 
-local sndWOP					= mod:NewAnnounce("SoundWOP", nil, nil, true)
+local sndWOP					= mod:NewSpecialWarning("SoundWOP", nil, nil, nil, 4, 2)
 --local soundDefile			= mod:NewSound(72762)
 
 mod:AddBoolOption("SpecWarnHealerGrabbed", "Healer|Tank", "announce")
@@ -368,8 +368,9 @@ function mod:SPELL_CAST_START(args)
 		sndWOP:ScheduleVoice(37, "defilesoon")
 		timerVileSpirit:Start(50)
 	elseif args:IsSpellID(72350) then -- Fury of Frostmourne
-		mod:SetWipeTime(160)--Change min wipe time mid battle to force dbm to keep module loaded for this long out of combat roleplay, hopefully without breaking mod.
+		self:NextPhase()
 		timerRoleplay:Start()
+		mod:SetWipeTime(160)--Change min wipe time mid battle to force dbm to keep module loaded for this long out of combat roleplay, hopefully without breaking mod.
 		timerVileSpirit:Cancel()
 		timerSoulreaperCD:Cancel()
 		timerDefileCD:Cancel()
@@ -403,9 +404,9 @@ function mod:SPELL_CAST_SUCCESS(args)
 		timerSoulreaperCD:Start(30.5, soulreapercount)
 		if mod:IsTank() or mod:IsHealer() then
 			sndWOP:Play("changemt")
-			sndWOP:ScheduleVoice(2, "count\\3")
-			sndWOP:ScheduleVoice(3, "count\\2")
-			sndWOP:ScheduleVoice(4, "count\\1")
+			sndWOP:ScheduleVoice(2, "countthree")
+			sndWOP:ScheduleVoice(3, "counttwo")
+			sndWOP:ScheduleVoice(4, "countone")
 		end
 --		if args:IsPlayer() then
 --			specWarnSoulreaper:Show()

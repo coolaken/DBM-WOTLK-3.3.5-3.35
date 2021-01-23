@@ -23,10 +23,10 @@ local canPurge = select(2, UnitClass("player")) == "MAGE"
 			or select(2, UnitClass("player")) == "SHAMAN"
 			or select(2, UnitClass("player")) == "PRIEST"
 
-local warnAddsSoon					= mod:NewAnnounce("WarnAddsSoon", 2)
-local warnDominateMind				= mod:NewTargetAnnounce(71289, 3)
+local warnAddsSoon					= mod:NewAnnounce("WarnAddsSoon", 2, nil, true)
+local warnDominateMind				= mod:NewTargetNoFilterAnnounce(71289, 3)
 local warnDeathDecay				= mod:NewSpellAnnounce(72108, 2)
-local warnSummonSpirit				= mod:NewSpellAnnounce(71426, 2)
+local warnSummonSpirit				= mod:NewSpellAnnounce(71426, 2, nil, true)
 local warnReanimating				= mod:NewAnnounce("WarnReanimating", 3)
 local warnDarkTransformation		= mod:NewSpellAnnounce(70900, 4)
 local warnDarkEmpowerment			= mod:NewSpellAnnounce(70901, 4)
@@ -36,8 +36,8 @@ local warnTouchInsignificance		= mod:NewAnnounce("WarnTouchInsignificance", 2, 7
 local warnDarkMartyrdom				= mod:NewSpellAnnounce(72499, 4)
 
 local specWarnCurseTorpor			= mod:NewSpecialWarningYou(71237)
-local specWarnDeathDecay			= mod:NewSpecialWarningMove(72108)
-local specWarnTouchInsignificance	= mod:NewSpecialWarningStack(71204, nil, 3)
+local specWarnDeathDecay			= mod:NewSpecialWarningMove(72108, nil, nil, nil, 2, 2)
+local specWarnTouchInsignificance	= mod:NewSpecialWarningTargetCount(71204, nil, nil, nil, 1, 2)
 local specWarnVampricMight			= mod:NewSpecialWarningDispel(70674, "MagicDispeller")
 local specWarnDarkMartyrdom			= mod:NewSpecialWarningMove(72499, "Melee")
 local specWarnFrostbolt				= mod:NewSpecialWarningInterrupt(72007, false)
@@ -51,7 +51,7 @@ local timerFrostboltVolleyCD		= mod:NewCDTimer(14, 72905, nil, nil, nil, 2, nil,
 local timerFrostboltCast			= mod:NewCastTimer(4, 72007, nil, nil, nil, 3, nil, DBM_CORE_L.INTERRUPT_ICON)
 local timerTouchInsignificance		= mod:NewTargetTimer(30, 71204, nil, "Tank|Healer", nil, 3, nil, DBM_CORE_L.TANK_ICON)
 
-local sndWOP					= mod:NewAnnounce("SoundWOP", nil, nil, true)
+local sndWOP					= mod:NewSpecialWarning("SoundWOP", nil, nil, nil, 4, 2)
 
 local berserkTimer					= mod:NewBerserkTimer(600)
 
@@ -80,7 +80,7 @@ function mod:OnCombatStart(delay)
 	berserkTimer:Start(-delay)
 	timerAdds:Start(7)
 	warnAddsSoon:Schedule(4)			-- 3sec pre-warning on start
-	sndWOP:ScheduleVoice(2, "Interface\\AddOns\\DBM-Core\\DBM-VPYike\\mobsoon.ogg")
+	warnAddsSoon:ScheduleVoice(2, "mobsoon")
 	self:ScheduleMethod(7, "addsTimer")
 	if not mod:IsDifficulty("normal10") then
 		timerDominateMindCD:Start(30)		-- Sometimes 1 fails at the start, then the next will be applied 70 secs after start ?? :S
@@ -121,7 +121,7 @@ end
 function mod:addsTimer()
 	timerAdds:Cancel()
 	warnAddsSoon:Cancel()
-	sndWOP:CancelVoice("mobsoon")
+	warnAddsSoon:CancelVoice("mobsoon")
 	if mod:IsDifficulty("heroic10") or mod:IsDifficulty("heroic25") then
 		warnAddsSoon:Schedule(40)	-- 5 secs prewarning
 		self:ScheduleMethod(45, "addsTimer")
@@ -178,7 +178,7 @@ do
 		elseif args:IsSpellID(71001, 72108, 72109, 72110) then
 			if args:IsPlayer() then
 				specWarnDeathDecay:Show()
-				sndWOP:Play("runaway")
+				specWarnDeathDecay:Play("runaway")
 			end
 			if (GetTime() - lastDD > 5) then
 				warnDeathDecay:Show()
@@ -193,12 +193,12 @@ do
 			timerTouchInsignificance:Start(args.destName)
 			if mod:IsTank() or mod:IsHealer() then
 				if (args.amount or 1) >= 3 and (mod:IsDifficulty("normal10") or mod:IsDifficulty("normal25")) then
-					specWarnTouchInsignificance:Show(args.amount)
+					specWarnTouchInsignificance:Show(args.amount, args.destName)
 					if args.amount == 3 or args.amount == 5 then
-						sndWOP:Play("changemt")
+						specWarnTouchInsignificance:Play("changemt")
 					end
 				elseif (args.amount or 1) >= 5 and (mod:IsDifficulty("heroic10") or mod:IsDifficulty("heroic25")) then
-					specWarnTouchInsignificance:Show(args.amount)
+					specWarnTouchInsignificance:Show(args.amount, args.destName)
 				end
 			end
 		end
@@ -265,7 +265,7 @@ function mod:SPELL_SUMMON(args)
 		if time() - lastSpirit > 5 then
 			warnSummonSpirit:Show()
 			timerSummonSpiritCD:Start()
-			sndWOP:Play("spirits") --注意鬼魂
+			warnSummonSpirit:Play("spirits") --注意鬼魂
 			lastSpirit = time()
 		end
 	end

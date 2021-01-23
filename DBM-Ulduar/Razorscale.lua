@@ -22,9 +22,9 @@ local warnTurretsReadySoon			= mod:NewAnnounce("warnTurretsReadySoon", 1, 48642)
 local warnTurretsReady				= mod:NewAnnounce("warnTurretsReady", 3, 48642)
 local warnDevouringFlameCast		= mod:NewAnnounce("WarnDevouringFlameCast", 2, 64733, false, "OptionDevouringFlame") -- new option is just a work-around...the saved variable handling will be updated to allow changing and updating default values soon
 
-local specWarnDevouringFlame		= mod:NewSpecialWarningMove(64733)
+local specWarnDevouringFlame		= mod:NewSpecialWarningMove(64733, nil, nil, nil, 3, 2)
 local specWarnDevouringFlameCast	= mod:NewSpecialWarning("SpecWarnDevouringFlameCast")
-local specWarnFuseArmor		= mod:NewSpecialWarningStack(64771, nil, 2)
+local specWarnFuseArmor		= mod:NewSpecialWarningTargetCount(64771, nil, nil, nil, 1, 2)
 
 local enrageTimer					= mod:NewBerserkTimer(900)
 local timerDeepBreathCooldown		= mod:NewCDTimer(21, 64021)
@@ -35,9 +35,7 @@ local timerTurret3					= mod:NewTimer(93, "timerTurret3", 48642)
 local timerTurret4					= mod:NewTimer(113, "timerTurret4", 48642)
 local timerGrounded                 = mod:NewTimer(45, "timerGrounded")
 
-local sndWOP					= mod:NewAnnounce("SoundWOP", nil, nil, true)
 
-mod:AddBoolOption("PlaySoundOnDevouringFlame", true)
 
 local castFlames
 local combattime = 0
@@ -67,9 +65,7 @@ end
 function mod:SPELL_DAMAGE(args)
 	if args:IsSpellID(64733, 64704) and args:IsPlayer() then
 		specWarnDevouringFlame:Show()
-		if self.Options.PlaySoundOnDevouringFlame then
-			DBM:PlaySoundFile("Interface\\AddOns\\DBM-VPYike\\runaway.ogg")
-		end		
+		specWarnDevouringFlame:Play("runaway")	
 	end
 end
 
@@ -128,8 +124,8 @@ function mod:SPELL_AURA_APPLIED(args)
 	if args:IsSpellID(64771) then
 		local amount = args.amount or 1
 		if amount >= 2 then
-			specWarnFuseArmor:Show(args.amount)
-			sndWOP:Play("changemt")
+			specWarnFuseArmor:Show(args.amount, args.destName)
+			specWarnFuseArmor:Play("changemt")
 		end
 	end
 end

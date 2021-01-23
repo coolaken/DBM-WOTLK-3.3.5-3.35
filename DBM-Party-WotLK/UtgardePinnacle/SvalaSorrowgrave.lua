@@ -12,7 +12,7 @@ mod:RegisterEvents(
 	"CHAT_MSG_MONSTER_YELL"
 )
 
-local warningSacrifice	= mod:NewTargetAnnounce(48267, 2)
+local warningSacrifice	= mod:NewTargetNoFilterAnnounce(48267, 2)
 local timerSacrifice	= mod:NewBuffActiveTimer(25, 48276)
 local timerRoleplay		= mod:NewTimer(67, "timerRoleplay", "Interface\\Icons\\Spell_Holy_BorrowedTime")--roleplay for boss is active
 

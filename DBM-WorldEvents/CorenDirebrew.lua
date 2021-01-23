@@ -13,15 +13,15 @@ mod:RegisterEvents(
 )
 
 local warnDisarm			= mod:NewCastAnnounce(47310, 2, 4, nil, "Melee")
-local warnBarrel			= mod:NewTargetAnnounce(51413, 4)
-local timerBarrel			= mod:NewTargetTimer(8, 51413)
+local warnBarrel			= mod:NewTargetNoFilterAnnounce(51413, 4)
+local timerBarrel			= mod:NewTargetTimer(8, 51413, nil, nil, nil, 3)
 
 local specWarnDisarm		= mod:NewSpecialWarningRun(47310, false)
 local specWarnBrew			= mod:NewSpecialWarning("specWarnBrew")
 local specWarnBrewStun		= mod:NewSpecialWarning("specWarnBrewStun")
 
-local timerBrew				= mod:NewTargetTimer(10, 47376)
-local timerBrewStun			= mod:NewTargetTimer(6, 47340)
+local timerBrew				= mod:NewTargetTimer(10, 47376, nil, nil, nil, 3)
+local timerBrewStun			= mod:NewTargetTimer(6, 47340, nil, nil, nil, 3)
 local timerDisarm			= mod:NewCastTimer(4, 47310)
 
 mod:AddBoolOption("YellOnBarrel", mod:IsTank(), "announce")

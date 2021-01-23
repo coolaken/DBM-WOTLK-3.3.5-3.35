@@ -24,8 +24,8 @@ mod:RegisterEvents(
 local warnSlimePuddle				= mod:NewSpellAnnounce(70341, 2)
 local warnUnstableExperimentSoon	= mod:NewSoonAnnounce(70351, 3)
 local warnUnstableExperiment		= mod:NewSpellAnnounce(70351, 4)
-local warnVolatileOozeAdhesive		= mod:NewTargetAnnounce(70447, 3)
-local warnGaseousBloat				= mod:NewTargetAnnounce(70672, 3)
+local warnVolatileOozeAdhesive		= mod:NewTargetNoFilterAnnounce(70447, 3)
+local warnGaseousBloat				= mod:NewTargetNoFilterAnnounce(70672, 3)
 local warnPhase2Soon				= mod:NewAnnounce("WarnPhase2Soon", 2)
 local warnTearGas					= mod:NewSpellAnnounce(71617, 2)		-- Phase transition normal
 local warnVolatileExperiment		= mod:NewSpellAnnounce(72840, 4)		-- Phase transition heroic
@@ -34,7 +34,7 @@ local warnChokingGasBombSoon		= mod:NewPreWarnAnnounce(71255, 5, 3, nil, "Melee"
 local warnChokingGasBomb			= mod:NewSpellAnnounce(71255, 3, nil, "Melee")		-- Phase 2 ability
 local warnPhase3Soon				= mod:NewAnnounce("WarnPhase3Soon", 2)
 local warnMutatedPlague				= mod:NewAnnounce("WarnMutatedPlague", 2, 72451, "Tank|Healer") -- Phase 3 ability
-local warnUnboundPlague				= mod:NewTargetAnnounce(72856, 3)			-- Heroic Ability
+local warnUnboundPlague				= mod:NewTargetNoFilterAnnounce(72856, 3)			-- Heroic Ability
 
 local specWarnVolatileOozeAdhesive	= mod:NewSpecialWarningYou(70447)
 local specWarnGaseousBloat			= mod:NewSpecialWarningYou(70672)
@@ -60,13 +60,13 @@ local timerUnboundPlagueCD			= mod:NewNextTimer(60, 72856, nil, nil, nil, 3, nil
 local timerUnboundPlague			= mod:NewBuffActiveTimer(12, 72856, nil, nil, nil, 3, nil, DBM_CORE_L.HEROIC_ICON)		-- Heroic Ability: we can't keep the debuff 60 seconds, so we have to switch at 12-15 seconds. Otherwise the debuff does to much damage!
 
 -- buffs from "Drink Me"
-local timerMutatedSlash				= mod:NewTargetTimer(20, 70542)
-local timerRegurgitatedOoze			= mod:NewTargetTimer(20, 70539)
+local timerMutatedSlash				= mod:NewTargetTimer(20, 70542, nil, nil, nil, 3)
+local timerRegurgitatedOoze			= mod:NewTargetTimer(20, 70539, nil, nil, nil, 3)
 
 local berserkTimer					= mod:NewBerserkTimer(600)
 
 --local soundGaseousBloat 			= mod:NewSound(72455)
-local sndWOP					= mod:NewAnnounce("SoundWOP", nil, nil, true)
+local sndWOP					= mod:NewSpecialWarning("SoundWOP", nil, nil, nil, 4, 2)
 
 mod:AddBoolOption("OozeAdhesiveIcon")
 mod:AddBoolOption("GaseousBloatIcon")

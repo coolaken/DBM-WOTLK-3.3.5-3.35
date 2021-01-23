@@ -12,18 +12,18 @@ mod:RegisterEvents(
 )
 
 local warnFear					= mod:NewSpellAnnounce(72452, 3)
-local warnImpendingDespair		= mod:NewTargetAnnounce(72426, 3)
-local warnQuiveringStrike		= mod:NewTargetAnnounce(72453, 3)
+local warnImpendingDespair		= mod:NewTargetNoFilterAnnounce(72426, 3)
+local warnQuiveringStrike		= mod:NewTargetNoFilterAnnounce(72453, 3)
 
 local timerFear					= mod:NewBuffActiveTimer(4, 72452)
-local timerImpendingDespair		= mod:NewTargetTimer(6, 72426)
-local timerQuiveringStrike		= mod:NewTargetTimer(5, 72453)
+local timerImpendingDespair		= mod:NewTargetTimer(6, 72426, nil, nil, nil, 3)
+local timerQuiveringStrike		= mod:NewTargetTimer(5, 72453, nil, nil, nil, 3)
 
 local timerFearCD				= mod:NewCDTimer(20, 72435)-- 亵渎尖啸 20秒!
 
 local lastfear = 0
 
-local sndWOP					= mod:NewAnnounce("SoundWOP", nil, nil, true)
+local sndWOP					= mod:NewSpecialWarning("SoundWOP", nil, nil, nil, 4, 2)
 
 
 local function sendFearWarning()

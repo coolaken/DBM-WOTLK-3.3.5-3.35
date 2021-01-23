@@ -13,18 +13,24 @@ mod:RegisterEvents(
 )
 
 local warnSoulstormSoon		= mod:NewSoonAnnounce(68872, 2)
-local warnCorruptSoul		= mod:NewTargetAnnounce(68839, 3)
+local warnCorruptSoul		= mod:NewTargetNoFilterAnnounce(68839, 3)
 local specwarnSoulstorm		= mod:NewSpecialWarning("specwarnSoulstorm")
+
 local timerSoulstormCast	= mod:NewCastTimer(4, 68872)
+local timerCorruptSoulCD	= mod:NewCDCountTimer(22, 68839, nil, nil, nil, 1)
 
 local warned_preStorm = false
+local corruptSoulCount = 0
 
 function mod:OnCombatStart(delay)
+	corruptSoulCount = 1
 	warned_preStorm = false
+	timerCorruptSoulCD:Start(15-delay, corruptSoulCount)
 end
 
 function mod:SPELL_CAST_START(args)
 	if args:IsSpellID(68872) then							-- Soulstorm
+		timerCorruptSoulCD:Cancel()
 		specwarnSoulstorm:Show()
 		timerSoulstormCast:Start()
 	end
@@ -32,7 +38,9 @@ end
 
 function mod:SPELL_AURA_APPLIED(args)
 	if args:IsSpellID(68839) then							-- Corrupt Soul
+		corruptSoulCount = corruptSoulCount + 1
 		warnCorruptSoul:Show(args.destName)
+		timerCorruptSoulCD:Start(15-delay, corruptSoulCount)
 	end
 end
 

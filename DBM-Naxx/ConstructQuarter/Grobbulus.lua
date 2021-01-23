@@ -14,12 +14,12 @@ mod:RegisterEvents(
 	"SPELL_CAST_SUCCESS"
 )
 
-local warnInjection		= mod:NewTargetAnnounce(28169, 2)
+local warnInjection		= mod:NewTargetNoFilterAnnounce(28169, 2)
 local warnCloud			= mod:NewSpellAnnounce(28240, 2)
 
 local specWarnInjection	= mod:NewSpecialWarning("SpecialWarningInjection")
 
-local timerInjection	= mod:NewTargetTimer(10, 28169)
+local timerInjection	= mod:NewTargetTimer(10, 28169, nil, nil, nil, 3)
 local timerCloud		= mod:NewNextTimer(15, 28240)
 local enrageTimer		= mod:NewBerserkTimer(720)
 

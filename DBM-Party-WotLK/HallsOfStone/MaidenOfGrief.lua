@@ -12,11 +12,11 @@ mod:RegisterEvents(
 	"SPELL_AURA_APPLIED"
 )
 
-local warningWoe		= mod:NewTargetAnnounce(50761, 2)
+local warningWoe		= mod:NewTargetNoFilterAnnounce(50761, 2)
 local warningSorrow		= mod:NewSpellAnnounce(50760, 1)
 local warningStorm		= mod:NewSpellAnnounce(50752, 3)
 
-local timerWoe			= mod:NewTargetTimer(10, 50761)
+local timerWoe			= mod:NewTargetTimer(10, 50761, nil, nil, nil, 3)
 local timerSorrow		= mod:NewBuffActiveTimer(6, 50760)
 local timerStormCD		= mod:NewCDTimer(20, 50752)
 local timerSorrowCD		= mod:NewCDTimer(30, 50760)

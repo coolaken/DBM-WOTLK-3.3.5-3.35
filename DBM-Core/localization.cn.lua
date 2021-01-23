@@ -479,7 +479,7 @@ L.AUTO_TIMER_TEXTS.adds					= "下一波小怪"
 L.AUTO_TIMER_TEXTS.addsshort			= "小怪"
 L.AUTO_TIMER_TEXTS.addscustom			= "小怪 (%%s)"
 L.AUTO_TIMER_TEXTS.addscustomshort		= "小怪 (%%s)"
-L.AUTO_TIMER_TEXTS.roleplay				= GUILD_INTEREST_RP
+L.AUTO_TIMER_TEXTS.roleplay				= "剧情"
 
 L.AUTO_TIMER_OPTIONS.target				= "计时条：$spell:%s 减益效果持续时间"
 L.AUTO_TIMER_OPTIONS.cast				= "计时条：$spell:%s 施法时间"
@@ -521,8 +521,11 @@ L.AUTO_YELL_OPTION_TEXT.count		    = "当你受到 $spell:%s 影响时大喊（�
 L.AUTO_YELL_OPTION_TEXT.fade			= "当你身上的 $spell:%s 即将消失时大喊（带倒数和技能名称）"
 L.AUTO_YELL_OPTION_TEXT.shortfade	    = "当你身上的 $spell:%s 即将消失时大喊（带倒数）"
 L.AUTO_YELL_OPTION_TEXT.iconfade		= "当你身上的 $spell:%s 即将消失时大喊（带倒数和标记）"
+L.AUTO_YELL_OPTION_TEXT.shortposition	= "当你受到$spell:%s影响时大喊（带位置）"
 L.AUTO_YELL_OPTION_TEXT.position		= "当你受到 $spell:%s 影响时大喊（带位置）"
 L.AUTO_YELL_OPTION_TEXT.combo		    = "当你受到 $spell:%s 影响时大喊（带一个自定义文本）"
+L.AUTO_YELL_OPTION_TEXT.repeatplayer					= "Yell repeatedly (with player name) when you are affected by $spell:%s"
+L.AUTO_YELL_OPTION_TEXT.repeaticon						= "Yell repeatedly (with icon) when you are affected by $spell:%s"
 --
 L.AUTO_YELL_ANNOUNCE_TEXT.shortyell     = "%s"
 L.AUTO_YELL_ANNOUNCE_TEXT.yell		    = UnitName("player") .. " 中了 %s"
@@ -532,6 +535,8 @@ L.AUTO_YELL_ANNOUNCE_TEXT.shortfade	    = "%%d 秒"
 L.AUTO_YELL_ANNOUNCE_TEXT.iconfade	    = "{rt%%2$d}%%1$d 秒" --应该对的吧。
 L.AUTO_YELL_ANNOUNCE_TEXT.position	    = UnitName("player").." ({rt%%3$d}) 中了 %1$s (%%1$s - {rt%%2$d})" --리동윤
 L.AUTO_YELL_ANNOUNCE_TEXT.combo		    = "%s, %%s"
+L.AUTO_YELL_ANNOUNCE_TEXT.repeatplayer					= UnitName("player")--Doesn't need translation, it's just player name spam
+L.AUTO_YELL_ANNOUNCE_TEXT.repeaticon						= "{rt%%2$d}"--Doesn't need translation. It's just icon spam
 
 --
 --L.AUTO_YELL_CUSTOM_POSITION			  = "{rt%d}%s{rt%d}"--Doesn't need translating. Has no strings

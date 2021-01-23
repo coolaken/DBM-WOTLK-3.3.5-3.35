@@ -9,13 +9,13 @@ mod:RegisterEvents(
 	"SPELL_AURA_REMOVED"
 )
 
-local warnBloodMirror		= mod:NewTargetAnnounce(70451, 3, nil, mod:IsHealer())
-local warnBloodSap			= mod:NewTargetAnnounce(70432, 4)
-local warnChainsofShadow	= mod:NewTargetAnnounce(70645, 3)
+local warnBloodMirror		= mod:NewTargetNoFilterAnnounce(70451, 3, nil, "Healer")
+local warnBloodSap			= mod:NewTargetNoFilterAnnounce(70432, 4)
+local warnChainsofShadow	= mod:NewTargetNoFilterAnnounce(70645, 3)
 
-local timerBloodMirror		= mod:NewTargetTimer(30, 70451, nil, mod:IsHealer())
-local timerBloodSap			= mod:NewTargetTimer(8, 70432)
-local timerChainsofShadow	= mod:NewTargetTimer(10, 70645)
+local timerBloodMirror		= mod:NewTargetTimer(30, 70451, nil, "Healer")
+local timerBloodSap			= mod:NewTargetTimer(8, 70432, nil, nil, nil, 3)
+local timerChainsofShadow	= mod:NewTargetTimer(10, 70645, nil, nil, nil, 3)
 
 mod:AddBoolOption("BloodMirrorIcon", false)
 mod:RemoveOption("HealthFrame")

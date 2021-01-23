@@ -18,7 +18,7 @@ local warnVortex		= mod:NewSpellAnnounce(56105, 3)
 local warnVortexSoon	= mod:NewSoonAnnounce(56105, 2)
 local warnBreathInc		= mod:NewAnnounce("WarningBreathSoon", 3, 60072)
 local warnBreath		= mod:NewAnnounce("WarningBreath", 4, 60072)
-local warnSurge			= mod:NewTargetAnnounce(60936, 3)
+local warnSurge			= mod:NewTargetNoFilterAnnounce(60936, 3)
 
 local specWarnSurge		= mod:NewSpecialWarningYou(60936)
 

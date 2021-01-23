@@ -16,15 +16,15 @@ mod:RegisterEvents(
 	"CHAT_MSG_RAID_BOSS_EMOTE"
 )
 
-local warnPactDarkfallen			= mod:NewTargetAnnounce(71340, 4)
-local warnBloodMirror				= mod:NewTargetAnnounce(71510, 3, nil, "Tank|Healer")
-local warnSwarmingShadows			= mod:NewTargetAnnounce(71266, 4)
+local warnPactDarkfallen			= mod:NewTargetNoFilterAnnounce(71340, 4)
+local warnBloodMirror				= mod:NewTargetNoFilterAnnounce(71510, 3, nil, "Tank|Healer")
+local warnSwarmingShadows			= mod:NewTargetNoFilterAnnounce(71266, 4)
 local warnInciteTerror				= mod:NewSpellAnnounce(73070, 3)
-local warnVampricBite				= mod:NewTargetAnnounce(71727, 2)
-local warnMindControlled			= mod:NewTargetAnnounce(70923, 4)
+local warnVampricBite				= mod:NewTargetNoFilterAnnounce(71727, 2)
+local warnMindControlled			= mod:NewTargetNoFilterAnnounce(70923, 4)
 local warnBloodthirstSoon			= mod:NewSoonAnnounce(71474, 2)
-local warnBloodthirst				= mod:NewTargetAnnounce(71474, 3, nil, false)
-local warnEssenceoftheBloodQueen	= mod:NewTargetAnnounce(71473, 3, nil, false)
+local warnBloodthirst				= mod:NewTargetNoFilterAnnounce(71474, 3, nil, false)
+local warnEssenceoftheBloodQueen	= mod:NewTargetNoFilterAnnounce(71473, 3, nil, false)
 
 local specWarnBloodBolt				= mod:NewSpecialWarningSpell(71772)
 local specWarnPactDarkfallen		= mod:NewSpecialWarningYou(71340)
@@ -45,7 +45,7 @@ local timerEssenceoftheBloodQueen	= mod:NewBuffActiveTimer(60, 71473, nil, nil, 
 
 local berserkTimer					= mod:NewBerserkTimer(330) --原来是320 5分30秒 待定!
 
-local sndWOP					= mod:NewAnnounce("SoundWOP", nil, nil, true)
+local sndWOP					= mod:NewSpecialWarning("SoundWOP", nil, nil, nil, 4, 2)
 
 local isPAL = select(2, UnitClass("player")) == "PALADIN"
 

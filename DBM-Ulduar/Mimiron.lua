@@ -21,8 +21,8 @@ mod:RegisterEvents(
 	"SPELL_DAMAGE"
 )
 
-local blastWarn					= mod:NewTargetAnnounce(64529, 4)
-local shellWarn					= mod:NewTargetAnnounce(63666, 2)
+local blastWarn					= mod:NewTargetNoFilterAnnounce(64529, 4)
+local shellWarn					= mod:NewTargetNoFilterAnnounce(63666, 2)
 local lootannounce				= mod:NewAnnounce("MagneticCore", 1)
 local warnBombSpawn				= mod:NewAnnounce("WarnBombSpawn", 3)
 local warnFrostBomb				= mod:NewSpellAnnounce(64623, 3)
@@ -55,7 +55,7 @@ local timerNextFrostBomb        = mod:NewNextTimer(30, 64623)
 local timerBombExplosion		= mod:NewCastTimer(15, 65333)
 local timerBombBotSpawn			= mod:NewCDTimer(15, 63811)
 
-local sndWOP					= mod:NewAnnounce("SoundWOP", nil, nil, true)
+local sndWOP					= mod:NewSpecialWarning("SoundWOP", nil, nil, nil, 4, 2)
 
 mod:AddBoolOption("PlaySoundOnShockBlast", isMelee)
 mod:AddBoolOption("PlaySoundOnDarkGlare", true)

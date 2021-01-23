@@ -34,7 +34,7 @@ local timerIceBlast		= mod:NewTimer(9.3, "TimerIceBlast", 15876)
 local noTargetTime = 0
 local isFlying = false
 
-local sndWOP					= mod:NewAnnounce("SoundWOP", nil, nil, true)
+local sndWOP					= mod:NewSpecialWarning("SoundWOP", nil, nil, nil, 4, 2)
 
 function mod:OnCombatStart(delay)
 	noTargetTime = 0

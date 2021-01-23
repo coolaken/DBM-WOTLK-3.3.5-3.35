@@ -30,7 +30,7 @@ local timerBoned			= mod:NewAchievementTimer(8, 4610)
 local berserkTimer			= mod:NewBerserkTimer(600)
 
 --local soundWhirlwind = mod:NewSound(69076)
-local sndWOP					= mod:NewAnnounce("SoundWOP", nil, nil, true)
+local sndWOP					= mod:NewSpecialWarning("SoundWOP", nil, nil, nil, 4, 2)
 mod:AddBoolOption("SetIconOnImpale", true)
 
 local impaleTargets = {}

@@ -7,9 +7,9 @@ mod:SetZone()
 
 mod:RegisterCombat("combat")
 
-local warningCharge		= mod:NewTargetAnnounce(50834, 2)
+local warningCharge		= mod:NewTargetNoFilterAnnounce(50834, 2)
 local warningRing		= mod:NewSpellAnnounce(50840, 3)
-local timerCharge		= mod:NewTargetTimer(10, 50834)
+local timerCharge		= mod:NewTargetTimer(10, 50834, nil, nil, nil, 3)
 local timerChargeCD		= mod:NewCDTimer(25, 50834)
 local timerRingCD		= mod:NewCDTimer(25, 50840)
 

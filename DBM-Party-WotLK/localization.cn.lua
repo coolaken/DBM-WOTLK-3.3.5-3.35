@@ -169,6 +169,10 @@ L:SetTimerLocalization({
 L:SetOptionLocalization({
 })
 
+L:SetMiscLocalization({
+	YellKill		= "啊……啊啊啊！从没有想到……我还能摆脱……他的魔掌……"
+})
+
 ---------------------------------------
 --  Caverns of Time: Old Stratholme  --
 ---------------------------------------
@@ -634,11 +638,11 @@ L:SetOptionLocalization({
 })
 
 L:SetMiscLocalization({
-	Pull	= "你们帮我看着点外面。我这样的强者只需要锤两下就能搞定这破烂……",
-	Phase1	= "安全系统发现不明入侵。历史文档的分析工作优先性转为低。对策程序立即启动",
-	Phase2	= "威胁指数超过核定标准。天界文档中断。提高安全级别",
-	Phase3	= "威胁指数过高。虚空分析程序关闭。启动清理协议",
-	Kill	= "警告：安全系统自动修复装置已被关闭，消除全部处理器内容并……"
+	Pull	= "是该收获答案了，让我们一路杀过去吧!",
+	Phase1	= "安全系统发现不明入侵。历史文档的分析工作优先性转为低。对策程序立即启动.",
+	Phase2	= "威胁指数超过核定标准。天界文档中断。提高安全级别.",
+	Phase3	= "威胁指数过高，虚空分析程序关闭，启动清理协议.",
+	Kill	= "警告：安全系统自动修复装置已被关闭，消除全部处理器内容并... "
 })
 
 -----------------
@@ -793,7 +797,8 @@ L:SetOptionLocalization({
 })
 
 L:SetMiscLocalization({
-	CombatStart		= "可怜而无知的蠢货！"
+	CombatStart		= "可怜而无知的蠢货！",
+	YellCombatEnd	= "我所做的一切……都是为了艾泽拉斯……"
 })
 
 --------------------------
@@ -1202,7 +1207,8 @@ L:SetOptionLocalization({
 })
 
 L:SetMiscLocalization({
-	YellCombatEnd	= "干得漂亮！你的下一个挑战将来自于十字军的骑士们。他们将以强大的实力对你进行测试。"
+	--YellCombatEnd	= "干得漂亮！你的下一个挑战将来自于十字军的骑士们。他们将以强大的实力对你进行测试。"
+	YellCombatEnd	= "安静！你的下一个挑战来自于十字军最强的队伍。你将面对他们强大的实力！"
 })
 
 ----------------------------------
@@ -1339,12 +1345,10 @@ L:SetOptionLocalization({
 L:SetMiscLocalization({
 	--CombatStart		= "唉，勇敢的冒险者，你们的路已经到头了。难道你们没有听到身后隧道里钢铁撞击的声音吗？那就是末日降临的乐章。", --Cannot promise just yet if this is right emote, it may be the second emote after this, will need to do more testing.
 	CombatStart		= "终于，勇敢、勇敢的冒险者，你的干扰终到尽头.你听见了身后隧道中的金属与骨头敲击声吗?这就是你即将面对的死亡之声.", --测试成功!
+	ACombatStart	= "入侵者进入了主人的领地。拉响警报！",
 	--HoarfrostTarget	= "冰霜巨龙霜牙凝视着(%S+)，准备发动一次冰霜袭击！",
 	HoarfrostTarget = "The frostwyrm %%s gazes at (%S+) and readies an icy attack!", --通过 %ss 双%%才可以 我也不知道为什么
-	--HoarfrostTarget = "The frostwyrm 霜牙 gazes at (%S+) and readies an icy attack!", --试试霜牙  The frostwyrm 霜牙 gazes at 一锤定音 and readies an icy attack!
-					 --  The frostwyrm 霜牙 gazes at 花小猪 and readies an icy attack!  --不行再试试%ss
 	YellCombatEnd	= "不可能……霜牙……警告……"
-	--YellCombatEnd	= "Impossible.... Rimefang.... warn...."
 })
 
 ----------------------
@@ -1492,10 +1496,10 @@ L:SetMiscLocalization({
 	WitchDoctor		= "复活的巫医",
 	ACombatStart	= "他太强大了!我们必须立刻离开这里!我的魔法只能困住他一小段时间。快来吧，英雄们!",
 	HCombatStart	= "他……太强大了。英雄们，快，快过来！我们必须马上离开！你们先走。我会尽全力挡住他。",
-	Wave1			= "你们无路可逃！",
+	Wave1			= "你们无路可逃",
 	Wave2			= "屈服于死亡的严寒吧！",
-	Wave3			= "死路一条！",
-	Wave4			= "你能抵挡多久？",
+	Wave3			= "死路一条",
+	Wave4			= "能抵挡多久？",
 	YellCombatEnd	= "开火！开火！"
 })
 

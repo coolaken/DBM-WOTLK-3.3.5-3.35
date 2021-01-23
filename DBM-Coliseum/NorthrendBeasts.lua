@@ -36,7 +36,7 @@ local specWarnImpale3		= mod:NewSpecialWarning("SpecialWarningImpale3")
 
 
 local specWarnAnger			= mod:NewSpecialWarningCount(66636)
-local specWarnImpale		= mod:NewSpecialWarningTargetCount(67477, "Tank") --3是层数 nil 默认就是3
+local specWarnImpale		= mod:NewSpecialWarningTargetCount(67477, "Tank|Healer") --3是层数 nil 默认就是3
 local specWarnFireBomb		= mod:NewSpecialWarningMove(66317)
 local specWarnSlimePool		= mod:NewSpecialWarningMove(67640)
 local specWarnToxin			= mod:NewSpecialWarningMove(67620)
@@ -69,7 +69,7 @@ local timerBurningSprayCD	= mod:NewCDTimer(21, 66902, nil, nil, nil, 2, nil, DBM
 local timerParalyticBiteCD	= mod:NewCDTimer(25, 66824, nil, "Tank", nil, 3, nil, DBM_CORE_L.TANK_ICON)
 local timerBurningBiteCD	= mod:NewCDTimer(15, 66879, nil, "Tank", nil, 3, nil, DBM_CORE_L.TANK_ICON)
 
-local sndWOP					= mod:NewAnnounce("SoundWOP", nil, nil, true)
+local sndWOP					= mod:NewSpecialWarning("SoundWOP", nil, nil, nil, 4, 2)
 
 mod:AddBoolOption("PingCharge")
 mod:AddBoolOption("SetIconOnChargeTarget", true)

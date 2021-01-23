@@ -41,18 +41,18 @@ mod:AddBoolOption("PlaySoundLightningTendrils", true)
 local warnFusionPunch			= mod:NewSpellAnnounce(61903, 4)
 local timerFusionPunchCast		= mod:NewCastTimer(3, 61903)
 local timerFusionPunchActive	= mod:NewTargetTimer(4, 61903)
-local warnOverwhelmingPower		= mod:NewTargetAnnounce(61888, 2)
+local warnOverwhelmingPower		= mod:NewTargetNoFilterAnnounce(61888, 2)
 local timerOverwhelmingPower	= mod:NewTargetTimer(25, 61888)
-local warnStaticDisruption		= mod:NewTargetAnnounce(61912, 3) 
+local warnStaticDisruption		= mod:NewTargetNoFilterAnnounce(61912, 3) 
 mod:AddBoolOption("SetIconOnOverwhelmingPower")
 mod:AddBoolOption("SetIconOnStaticDisruption")
 
-local sndWOP					= mod:NewAnnounce("SoundWOP", nil, nil, true)
+local sndWOP					= mod:NewSpecialWarning("SoundWOP", nil, nil, nil, 4, 2)
 
 -- Runemaster Molgeim
 -- Lightning Blast ... don't know, maybe 63491
 local timerShieldofRunes		= mod:NewBuffActiveTimer(15, 63967)
-local warnRuneofPower			= mod:NewTargetAnnounce(64320, 2)
+local warnRuneofPower			= mod:NewTargetNoFilterAnnounce(64320, 2)
 local warnRuneofDeath			= mod:NewSpellAnnounce(63490, 2)
 local warnShieldofRunes			= mod:NewSpellAnnounce(63489, 2)
 local warnRuneofSummoning		= mod:NewSpellAnnounce(62273, 3)

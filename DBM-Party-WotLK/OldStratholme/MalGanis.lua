@@ -13,8 +13,8 @@ mod:RegisterEvents(
 	"SPELL_AURA_REMOVED"
 )
 
-local warningSleep	= mod:NewTargetAnnounce(52721, 2)
-local timerSleep	= mod:NewTargetTimer(10, 52721)
+local warningSleep	= mod:NewTargetNoFilterAnnounce(52721, 2)
+local timerSleep	= mod:NewTargetTimer(10, 52721, nil, nil, nil, 3)
 local timerSleepCD	= mod:NewCDTimer(20, 52721)
 
 function mod:SPELL_AURA_APPLIED(args)

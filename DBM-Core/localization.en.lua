@@ -539,7 +539,9 @@ L.AUTO_YELL_OPTION_TEXT = {
 	iconfade						= "Yell (with countdown and icon) when $spell:%s is fading",
 	position						= "Yell (with position and player name) when you are affected by $spell:%s",
 	shortposition					= "Yell (with position) when you are affected by $spell:%s",
-	combo							= "Yell (with custom text) when you are affected by $spell:%s and other spells at same time"
+	combo							= "Yell (with custom text) when you are affected by $spell:%s and other spells at same time",
+	repeatplayer					= "Yell repeatedly (with player name) when you are affected by $spell:%s",
+	repeaticon						= "Yell repeatedly (with icon) when you are affected by $spell:%s"
 }
 L.AUTO_YELL_ANNOUNCE_TEXT = {
 	shortyell						= "%s",
@@ -550,7 +552,9 @@ L.AUTO_YELL_ANNOUNCE_TEXT = {
 	iconfade						= "{rt%%2$d}%%1$d",
 	position 						= "%s %%s on {rt%%d}"..UnitName("player").."{rt%%d}",
 	shortposition 					= "{rt%%1$d}%s %%2$d",--Icon, Spellname, number
-	combo							= "%s and %%s"--Spell name (from option, plus spellname given in arg)
+	combo							= "%s and %%s",--Spell name (from option, plus spellname given in arg)
+	repeatplayer					= UnitName("player"),--Doesn't need translation, it's just player name spam
+	repeaticon						= "{rt%%2$d}"--Doesn't need translation. It's just icon spam
 }
 L.AUTO_YELL_CUSTOM_POSITION			= "{rt%d}%s{"--Doesn't need translating. Has no strings
 L.AUTO_YELL_CUSTOM_POSITION2		= "{rt%d}%s{rt%d}"--Doesn't need translating. Has no strings

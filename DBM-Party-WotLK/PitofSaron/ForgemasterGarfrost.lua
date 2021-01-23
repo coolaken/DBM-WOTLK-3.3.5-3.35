@@ -15,12 +15,12 @@ mod:RegisterEvents(
 )
 
 local warnForgeWeapon			= mod:NewSpellAnnounce(70335, 2)
-local warnDeepFreeze			= mod:NewTargetAnnounce(70384, 2)
+local warnDeepFreeze			= mod:NewTargetNoFilterAnnounce(70384, 2)
 local warnSaroniteRock			= mod:NewAnnounce("warnSaroniteRock", 3, 70851)
 local specWarnSaroniteRock		= mod:NewSpecialWarning("specWarnSaroniteRock")
 local specWarnSaroniteRockNear	= mod:NewSpecialWarning("specWarnSaroniteRockNear")
 local specWarnPermafrost		= mod:NewSpecialWarning("specWarnPermafrost")
-local timerDeepFreeze			= mod:NewTargetTimer(14, 70381)
+local timerDeepFreeze			= mod:NewTargetTimer(14, 70381, nil, nil, nil, 3)
 
 mod:AddBoolOption("SetIconOnSaroniteRockTarget", true)
 mod:AddBoolOption("AchievementCheck", false, "announce")

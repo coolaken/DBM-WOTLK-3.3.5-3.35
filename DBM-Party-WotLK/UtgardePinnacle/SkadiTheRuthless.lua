@@ -14,9 +14,9 @@ mod:RegisterEvents(
 )
 
 local warnPhase2		= mod:NewPhaseAnnounce(2)
-local warningPoison		= mod:NewTargetAnnounce(59331, 2)
+local warningPoison		= mod:NewTargetNoFilterAnnounce(59331, 2)
 local warningWhirlwind	= mod:NewSpellAnnounce(59322, 3)
-local timerPoison		= mod:NewTargetTimer(12, 59331)
+local timerPoison		= mod:NewTargetTimer(12, 59331, nil, nil, nil, 3)
 local timerWhirlwindCD	= mod:NewCDTimer(23, 59322)
 
 local specWarnWhirlwind	= mod:NewSpecialWarningRun(59322)

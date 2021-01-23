@@ -12,8 +12,8 @@ mod:RegisterEvents(
 )
 
 local warnDisruptingShout		= mod:NewSpellAnnounce(71022, 2)
-local warnDarkReckoning			= mod:NewTargetAnnounce(69483, 3)
-local warnDeathPlague			= mod:NewTargetAnnounce(72865, 4)
+local warnDarkReckoning			= mod:NewTargetNoFilterAnnounce(69483, 3)
+local warnDeathPlague			= mod:NewTargetNoFilterAnnounce(72865, 4)
 
 local specWarnDisruptingShout	= mod:NewSpecialWarningCast(71022)
 local specWarnDarkReckoning		= mod:NewSpecialWarningMove(69483)
@@ -21,11 +21,11 @@ local specWarnDeathPlague		= mod:NewSpecialWarningYou(72865)
 local specWarnTrap				= mod:NewSpecialWarning("SpecWarnTrap")
 
 local timerDisruptingShout		= mod:NewCastTimer(3, 71022)
-local timerDarkReckoning		= mod:NewTargetTimer(8, 69483)
-local timerDeathPlague			= mod:NewTargetTimer(15, 72865)
+local timerDarkReckoning		= mod:NewTargetTimer(8, 69483, nil, nil, nil, 3)
+local timerDeathPlague			= mod:NewTargetTimer(15, 72865, nil, nil, nil, 3)
 
 --local soundDarkReckoning = mod:NewSound(69483)
-local sndWOP					= mod:NewAnnounce("SoundWOP", nil, nil, true)
+local sndWOP					= mod:NewSpecialWarning("SoundWOP", nil, nil, nil, 4, 2)
 
 mod:AddBoolOption("SetIconOnDarkReckoning", true)
 mod:AddBoolOption("SetIconOnDeathPlague", true)

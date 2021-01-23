@@ -14,8 +14,8 @@ mod:RegisterEvents(
 )
 
 local warningTime 	= mod:NewSpellAnnounce(58848, 3)
-local warningCurse 	= mod:NewTargetAnnounce(52772, 2)
-local timerCurse	= mod:NewTargetTimer(10, 52772)
+local warningCurse 	= mod:NewTargetNoFilterAnnounce(52772, 2)
+local timerCurse	= mod:NewTargetTimer(10, 52772, nil, nil, nil, 3)
 local timerTimeCD	= mod:NewCDTimer(25, 58848)
 
 function mod:SPELL_CAST_SUCCESS(args)

@@ -13,9 +13,9 @@ mod:RegisterEvents(
 	"SPELL_SUMMON"
 )
 
-local warningEnfeeble	= mod:NewTargetAnnounce(43650, 2)
+local warningEnfeeble	= mod:NewTargetNoFilterAnnounce(43650, 2)
 local warningSummon		= mod:NewSpellAnnounce(52611, 3)
-local timerEnfeeble		= mod:NewTargetTimer(6, 43650)
+local timerEnfeeble		= mod:NewTargetTimer(6, 43650, nil, nil, nil, 3)
 
 function mod:SPELL_AURA_APPLIED(args)
 	if args:IsSpellID(43650) then

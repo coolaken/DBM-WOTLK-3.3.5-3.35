@@ -13,7 +13,7 @@ mod:RegisterEvents(
 	"SPELL_SUMMON"
 )
 
-local warnHodirsFury		= mod:NewTargetAnnounce(62297)
+local warnHodirsFury		= mod:NewTargetNoFilterAnnounce(62297)
 local pursueTargetWarn		= mod:NewAnnounce("PursueWarn", 2, 62374)
 local warnNextPursueSoon	= mod:NewAnnounce("warnNextPursueSoon", 3, 62374)
 
@@ -23,9 +23,9 @@ local warnWardofLife		= mod:NewSpecialWarning("warnWardofLife")
 
 local timerSystemOverload	= mod:NewBuffActiveTimer(20, 62475)
 local timerFlameVents		= mod:NewCastTimer(10, 62396)
-local timerPursued			= mod:NewTargetTimer(30, 62374)
+local timerPursued			= mod:NewTargetTimer(30, 62374, nil, nil, nil, 3)
 
-local sndWOP					= mod:NewAnnounce("SoundWOP", nil, nil, true)
+local sndWOP					= mod:NewSpecialWarning("SoundWOP", nil, nil, nil, 4, 2)
 --local soundPursued = mod:NewSound(62374)
 --local voiceFelGeyser			= mod:NewVoice(218823)--watchstep
 

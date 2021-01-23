@@ -17,13 +17,13 @@ local warningAdds				= mod:NewAnnounce("WarnAdds", 3)
 local warnCleaveArmor			= mod:NewSpellAnnounce(74367, 3, nil, "Tank|Healer") 
 local warningFear				= mod:NewSpellAnnounce(74384, 3)
 
-local specWarnCleaveArmor		= mod:NewSpecialWarningStack(74367, nil, 2)--ability lasts 30 seconds, has a 15 second cd, so tanks should trade at 2 stacks.
+local specWarnCleaveArmor		= mod:NewSpecialWarningTargetCount(74367, "Tank|Healer", nil, nil, 1, 2)--ability lasts 30 seconds, has a 15 second cd, so tanks should trade at 2 stacks.
 
 local timerAddsCD				= mod:NewTimer(45.5, "TimerAdds")
-local timerCleaveArmor			= mod:NewTargetTimer(30, 74367, nil, "Tank|Healer")
+local timerCleaveArmor			= mod:NewTargetTimer(30, 74367, nil, "Tank|Healer", nil, 3)
 local timerFearCD				= mod:NewCDTimer(33, 74384)--anywhere from 33-40 seconds in between fears.
 
-local sndWOP					= mod:NewAnnounce("SoundWOP", nil, nil, true)
+local sndWOP					= mod:NewSpecialWarning("SoundWOP", nil, nil, nil, 4, 2)
 
 function mod:OnCombatStart(delay)
 	timerFearCD:Start(14-delay)--need more pulls to verify consistency
@@ -42,13 +42,10 @@ function mod:SPELL_AURA_APPLIED(args)
 	if args:IsSpellID(74367) then
 		warnCleaveArmor:Show(args.spellName, args.destName, args.amount or 1)
 		timerCleaveArmor:Start(args.destName)
---		if args:IsPlayer() and (args.amount or 1) >= 2 then
-		if mod:IsTank() or mod:IsHealer() then
 			if (args.amount or 1) >= 2 then
-				specWarnCleaveArmor:Show(args.amount)
-				sndWOP:Play("changemt")
+				specWarnCleaveArmor:Show(args.amount, args.destName)
+				specWarnCleaveArmor:Play("changemt")
 			end
-		end
 	end
 end
 

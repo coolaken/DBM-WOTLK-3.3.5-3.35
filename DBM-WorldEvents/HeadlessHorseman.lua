@@ -12,10 +12,10 @@ mod:RegisterEvents(
 	"CHAT_MSG_MONSTER_SAY"
 )
 
-local warnConflag				= mod:NewTargetAnnounce(42380, 3)
-local warnSquashSoul			= mod:NewTargetAnnounce(42514, 2)
-local timerConflag				= mod:NewTargetTimer(4, 42380)
-local timerSquashSoul			= mod:NewTargetTimer(15, 42514)
+local warnConflag				= mod:NewTargetNoFilterAnnounce(42380, 3)
+local warnSquashSoul			= mod:NewTargetNoFilterAnnounce(42514, 2)
+local timerConflag				= mod:NewTargetTimer(4, 42380, nil, nil, nil, 3)
+local timerSquashSoul			= mod:NewTargetTimer(15, 42514, nil, nil, nil, 3)
 local warnHorsemanSoldiers		= mod:NewAnnounce("warnHorsemanSoldiers")
 local specWarnHorsemanHead		= mod:NewSpecialWarning("specWarnHorsemanHead")
 

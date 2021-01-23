@@ -16,7 +16,7 @@ mod:RegisterEvents(
 	"SPELL_DAMAGE"
 )
 
-local warnStormCloud		= mod:NewTargetAnnounce(65123)
+local warnStormCloud		= mod:NewTargetNoFilterAnnounce(65123)
 
 local warnFlashFreeze		= mod:NewSpecialWarningSpell(61968)
 local specWarnBitingCold	= mod:NewSpecialWarningMove(62188, false)
@@ -30,7 +30,7 @@ local timerFrozenBlows		= mod:NewBuffActiveTimer(20, 63512)
 local timerFlashFrCD		= mod:NewCDTimer(50, 61968)
 local timerAchieve			= mod:NewAchievementTimer(179, 3182, "TimerSpeedKill")
 
-local sndWOP					= mod:NewAnnounce("SoundWOP", nil, nil, true)
+local sndWOP					= mod:NewSpecialWarning("SoundWOP", nil, nil, nil, 4, 2)
 
 mod:AddBoolOption("SetIconOnStormCloud")
 

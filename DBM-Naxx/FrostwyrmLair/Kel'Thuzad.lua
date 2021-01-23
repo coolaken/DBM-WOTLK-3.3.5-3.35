@@ -26,10 +26,10 @@ local isControler = select(2, UnitClass("player")) == "PALADIN"
 
 local warnAddsSoon			= mod:NewAnnounce("WarnAddsSoon", 1, 45419)
 local warnPhase2			= mod:NewPhaseAnnounce(2, 3)
-local warnBlastTargets		= mod:NewTargetAnnounce(27808, 2)
+local warnBlastTargets		= mod:NewTargetNoFilterAnnounce(27808, 2)
 local warnFissure			= mod:NewSpellAnnounce(27810, 3)
-local warnMana				= mod:NewTargetAnnounce(27819, 2)
-local warnChainsTargets		= mod:NewTargetAnnounce(28410, 2)
+local warnMana				= mod:NewTargetNoFilterAnnounce(27819, 2)
+local warnChainsTargets		= mod:NewTargetNoFilterAnnounce(28410, 2)
 
 local specwarnP2Soon		= mod:NewSpecialWarning("SpecwarnP2Soon")
 
@@ -56,7 +56,7 @@ local frostBlastTargets = {}
 local chainsTargets = {}
 local counttime = 0
 
-local sndWOP					= mod:NewAnnounce("SoundWOP", nil, nil, true)
+local sndWOP					= mod:NewSpecialWarning("SoundWOP", nil, nil, nil, 4, 2)
 
 mod.vb.phase = 0
 
@@ -86,9 +86,6 @@ function mod:OnCombatStart(delay)
 	if mod:IsDifficulty("normal25") then
 		timerMCCD:Schedule(225-delay)
 		sndWOP:ScheduleVoice(220, "findmc")
-		sndWOP:ScheduleVoice(222, "countthree")
-		sndWOP:ScheduleVoice(223, "counttwo")
-		sndWOP:ScheduleVoice(224, "countone")
 	end
 	timerPhase2:Start()
 	warnPhase2:Schedule(225)
@@ -126,13 +123,7 @@ function mod:SPELL_AURA_APPLIED(args)
 		timerMC:Start()
 		timerMCCD:Start(60)--60 seconds?
 		sndWOP:CancelVoice("findmc")
-		sndWOP:CancelVoice("countthree")
-		sndWOP:CancelVoice("counttwo")
-		sndWOP:CancelVoice("countone")
 		sndWOP:ScheduleVoice(55, "findmc")
-		sndWOP:ScheduleVoice(57, "countthree")
-		sndWOP:ScheduleVoice(58, "counttwo")
-		sndWOP:ScheduleVoice(59, "countone")
 		if self.Options.SetIconOnMC then
 			self:SetIcon(args.destName, MCIcon, 20)
 			MCIcon = MCIcon + 1
@@ -184,9 +175,6 @@ function mod:CHAT_MSG_MONSTER_YELL(msg)
 		timerMCCD:Cancel()
 		sndWOP:CancelVoice("ptwo")
 		sndWOP:CancelVoice("findmc")
-		sndWOP:CancelVoice("countthree")
-		sndWOP:CancelVoice("counttwo")
-		sndWOP:CancelVoice("countone")
 		sndWOP:ScheduleVoice("phasechange")
 		timerFissureCD:Start(25)
 		timerFrostBlastCD:Start(45)

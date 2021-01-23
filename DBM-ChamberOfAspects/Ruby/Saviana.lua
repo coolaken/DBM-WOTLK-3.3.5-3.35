@@ -13,7 +13,7 @@ mod:RegisterEvents(
 	"SPELL_AURA_REMOVED"
 )
 
-local warningWarnBeacon		= mod:NewTargetAnnounce(74453, 4)--Will change to a target announce if possible. need to do encounter
+local warningWarnBeacon		= mod:NewTargetNoFilterAnnounce(74453, 4)--Will change to a target announce if possible. need to do encounter
 local warningWarnEnrage		= mod:NewSpellAnnounce(78722, 3)
 local warningWarnBreath		= mod:NewSpellAnnounce(74404, 3)
 
@@ -26,7 +26,7 @@ local timerConflagCD		= mod:NewNextTimer(50, 74452)
 local timerBreath			= mod:NewCDTimer(25, 74404, nil, mod:IsTank() or mod:IsHealer())
 local timerEnrage			= mod:NewBuffActiveTimer(10, 78722)
 
-local sndWOP					= mod:NewAnnounce("SoundWOP", nil, nil, true)
+local sndWOP					= mod:NewSpecialWarning("SoundWOP", nil, nil, nil, 4, 2)
 
 mod:AddBoolOption("RangeFrame")
 mod:AddBoolOption("BeaconIcon")

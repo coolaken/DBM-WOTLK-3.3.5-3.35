@@ -11,8 +11,8 @@ mod:RegisterEvents(
 	"SPELL_CAST_SUCCESS"
 )
 
-local warningChains		= mod:NewTargetAnnounce(52696, 4)
-local timerChains		= mod:NewTargetTimer(5, 52696)
+local warningChains		= mod:NewTargetNoFilterAnnounce(52696, 4)
+local timerChains		= mod:NewTargetTimer(5, 52696, nil, nil, nil, 3)
 local timerChainsCD		= mod:NewCDTimer(15, 52696)
 
 function mod:SPELL_CAST_SUCCESS(args)

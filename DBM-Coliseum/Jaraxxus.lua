@@ -52,7 +52,7 @@ local timerFleshCD				= mod:NewCDTimer(23, 67051, nil, nil, nil, 3)
 local timerPortalCD				= mod:NewCDTimer(120, 67900, nil, nil, nil, 1)
 local timerVolcanoCD			= mod:NewCDTimer(120, 67901, nil, nil, nil, 1)
 
-local sndWOP					= mod:NewAnnounce("SoundWOP", nil, nil, true)
+local sndWOP					= mod:NewSpecialWarning("SoundWOP", nil, nil, nil, 4, 2)
 
 mod:AddBoolOption("LegionFlameWhisper", false, "announce")
 mod:AddBoolOption("LegionFlameRunSound", true)

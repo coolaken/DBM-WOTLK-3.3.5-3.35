@@ -11,8 +11,8 @@ mod:RegisterEvents(
 	"SPELL_AURA_APPLIED"
 )
 
-local warningImpale		= mod:NewTargetAnnounce(48261, 2)
-local timerImpale		= mod:NewTargetTimer(9, 48261)
+local warningImpale		= mod:NewTargetNoFilterAnnounce(48261, 2)
+local timerImpale		= mod:NewTargetTimer(9, 48261, nil, nil, nil, 3)
 
 function mod:SPELL_AURA_APPLIED(args)
 	if args:IsSpellID(48261, 59268) then

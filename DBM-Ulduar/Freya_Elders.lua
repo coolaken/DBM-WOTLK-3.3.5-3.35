@@ -15,12 +15,12 @@ mod:RegisterEvents(
 
 local warnImpale			= mod:NewSpellAnnounce(62928)
 
-local timerImpale			= mod:NewTargetTimer(5, 62928)
+local timerImpale			= mod:NewTargetTimer(5, 62928, nil, nil, nil, 3)
 
 local specWarnFistofStone	= mod:NewSpecialWarningSpell(62344, mod:IsTank())
 local specWarnGroundTremor	= mod:NewSpecialWarningCast(62932, true)
 
-local sndWOP					= mod:NewAnnounce("SoundWOP", nil, nil, true)
+local sndWOP					= mod:NewSpecialWarning("SoundWOP", nil, nil, nil, 4, 2)
 
 mod:AddBoolOption("PlaySoundOnFistOfStone", mod:IsTank())
 mod:AddBoolOption("TrashRespawnTimer", true, "timer")

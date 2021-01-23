@@ -16,7 +16,7 @@ mod:RegisterEvents(
 local warningSplitSoon		= mod:NewAnnounce("WarningSplitSoon", 2)
 local warningRepellingWave	= mod:NewSpellAnnounce(74509, 3)
 local warnWhirlwind			= mod:NewSpellAnnounce(75125, 3, nil, mod:IsTank() or mod:IsHealer())
-local warningWarnBrand		= mod:NewTargetAnnounce(74505, 4)
+local warningWarnBrand		= mod:NewTargetNoFilterAnnounce(74505, 4)
 
 local specWarnBrand			= mod:NewSpecialWarningYou(74505)
 local specWarnRepellingWave	= mod:NewSpecialWarningSpell(74509)
@@ -25,7 +25,7 @@ local timerWhirlwind		= mod:NewBuffActiveTimer(4, 75125, nil, mod:IsTank() or mo
 local timerRepellingWave	= mod:NewBuffActiveTimer(4, 74509)--1 second cast + 3 second stun
 local timerBrand			= mod:NewBuffActiveTimer(10, 74505)
 
-local sndWOP					= mod:NewAnnounce("SoundWOP", nil, nil, true)
+local sndWOP					= mod:NewSpecialWarning("SoundWOP", nil, nil, nil, 4, 2)
 mod:AddBoolOption("SetIconOnBrand", true)
 mod:AddBoolOption("RangeFrame")
 

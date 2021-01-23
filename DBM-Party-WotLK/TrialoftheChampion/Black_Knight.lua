@@ -17,14 +17,14 @@ mod:RegisterEvents(
 )
 
 local warnExplode			= mod:NewAnnounce("warnExplode", 4, 67886)
-local warnGhoulExplode		= mod:NewTargetAnnounce(67751, 4)
-local warnMarked			= mod:NewTargetAnnounce(67823, 3)
+local warnGhoulExplode		= mod:NewTargetNoFilterAnnounce(67751, 4)
+local warnMarked			= mod:NewTargetNoFilterAnnounce(67823, 3)
 
 local specWarnDesecration	= mod:NewSpecialWarningMove(67876)
-local specWarnExplode		= mod:NewSpecialWarningRun(67751, mod:IsMelee())
+local specWarnExplode		= mod:NewSpecialWarningRun(67751, nil, nil, nil, 1, 2)
 
 local timerCombatStart		= mod:NewCombatTimer(45.5)
-local timerMarked			= mod:NewTargetTimer(10, 67823)
+local timerMarked			= mod:NewTargetTimer(10, 67823, nil, nil, nil, 3)
 local timerExplode			= mod:NewCastTimer(4, 67886)
 
 --local soundExplode	 		= mod:NewSound(67751, nil, mod:IsMelee())
@@ -43,7 +43,7 @@ function mod:SPELL_CAST_START(args)
 	if args:IsSpellID(67729, 67886) and GetTime() - lastexplode > 2 then
 		warnExplode:Show()
 		specWarnExplode:Show()
-		--soundExplode:Play()
+		specWarnExplode:Play("runaway")
 		timerExplode:Start()
 		lastexplode = GetTime()
 	end
@@ -83,7 +83,7 @@ function mod:SPELL_AURA_APPLIED(args)
 	elseif args:IsSpellID(67751) and GetTime() - lastexplode > 2 then	-- Ghoul Explode (BK exlodes Army of the dead. Phase 3)
 		warnGhoulExplode:Show(args.destName)
 		specWarnExplode:Show()
-		--soundExplode:Play()
+		specWarnExplode:Play("runaway")
 		lastexplode = GetTime()
 	end
 end

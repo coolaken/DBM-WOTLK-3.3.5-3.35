@@ -31,10 +31,10 @@ local warnPhase2Soon			= mod:NewAnnounce("WarnPhase2Soon", 2)
 local announcePreBigBang		= mod:NewPreWarnAnnounce(64584, 10, 3)
 local announceBlackHole			= mod:NewSpellAnnounce(65108, 2)
 local announceCosmicSmash		= mod:NewAnnounce("WarningCosmicSmash", 3, 62311)
-local announcePhasePunch		= mod:NewAnnounce("WarningPhasePunch", 4, 65108, mod:IsHealer() or mod:IsTank())
+local announcePhasePunch		= mod:NewAnnounce("WarningPhasePunch", 4, 65108, "Tank|Healer")
 
-local specwarnStarLow			= mod:NewSpecialWarning("warnStarLow", mod:IsHealer() or mod:IsTank())
-local specWarnPhasePunch		= mod:NewSpecialWarningStack(64412, nil, 4)
+local specwarnStarLow			= mod:NewSpecialWarning("warnStarLow", "Tank|Healer")
+local specWarnPhasePunch		= mod:NewSpecialWarningTargetCount(64412, nil, nil, nil, 1, 2)
 local specWarnBigBang			= mod:NewSpecialWarningSpell(64584)
 local specWarnCosmicSmash		= mod:NewSpecialWarningSpell(64598)
 
@@ -51,7 +51,7 @@ local timerNextPhasePunch		= mod:NewNextTimer(16, 64412)
 local warned_preP2 = false
 local warned_star = false
 
-local sndWOP					= mod:NewAnnounce("SoundWOP", nil, nil, true)
+local sndWOP					= mod:NewSpecialWarning("SoundWOP", nil, nil, nil, 4, 2)
 
 function mod:OnCombatStart(delay)
 	warned_preP2 = false
@@ -109,8 +109,8 @@ function mod:SPELL_AURA_APPLIED(args)
 	if args:IsSpellID(64412) then
 		timerNextPhasePunch:Start()
 		local amount = args.amount or 1
-		if args:IsPlayer() and amount >= 4 then
-			specWarnPhasePunch:Show(args.amount)
+		if amount >= 4 then
+			specWarnPhasePunch:Show(args.amount, args.destName)
 		end
 		timerPhasePunch:Start(args.destName)
 		announcePhasePunch:Show(args.destName, amount)

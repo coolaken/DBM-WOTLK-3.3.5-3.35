@@ -7,8 +7,8 @@ mod:SetZone()
 
 mod:RegisterCombat("combat")
 
-local warningPlague	= mod:NewTargetAnnounce(56130, 2)
-local timerPlague	= mod:NewTargetTimer(30, 56130)
+local warningPlague	= mod:NewTargetNoFilterAnnounce(56130, 2)
+local timerPlague	= mod:NewTargetTimer(30, 56130, nil, nil, nil, 3)
 
 mod:RegisterEvents(
 	"SPELL_AURA_APPLIED",

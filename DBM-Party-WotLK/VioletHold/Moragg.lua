@@ -11,8 +11,8 @@ mod:RegisterEvents(
 	"SPELL_AURA_APPLIED"
 )
 
-local warningLink 	= mod:NewTargetAnnounce(54396, 2)
-local timerLink		= mod:NewTargetTimer(12, 54396)
+local warningLink 	= mod:NewTargetNoFilterAnnounce(54396, 2)
+local timerLink		= mod:NewTargetTimer(12, 54396, nil, nil, nil, 3)
 local timerLinkCD	= mod:NewCDTimer(45, 54396)
 
 function mod:SPELL_AURA_APPLIED(args)
