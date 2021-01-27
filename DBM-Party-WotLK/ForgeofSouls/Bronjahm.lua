@@ -40,7 +40,7 @@ function mod:SPELL_AURA_APPLIED(args)
 	if args:IsSpellID(68839) then							-- Corrupt Soul
 		corruptSoulCount = corruptSoulCount + 1
 		warnCorruptSoul:Show(args.destName)
-		timerCorruptSoulCD:Start(15-delay, corruptSoulCount)
+		timerCorruptSoulCD:Start(15, corruptSoulCount)
 	end
 end
 

@@ -901,7 +901,8 @@ L:SetOptionLocalization({
 })
 
 L:SetMiscLocalization({
-	YellCombatEnd	= "不！不！我还可以……做得更好。"
+	YellCombatEnd	= "不！不！我还可以……做得更好。",
+	YellCombatEndEng	= "No! I can do... better! I can..."
 })
 
 ------------------------
@@ -1494,12 +1495,12 @@ L:SetMiscLocalization({
 	Ghoul			= "狂怒食尸鬼",
 	Abom			= "笨拙憎恶体",
 	WitchDoctor		= "复活的巫医",
-	ACombatStart	= "他太强大了!我们必须立刻离开这里!我的魔法只能困住他一小段时间。快来吧，英雄们!",
-	HCombatStart	= "他……太强大了。英雄们，快，快过来！我们必须马上离开！你们先走。我会尽全力挡住他。",
-	Wave1			= "你们无路可逃",
+	ACombatStart	= "你们无路可逃..",
+	HCombatStart	= "你们无路可逃",
+	Wave1			= "冰冷的死亡等待着你.",
 	Wave2			= "屈服于死亡的严寒吧！",
-	Wave3			= "死路一条",
-	Wave4			= "能抵挡多久？",
+	Wave3			= "死路一条.",
+	Wave4			= "你们到底能抵挡多久？",
 	YellCombatEnd	= "开火！开火！"
 })
 

@@ -96,7 +96,7 @@ function mod:CHAT_MSG_RAID_BOSS_EMOTE(msg, _, _, _, target)
 				if uId then
 					local inRange = CheckInteractDistance(uId, 3)
 					if inRange then
-						specWarnHoarfrostNear:Show()
+						specWarnHoarfrostNear:Show(target)
 						specWarnHoarfrostNear:Play("watchorb")
 					end
 				end

@@ -59,27 +59,6 @@ L:SetOptionLocalization{
 	etIconOnInjectionTarget = "我草"
 }
 
------------------
---  Grobbulus  --
------------------
-L = DBM:GetModLocalization("Grobbulus")
-
-L:SetGeneralLocalization({
-	name 				= "格罗布鲁斯"
-})
-
-L:SetOptionLocalization({
-	SpecialWarningInjection		= "当你中了变异注射时显示特别警报",
-	SetIconOnInjectionTarget	= "设定标记给中了变异注射的玩家"
-})
-
-L:SetWarningLocalization({
-	SpecialWarningInjection		= "你中了变异注射 - 快跑开"
-})
-
-L:SetTimerLocalization({
-})
-
 
 ------------------
 --  Razorscale  --
@@ -120,11 +99,11 @@ L:SetOptionLocalization{
 }
 
 L:SetMiscLocalization{
-	YellAir				= "给我们一点时间，做好建筑炮台的准备。",
-	YellAir2			= "火灭了！准备重建炮台！",
+	YellAir				= "给我们一点时间去准备鱼叉炮.",
+	YellAir2			= "火焰消退了！让我们重铸这些鱼叉炮!",
 	YellGround			= "快一点！她马上就要挣脱了！",
 	YellAire				= "Give us a moment to prepare to build the turrets.",
-	YellAir2e			= "Fires out! Let's rebuild those turrets!",
+	YellAir2e			= "Fires out! Let's rebuild those turrets!", --
 	YellGrounde			= "Move quickly! She won't remain grounded for long!",
 	EmotePhase2			= "%%s被永久地禁锢在地面上！",
 	FlamecastUnknown		= DBM_CORE_UNKNOWN

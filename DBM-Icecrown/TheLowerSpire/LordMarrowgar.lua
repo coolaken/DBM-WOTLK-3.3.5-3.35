@@ -11,6 +11,7 @@ mod:RegisterEvents(
 	"SPELL_AURA_APPLIED",
 	"SPELL_AURA_REMOVED",
 	"SPELL_CAST_START",
+	"SPELL_CAST_SUCCESS",
 	"SPELL_PERIODIC_DAMAGE",
 	"SPELL_SUMMON"
 )
@@ -22,9 +23,10 @@ local warnImpale			= mod:NewAnnounce("WarnImpale", 4, 72669)
 local specWarnColdflame		= mod:NewSpecialWarningMove(70825)
 local specWarnWhirlwind		= mod:NewSpecialWarningRun(69076)
 
-local timerBoneSpike		= mod:NewCDTimer(18, 69057, nil, nil, nil, 2, nil, DBM_CORE_L.HEALER_ICON)
-local timerWhirlwindCD		= mod:NewCDTimer(90, 69076, nil, nil, nil, 2, nil, DBM_CORE_L.HEALER_ICON)
+local timerBoneSpike		= mod:NewCDTimer(18, 69057, nil, nil, nil, 1, nil, DBM_CORE_L.DAMAGE_ICON)
+local timerWhirlwindCD		= mod:NewCDTimer(90, 69076, nil, nil, nil, 2)
 local timerWhirlwind		= mod:NewBuffActiveTimer(20, 69076, nil, nil, nil, 2, nil, DBM_CORE_L.HEALER_ICON)
+local timerBoneSliceCD				= mod:NewAITimer(20, 70814, nil, "Tank|Healer", nil, 3, nil, DBM_CORE_L.TANK_ICON)
 local timerBoned			= mod:NewAchievementTimer(8, 4610)
 
 local berserkTimer			= mod:NewBerserkTimer(600)
@@ -84,6 +86,12 @@ function mod:SPELL_CAST_START(args)
 		warnBoneSpike:Show()
 		sndWOP:ScheduleVoice(2, "killbone")
 		timerBoneSpike:Start()
+	end
+end
+
+function mod:SPELL_CAST_SUCCESS(args)
+	if args:IsSpellID(69055, 70814) then
+		timerBoneSliceCD:Start()
 	end
 end
 

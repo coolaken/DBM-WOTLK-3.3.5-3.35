@@ -6,8 +6,7 @@ mod:SetCreatureID(33186)
 mod:SetUsedIcons(8)
 
 --mod:RegisterCombat("combat")
-mod:RegisterCombat("yell", L.YellAir)
-mod:RegisterCombat("yell", L.YellAire)
+mod:RegisterCombat("yell", L.YellAir,L.YellAire)
 mod:RegisterEvents(
 	"SPELL_CAST_START",
 	"SPELL_AURA_APPLIED",
