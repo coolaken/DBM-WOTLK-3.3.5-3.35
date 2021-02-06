@@ -8097,6 +8097,7 @@ do
 			["SpellCaster"] = true,
 			["CasterDps"] = true,
 			["RemoveCurse"] = true,
+			["HasRepel"] =  (IsSpellKnown(50516) or IsSpellKnown(61384)) and true or false,
 		},
 		["DRUID2"] = { --Feral Druid
 			["Dps"] = true,

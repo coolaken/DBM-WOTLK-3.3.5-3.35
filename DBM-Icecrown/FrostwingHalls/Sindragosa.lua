@@ -61,6 +61,7 @@ mod:AddBoolOption("SetIconOnUnchainedMagic", true)
 mod:AddBoolOption("ClearIconsOnAirphase", true)
 mod:AddBoolOption("AnnounceFrostBeaconIcons", false)
 mod:AddBoolOption("AchievementCheck", false, "announce")
+mod:AddBoolOption("YellOnBeacon", false)
 mod:AddBoolOption("RangeFrame")
 
 local beaconTargets		= {}
@@ -184,12 +185,14 @@ function mod:SPELL_AURA_APPLIED(args)
 			specWarnFrostBeacon:ScheduleVoice(4, "countthree")
 			specWarnFrostBeacon:ScheduleVoice(5, "counttwo")
 			specWarnFrostBeacon:ScheduleVoice(6, "countone")
-			if phase == 1 then
+			if phase == 1 and self.Options.YellOnBeacon then
 				self:Schedule(0.31, sendIconMsg)
 			elseif phase == 2 then
 				specWarnFrostBeacon:ScheduleVoice(1, "backcenter")
 				if mod:IsHealer() and isPAL then
-					SendChatMessage("NQ被点,注意刷坦!", "SAY")
+					if self.Options.YellOnBeacon then
+						SendChatMessage("NQ被点,注意刷坦!", "SAY")
+					end
 				end
 			end
 		end

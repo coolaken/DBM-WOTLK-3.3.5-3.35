@@ -335,6 +335,7 @@ L:SetOptionLocalization{
 	MalleableGooIcon		= "为中$spell:72295的目标之一设置标记",
 	NextUnboundPlagueTargetIcon	= "为下一个$spell:72856的目标设置标记",
 	YellOnMalleableGoo		= "当你中了$spell:72295时大喊",
+	YellOnMalleableGooTest		= "为$spell:72295发送聊天提醒",
 	YellOnUnbound			= "当你中了$spell:72856时大喊",
 	YellOnUnboundUrgent			= "当你中的$spell:72856已经持续太久需要立刻传递时大喊",
 	GooArrow			= "当你附近的人中了$spell:72295时显示DBM箭头",
@@ -354,6 +355,7 @@ L:SetMiscLocalization{
 	YellPhase2			= "嗯，什么感觉也没有。什么？！这是哪儿来的？",
 	YellPhase3			= "味道像……樱桃！哦！见笑了！",
 	YellMalleable			= "我中了可延展黏液！",
+	YellMalleableTest			= "\124cff71d5ff\124Hspell:70852\124h[可延展黏液]\124h\124r".." 快躲开",
 	YellUnbound			= "我中了肆虐毒疫！",
 	Yanzhan				= "%s施放了可延展黏液！", --         |TInterface\\Icons\\inv_misc_herb_evergreenmoss.blp:16|t%s施放了|cFF00FF00可延展黏液！|r                    		"%s施放了|cFFFF7F00窒息毒气弹！|r", -- [2]
 	Yanzhan2			= "可延展黏液",--"%s可延展黏液！",
@@ -512,6 +514,7 @@ L:SetOptionLocalization{
 	SetIconOnUnchainedMagic		= DBM_CORE_L.AUTO_ICONS_OPTION_TEXT:format(69762),
 	ClearIconsOnAirphase		= "空中阶段前清除所有标记",
 	AchievementCheck		= "公布'极限'成就警告到团队频道\n(需助理权限)",
+	YellOnBeacon			= "提示$spell:70126位置,每个团可能不一样!这边设置的是{rt8}{rt5}左,{rt7}{rt3}中,{rt6}{rt4}右",
 	RangeFrame			= "显示距离框(普通10码, 困难20码)"
 }
 

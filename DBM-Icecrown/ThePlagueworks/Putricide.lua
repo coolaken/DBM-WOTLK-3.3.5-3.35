@@ -74,6 +74,7 @@ mod:AddBoolOption("MalleableGooIcon")
 mod:AddBoolOption("UnboundPlagueIcon")					-- icon on the player with active buff
 mod:AddBoolOption("GooArrow")
 mod:AddBoolOption("YellOnMalleableGoo", true, "announce")
+mod:AddBoolOption("YellOnMalleableGooTest", false)
 --mod:AddBoolOption("YellOnUnbound", false, "announce")
 mod:AddBoolOption("YellOnUnboundUrgent", true, "announce")
 mod:AddBoolOption("BypassLatencyCheck", false)--Use old scan method without syncing or latency check (less reliable but not dependant on other DBM users in raid)
@@ -84,6 +85,8 @@ local spamPuddle = 0
 local spamGas = 0
 --local phase = 0
 local glime = true
+
+mod.vb.phase = 0
 
 local function UnboundUrgent()
 	SendChatMessage(L.YellUnboundUrgent, "YELL")
@@ -477,8 +480,10 @@ function mod:CHAT_MSG_RAID_BOSS_EMOTE(msg)
 	if (msg == L.Yanzhan or msg:find(L.Yanzhan)) or (msg == L.Yanzhan2 or msg:find(L.Yanzhan2)) then
 		warnMalleableGoo:Show()
 		specWarnMalleableGooCast:Show()
-		SendChatMessage("\124cff71d5ff\124Hspell:70852\124h[可延展黏液]\124h\124r".." 快躲开", "SAY")
-		self:SendSync("GooOn", "化羽")
+		if self.Options.YellOnMalleableGooTest then
+			SendChatMessage(L.YellMalleableTest, "SAY")
+		end
+		self:SendSync("GooOn", "")
 		sndWOP:Play("greenball")
 		if mod:IsDifficulty("heroic10") or mod:IsDifficulty("heroic25") then
 			timerMalleableGooCD:Start(20)

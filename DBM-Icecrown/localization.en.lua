@@ -330,6 +330,7 @@ L:SetOptionLocalization{
 	MalleableGooIcon			= "Set icon on first $spell:72295 target",
 	NextUnboundPlagueTargetIcon	= "Set icon on next $spell:72856 target",
 	YellOnMalleableGoo			= "Yell on $spell:72295",
+	YellOnMalleableGooTest		= "Say on $spell:72295",
 	YellOnUnbound				= "Yell on $spell:72856",
 	YellOnUnboundUrgent				= "Yell when $spell:72856 becomes urgent",
 	GooArrow					= "Show DBM arrow when $spell:72295 is near you",
@@ -341,6 +342,7 @@ L:SetOptionLocalization{
 L:SetMiscLocalization{
 	YellPull		= "Good news, everyone! I think I've perfected a plague that will destroy all life on Azeroth!",
 	YellMalleable	= "Malleable Goo on me!",
+	YellMalleableTest			= "\124cff71d5ff\124Hspell:70852\124h[Malleable Goo]\124h\124r".." be careful",
 	YellUnbound		= "Unbound Plague on me!",
 	YellUnboundUrgent		= "Take my Plague away!"
 }
@@ -491,6 +493,7 @@ L:SetOptionLocalization{
 	SetIconOnUnchainedMagic	= "69762",
 	ClearIconsOnAirphase	= "Clear all icons before air phase",
 	AchievementCheck		= "Announce 'All You Can Eat' achievement warnings to raid\n(requires promoted status)",
+	YellOnBeacon			= "say $spell:70126 position {rt8}{rt5}left,{rt7}{rt3}mid,{rt6}{rt4}right,",
 	RangeFrame				= "Show raid icon based range frame (10 normal, 20 heroic)"
 }
 

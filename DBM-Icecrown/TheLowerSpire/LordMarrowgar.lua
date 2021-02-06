@@ -17,7 +17,7 @@ mod:RegisterEvents(
 )
 
 local preWarnWhirlwind   	= mod:NewSoonAnnounce(69076, 3)
-local warnBoneSpike			= mod:NewCastAnnounce(69057, 2)
+local warnBoneSpike			= mod:NewCastAnnounce(69057, 2, 8)
 local warnImpale			= mod:NewAnnounce("WarnImpale", 4, 72669)
 
 local specWarnColdflame		= mod:NewSpecialWarningMove(70825)

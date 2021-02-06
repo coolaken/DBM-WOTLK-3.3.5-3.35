@@ -40,6 +40,7 @@ local specWarnDeathDecay			= mod:NewSpecialWarningMove(72108, nil, nil, nil, 2, 
 local specWarnTouchInsignificance	= mod:NewSpecialWarningTargetCount(71204, nil, nil, nil, 1, 2)
 local specWarnVampricMight			= mod:NewSpecialWarningDispel(70674, "MagicDispeller")
 local specWarnDarkMartyrdom			= mod:NewSpecialWarningMove(72499, "Melee")
+local specWarnDarkMartyrdomInterrupt			= mod:NewSpecialWarningInterrupt(72499, "HasRepel")
 local specWarnFrostbolt				= mod:NewSpecialWarningInterrupt(72007, false)
 local specWarnVengefulShade			= mod:NewSpecialWarning("SpecWarnVengefulShade", "-Tank")
 
@@ -49,6 +50,7 @@ local timerDominateMindCD			= mod:NewCDTimer(40, 71289, nil, nil, nil, 7)
 local timerSummonSpiritCD			= mod:NewCDTimer(20, 71426, nil, nil, nil, 1, nil, DBM_CORE_L.DEADLY_ICON) --默认是10秒
 local timerFrostboltVolleyCD		= mod:NewCDTimer(14, 72905, nil, nil, nil, 2, nil, DBM_CORE_L.MAGIC_ICON)--寒冰箭雨 72905 72906 72907 72908
 local timerFrostboltCast			= mod:NewCastTimer(4, 72007, nil, nil, nil, 3, nil, DBM_CORE_L.INTERRUPT_ICON)
+local timerDarkMartyrdomCast				= mod:NewCastTimer(4, 72499, nil, nil, nil, 2, nil, DBM_CORE_L.INTERRUPT_ICON, nil, 2, 3)
 local timerTouchInsignificance		= mod:NewTargetTimer(30, 71204, nil, "Tank|Healer", nil, 3, nil, DBM_CORE_L.TANK_ICON)
 
 local sndWOP					= mod:NewSpecialWarning("SoundWOP", nil, nil, nil, 4, 2)
@@ -238,6 +240,8 @@ function mod:SPELL_CAST_START(args)
 			self:TrySetTarget()
 		end
 	elseif args:IsSpellID(72499, 72500, 72497, 72496) then
+		timerDarkMartyrdomCast:Start()
+		specWarnDarkMartyrdomInterrupt:Show()
 		warnDarkMartyrdom:Show()
 		specWarnDarkMartyrdom:Show()
 		if mod:IsMelee() then
