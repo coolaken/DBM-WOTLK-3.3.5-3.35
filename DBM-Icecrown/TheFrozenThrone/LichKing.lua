@@ -125,7 +125,7 @@ mod.vb.phase = 0
 
 function mod:OnCombatStart(delay)
 	phase = 0
-	self.vb.phase = 1
+	self.vb.phase = 0
 	lastPlagueCast = 0
 	infestcount = 1
 	soulreapercount = 1

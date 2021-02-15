@@ -11,6 +11,7 @@ mod:RegisterEvents(
 	"SPELL_AURA_APPLIED_DOSE",
 	"SPELL_AURA_REMOVED",
 	"SPELL_CAST_START",
+	"SPELL_CAST_FAILED",
 	"SPELL_CAST_SUCCESS",
 	"SPELL_INTERRUPT",
 	"SPELL_SUMMON",
@@ -247,6 +248,12 @@ function mod:SPELL_CAST_START(args)
 		if mod:IsMelee() then
 			sndWOP:Play("boomrun") --爆炸快躲
 		end
+	end
+end
+
+function mod:SPELL_CAST_FAILED(args)
+	if args:IsSpellID(72499, 72500, 72497, 72496) then
+		timerDarkMartyrdomCast:Cancel()
 	end
 end
 

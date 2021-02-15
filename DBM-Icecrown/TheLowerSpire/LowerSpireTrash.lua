@@ -79,6 +79,12 @@ function mod:SPELL_CAST_START(args)
 	end
 end
 
+function mod:SPELL_CAST_FAILED(args)
+	if args:IsSpellID(71022) then
+		timerDisruptingShout:Cancel()
+	end
+end
+
 function mod:CHAT_MSG_MONSTER_YELL(msg)
 	if (msg == L.WarderTrap1 or msg == L.WarderTrap2 or msg == L.WarderTrap3) and mod:LatencyCheck() then
 		self:SendSync("WarderTrap")
