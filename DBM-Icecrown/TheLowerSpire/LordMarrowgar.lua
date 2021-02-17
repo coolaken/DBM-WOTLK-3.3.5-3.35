@@ -17,7 +17,7 @@ mod:RegisterEvents(
 )
 
 local preWarnWhirlwind   	= mod:NewSoonAnnounce(69076, 3)
-local warnBoneSpike			= mod:NewCastAnnounce(69057, 2, 8)
+local warnBoneSpike			= mod:NewCastAnnounce(69057, 3, 8)
 local warnImpale			= mod:NewAnnounce("WarnImpale", 4, 72669)
 
 local specWarnColdflame		= mod:NewSpecialWarningMove(70825)
@@ -25,6 +25,7 @@ local specWarnWhirlwind		= mod:NewSpecialWarningRun(69076)
 
 local timerBoneSpike		= mod:NewCDTimer(18, 69057, nil, nil, nil, 1, nil, DBM_CORE_L.DAMAGE_ICON)
 local timerWhirlwindCD		= mod:NewCDTimer(90, 69076, nil, nil, nil, 2)
+local timerBoneSpikeCast			= mod:NewCastTimer(3, 69057, nil, nil, nil, 1, nil, DBM_CORE_L.DAMAGE_ICON)
 local timerWhirlwind		= mod:NewBuffActiveTimer(20, 69076, nil, nil, nil, 2, nil, DBM_CORE_L.HEALER_ICON)
 local timerBoneSliceCD				= mod:NewAITimer(20, 70814, nil, "Tank|Healer", nil, 3, nil, DBM_CORE_L.TANK_ICON)
 local timerBoned			= mod:NewAchievementTimer(8, 4610)
@@ -84,6 +85,7 @@ end
 function mod:SPELL_CAST_START(args)
 	if args:IsSpellID(69057, 70826, 72088, 72089) then				-- Bone Spike Graveyard
 		warnBoneSpike:Show()
+		timerBoneSpikeCast:Start()
 		sndWOP:ScheduleVoice(2, "killbone")
 		timerBoneSpike:Start()
 	end

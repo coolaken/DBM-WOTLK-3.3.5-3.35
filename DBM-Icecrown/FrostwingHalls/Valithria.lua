@@ -33,7 +33,7 @@ local specWarnManaVoid	= mod:NewSpecialWarningMove(71741, nil, nil, nil, 1, 2)
 
 local timerLayWaste		= mod:NewBuffActiveTimer(12, 69325)
 local timerNextPortal	= mod:NewCDCountTimer(46.5, 72483, nil, nil, nil, 5)
-local timerPortalsOpen	= mod:NewTimer(10, "TimerPortalsOpen", 72483, nil, nil, 5, nil, DBM_CORE_L.HEALER_ICON)
+local timerPortalsOpen	= mod:NewTimer(10, "TimerPortalsOpen", 72483, nil, nil, 5, DBM_CORE_L.HEALER_ICON)
 local timerOutPortal	= mod:NewTimer(20,"TimerOutPortal", "Interface\\Icons\\spell_arcane_portalshattrath", nil, nil, 5)
 local timerHealerBuff	= mod:NewBuffFadesTimer(40, 70873, nil, nil, nil, 7)
 local timerGutSpray		= mod:NewTargetTimer(12, 71283, nil, "Tank|Healer", nil, 3)
