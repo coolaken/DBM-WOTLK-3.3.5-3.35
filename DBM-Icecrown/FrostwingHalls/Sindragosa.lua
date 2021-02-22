@@ -143,7 +143,7 @@ function mod:OnCombatStart(delay)
 	berserkTimer:Start(-delay)
 	timerNextAirphase:Start(50-delay)
 	timerNextBlisteringCold:Start(33-delay)
-	specWarnBlisteringCold:ScheduleVoice(29, "gripsoon")
+	specWarnBlisteringCold:ScheduleVoice(28, "gripsoon")
 	warned_P2 = false
 	warnedfailed = false
 	table.wipe(beaconTargets)
@@ -185,9 +185,10 @@ function mod:SPELL_AURA_APPLIED(args)
 			specWarnFrostBeacon:ScheduleVoice(4, "countthree")
 			specWarnFrostBeacon:ScheduleVoice(5, "counttwo")
 			specWarnFrostBeacon:ScheduleVoice(6, "countone")
-			if phase == 1 and self.Options.YellOnBeacon then
+			if self.vb.phase == 1 and self.Options.YellOnBeacon then
 				self:Schedule(0.31, sendIconMsg)
-			elseif phase == 2 then
+			end
+			if self.vb.phase == 2 then
 				specWarnFrostBeacon:ScheduleVoice(1, "backcenter")
 				if mod:IsHealer() and isPAL then
 					if self.Options.YellOnBeacon then
@@ -196,7 +197,7 @@ function mod:SPELL_AURA_APPLIED(args)
 				end
 			end
 		end
-		if phase == 1 and self.Options.SetIconOnFrostBeacon then
+		if self.vb.phase == 1 and self.Options.SetIconOnFrostBeacon then
 			table.insert(beaconIconTargets, DBM:GetRaidUnitId(args.destName))
 			self:UnscheduleMethod("SetBeaconIcons")
 			if (mod:IsDifficulty("normal25") and #beaconIconTargets >= 5) or (mod:IsDifficulty("heroic25") and #beaconIconTargets >= 6) or ((mod:IsDifficulty("normal10") or mod:IsDifficulty("heroic10")) and #beaconIconTargets >= 2) then
@@ -220,7 +221,7 @@ function mod:SPELL_AURA_APPLIED(args)
 				end
 			end
 		end
-		if phase == 2 then--Phase 2 there is only one icon/beacon, don't use sorting method if we don't have to.
+		if self.vb.phase == 2 then--Phase 2 there is only one icon/beacon, don't use sorting method if we don't have to.
 			beaconCount = beaconCount + 1
 			timerNextBeacon:Start(nil, beaconCount)
 			if self.Options.SetIconOnFrostBeacon then
@@ -231,7 +232,7 @@ function mod:SPELL_AURA_APPLIED(args)
 			end
 		end
 		self:Unschedule(warnBeaconTargets)
-		if phase == 2 or (mod:IsDifficulty("normal25") and #beaconTargets >= 5) or (mod:IsDifficulty("heroic25") and #beaconTargets >= 6) or ((mod:IsDifficulty("normal10") or mod:IsDifficulty("heroic10")) and #beaconTargets >= 2) then
+		if self.vb.phase == 2 or (mod:IsDifficulty("normal25") and #beaconTargets >= 5) or (mod:IsDifficulty("heroic25") and #beaconTargets >= 6) or ((mod:IsDifficulty("normal10") or mod:IsDifficulty("heroic10")) and #beaconTargets >= 2) then
 			warnBeaconTargets()
 		else
 			self:Schedule(0.3, warnBeaconTargets)
@@ -313,7 +314,7 @@ function mod:SPELL_CAST_SUCCESS(args)
 		specWarnBlisteringCold:Play("boomrun")
 		timerBlisteringCold:Start()
 		timerNextBlisteringCold:Start()
-		specWarnBlisteringCold:ScheduleVoice(63, "gripsoon")
+		specWarnBlisteringCold:ScheduleVoice(62, "gripsoon")
 	end
 end	
 
@@ -360,7 +361,7 @@ function mod:CHAT_MSG_MONSTER_YELL(msg)
 		warnAirphase:Show()
 		timerNextFrostBreath:Cancel()
 		specWarnBlisteringCold:CancelVoice("gripsoon")
-		if phase == 1 then
+		if self.vb.phase == 1 then
 			specWarnFrostBeacon:ScheduleVoice(13, "findshelter") 
 			specWarnFrostBeacon:ScheduleVoice(19, "countone")
 			specWarnFrostBeacon:ScheduleVoice(25, "counttwo")
@@ -370,7 +371,7 @@ function mod:CHAT_MSG_MONSTER_YELL(msg)
 		end
 		timerUnchainedMagic:Start(55)
 		timerNextBlisteringCold:Start(80)--Not exact anywhere from 80-110seconds after airphase begin
-		specWarnBlisteringCold:ScheduleVoice(76, "gripsoon")
+		specWarnBlisteringCold:ScheduleVoice(75, "gripsoon")
 		timerNextAirphase:Start()
 		timerNextGroundphase:Start()
 		warnGroundphaseSoon:Schedule(40)
@@ -386,6 +387,6 @@ function mod:CHAT_MSG_MONSTER_YELL(msg)
 		warnGroundphaseSoon:Cancel()
 		specWarnBlisteringCold:CancelVoice("gripsoon")
 		timerNextBlisteringCold:Start(35)
-		specWarnBlisteringCold:ScheduleVoice(31, "gripsoon")
+		specWarnBlisteringCold:ScheduleVoice(30, "gripsoon")
 	end
 end
