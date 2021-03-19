@@ -32,7 +32,7 @@ local specWarnOverlordsBrand	= mod:NewSpecialWarningYou(69172)
 local timerCombatStart			= mod:NewCombatTimer(40)
 local timerOverlordsBrand		= mod:NewTargetTimer(8, 69172, nil, nil, nil, 3)
 local timerUnholyPower			= mod:NewBuffActiveTimer(10, 69629)
-local timerForcefulSmash		= mod:NewCDTimer(50, 69155, nil, nil, nil, 3, nil, DBM_CORE_L.TANK_ICON) --hotfixed? new combat logs show it every 50 seconds'ish.(16.0, 24814, nil, nil, nil, 3)
+local timerForcefulSmash		= mod:NewCDTimer(46, 69155, nil, nil, nil, 3, nil, DBM_CORE_L.TANK_ICON) --hotfixed? new combat logs show it every 50 seconds'ish.(16.0, 24814, nil, nil, nil, 3)
 
 
 mod:AddBoolOption("SetIconOnHoarfrostTarget", true)
@@ -40,7 +40,7 @@ mod:AddBoolOption("SetIconOnHoarfrostTarget", true)
 
 function mod:OnCombatStart(delay)
 	timerCombatStart:Start(-delay)
-	timerForcefulSmash:Start(-delay)
+	timerForcefulSmash:Start(54-delay)
 end
 
 function mod:SPELL_CAST_START(args)

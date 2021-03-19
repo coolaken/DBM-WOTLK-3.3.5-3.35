@@ -195,7 +195,7 @@ L:SetTimerLocalization{
 }
 
 L:SetMiscLocalization{
-	PullAlliance			= "发动引擎!小伙子们，我们即将面对命运啦!",
+	PullAlliance			= "启动引擎！小伙子们，向命运之战前进！",
 	KillAlliance			= "别说我没警告过你，无赖!兄弟姊妹们，向前冲!",
 	PullHorde			= "来吧！部落忠诚勇敢的儿女们！今天是部落仇敌灭亡的日子！LOK'TAR OGAR！",
 	KillHorde			= "联盟不行了。向巫妖王进攻！",

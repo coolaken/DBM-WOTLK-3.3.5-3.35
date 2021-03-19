@@ -20,14 +20,16 @@ local WarnFrostbite			= mod:NewAnnounce("Frostbite", 2, 72098, "Healer|Tank")
 
 local timerNextFrostbite	= mod:NewNextTimer(5, 72098, nil, "Tank")
 local timerFrostbite		= mod:NewTargetTimer(20, 72098, nil, "Healer|Tank", nil, 3)
-local timerWhiteout			= mod:NewNextTimer(38, 72096)
-local timerNextOrb			= mod:NewNextTimer(32, 72095)
+local timerWhiteout			= mod:NewNextTimer(40, 72096)
+local timerNextOrb			= mod:NewNextTimer(30, 72095)
+local timerFreezingGround	= mod:NewNextTimer(20, 72090)
 
 --local timerToravonEnrage	= mod:NewTimer(300, "ToravonEnrage", 26662)
 
 function mod:OnCombatStart(delay)
-	timerNextOrb:Start(13-delay)
-	timerWhiteout:Start(25-delay)
+	timerNextOrb:Start(9-delay)
+	timerWhiteout:Start(22-delay)
+	timerFreezingGround:Start(24-delay)
 --	timerToravonEnrage:Start(-delay)
 end
 
@@ -44,6 +46,7 @@ end
 function mod:SPELL_CAST_SUCCESS(args)
 	if args:IsSpellID(72104, 72090) then			-- Freezing Ground (Aoe and damage debuff)
 		warnFreezingGround:Show()
+		timerFreezingGround:Start()
 	end
 end
 

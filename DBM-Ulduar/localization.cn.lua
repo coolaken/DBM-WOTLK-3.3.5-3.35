@@ -252,8 +252,8 @@ L:SetGeneralLocalization{
 
 L:SetMiscLocalization{
 	Defender 			= "野性防御者 (%d)",
-	--YellPull 			= "有些东西，最好永远都不去碰！"
-	YellPull = "Some things are better left alone!"
+	YellPull 			= "有些东西最好永远都不去碰!"
+	--YellPull = "Some things are better left alone!"
 }
 
 L:SetTimerLocalization{
@@ -297,8 +297,8 @@ L:SetOptionLocalization{
 }
 
 L:SetMiscLocalization{
-	--YellKill			= "我……我终于从他的魔掌中……解脱了。",
-	YellKill	= "I... I am released from his grasp... at last.",
+	YellKill			= "我……我终于……从他的魔掌中……解脱了.",
+	--YellKill	= "I... I am released from his grasp... at last.",
 	YellCloud			= "我中了风暴雷云 快接近我！"
 }
 
@@ -326,12 +326,12 @@ L:SetOptionLocalization{
 }
 
 L:SetMiscLocalization{
-	--YellPhase1			= "入侵者！你们这些凡人竟敢坏了我的兴致，看我怎么……等等，你们……",
-	--YellPhase2			= "狂妄的小崽子们，竟敢在我的地盘上挑战我？我要亲自碾碎你们！",
-	--YellKill			= "住手！我认输了！",
-	YellPhase1	= "Interlopers! You mortals who dare to interfere with my sport will pay... Wait--you...",
-	YellPhase2	= "Impertinent whelps, you dare challenge me atop my pedestal? I will crush you myself!",
-	YellKill	= "Stay your arms! I yield!",
+	YellPhase1			= "入侵者！你们这群凡人竟敢坏了我的兴致，看我怎么……额？等等，你们...",
+	YellPhase2			= "狂妄的小崽子们....竟敢在我的地盘上挑战我，我要亲自碾碎你们!",
+	YellKill			= "住手！我认输了!",
+	--YellPhase1	= "Interlopers! You mortals who dare to interfere with my sport will pay... Wait--you...",
+	--YellPhase2	= "Impertinent whelps, you dare challenge me atop my pedestal? I will crush you myself!",
+	--YellKill	= "Stay your arms! I yield!",
 	ChargeOn			= "闪电充能: %s",
 	Charge				= "中了闪电充能(这一次): %s" 
 }
@@ -351,8 +351,8 @@ L:SetMiscLocalization{
 	Snaplasher			= "迅疾鞭笞者",
 	StormLasher			= "风暴鞭笞者",
 	TreeYell      = "|cFF00FFFF生命缚誓者的礼物|r开始生长！",
-	--YellKill			= "他对我的控制已经不复存在了。我又一次恢复了理智。谢谢你们，英雄们。",
-	YellKill           = "His hold on me dissipates. I can see clearly once more. Thank you, heroes.",
+	YellKill			= "他对我的控制已经不复存在了.我又一次恢复了理智.谢谢你们，英雄们.",
+	--YellKill           = "His hold on me dissipates. I can see clearly once more. Thank you, heroes.",
 	TrashRespawnTimer		= "弗蕾亚的小怪重生"
 }
 
@@ -443,20 +443,21 @@ L:SetMiscLocalization{
 	MobPhase1			= "巨兽二型",
 	MobPhase2			= "VX-001",
 	MobPhase3			= "空中指挥单位",
-	--YellPull			= "我们时间不多了，朋友们！来帮忙测试一下我所发明的最新型、最强大的机体吧。在你们改变主意之前，请允许我提醒一下，你们把XT-002搞得一团糟，应该算是欠我个人情吧。",
-	--YellHardPull			= "Self-destruct sequence initiated",
-	--YellPhase2			= "太棒了！测试结果非常好！外壳完整率百分之九十八点九！几乎没有划伤！继续。",
-	--YellPhase3			= "非常感谢，朋友们！你们的帮助使我获得了一些极其珍贵的数据！下面，我要让你们——咦，我把它放哪去了？哦！这里。",
-	--YellPhase4			= "初步测试阶段完成。真正的测试开始啦！",
+	YellPull			= "我们时间不多了，朋友们！来帮忙测试一下我所发明的最新型、最强大的机体吧。在你们改变主意之前，请允许我提醒一下，你们把XT-002搞得一团糟，应该算是欠我个人情吧.",
+	YellHardPull			= "嘿，你们为什么要这么做啊？没看到上面写着“不要按这个按钮”吗？你们激活了自毁系统，还怎么完成测试呀？",
+	YellPhase2			= "太棒了！测试结果非常好！外壳完整率百分之九十八点九！几乎没有划伤！继续.",
+	YellPhase3			= "非常感谢，朋友们！你们的帮助使我获得了一些极其珍贵的数据！下面，我要让你们——咦，我把它放哪去了？哦！这里!",
+	YellPhase4			= "初步测试阶段完成。真正的测试开始啦!",
+	YellKilled			= "看起来我的计算有一点小小的偏差。监狱中的恶魔侵蚀了我的思维，篡改了我的主要指令。所有系统都已恢复正常。完毕。",
 	--MobPhase1		= "Leviathan Mk II",
 	--MobPhase2		= "VX-001",
 	--MobPhase3		= "Aerial Command Unit",
-	YellPull		= "We haven't much time, friends! You're going to help me test out my latest and greatest creation. Now, before you change your minds, remember, that you kind of owe it to me after the mess you made with the XT-002.",
-	YellHardPull	= "Now why would you go and do something like that? Didn't you see the sign that said 'DO NOT PUSH THIS BUTTON!'? How will we finish testing with the self-destruct mechanism active?",
-	YellPhase2		= "WONDERFUL! Positively marvelous results! Hull integrity at 98.9 percent! Barely a dent! Moving right along.",
-	YellPhase3		= "Thank you, friends! Your efforts have yielded some fantastic data! Now, where did I put-- oh, there it is!",
-	YellPhase4		= "Preliminary testing phase complete. Now comes the true test!",
-	YellKilled		= "It would appear that I've made a slight miscalculation. I allowed my mind to be corrupted by the fiend in the prison, overriding my primary directive. All systems seem to be functional now. Clear.",
+	--YellPull		= "We haven't much time, friends! You're going to help me test out my latest and greatest creation. Now, before you change your minds, remember, that you kind of owe it to me after the mess you made with the XT-002.",
+	--YellHardPull	= "Now why would you go and do something like that? Didn't you see the sign that said 'DO NOT PUSH THIS BUTTON!'? How will we finish testing with the self-destruct mechanism active?",
+	--YellPhase2		= "WONDERFUL! Positively marvelous results! Hull integrity at 98.9 percent! Barely a dent! Moving right along.",
+	--YellPhase3		= "Thank you, friends! Your efforts have yielded some fantastic data! Now, where did I put-- oh, there it is!",
+	--YellPhase4		= "Preliminary testing phase complete. Now comes the true test!",
+	--YellKilled		= "It would appear that I've made a slight miscalculation. I allowed my mind to be corrupted by the fiend in the prison, overriding my primary directive. All systems seem to be functional now. Clear.",
 	LootMsg				= "(.+)获得了物品：.*Hitem:(%d+)"
 }
 
@@ -494,8 +495,8 @@ L:SetOptionLocalization{
 }
 
 L:SetMiscLocalization{
-	--EmoteSaroniteVapors		= "一团萨隆邪铁蒸汽在附近聚集起来！",
-	EmoteSaroniteVapors	= "A cloud of saronite vapors coalesces nearby!",
+	EmoteSaroniteVapors		= "一股萨隆邪铁蒸汽在附近汇聚!",
+	--EmoteSaroniteVapors	= "A cloud of saronite vapors coalesces nearby!",
 	YellLeech			= "我中了无面者的印记 - 远离我",
 	YellCrash			= "我中了暗影冲撞 - 远离我"
 }
@@ -510,10 +511,10 @@ L:SetGeneralLocalization{
 }
 
 L:SetMiscLocalization{
-	--YellPull 			= "攻击这头野兽要害的时刻即将来临！将你们的愤怒和仇恨倾泻到它的爪牙身上！",
-	--YellPhase2			= "我是清醒的梦境。",
-	YellPull 			= "The time to strike at the head of the beast will soon be upon us! Focus your anger and hatred on his minions!",
-	YellPhase2	 		= "I am the lucid dream.",
+	YellPull 			= "攻击这头野兽要害的时刻即将来临!将你们的愤怒和仇恨倾泻到它的爪牙身上!",
+	YellPhase2			= "我是清醒的梦境.",
+	--YellPull 			= "The time to strike at the head of the beast will soon be upon us! Focus your anger and hatred on his minions!",
+	--YellPhase2	 		= "I am the lucid dream.",
 	EmoteDoorOpen	= "MADNESS WILL CONSUME YOU!",
 	Sara 				= "萨拉",
 	Brain				= "尤格-萨隆的大脑",

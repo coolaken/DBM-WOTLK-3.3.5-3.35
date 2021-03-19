@@ -3,7 +3,8 @@ local L		= mod:GetLocalizedStrings()
 
 mod:SetRevision(("$Revision: 4512 $"):sub(12, -3))
 mod:SetCreatureID(36853)
-mod:RegisterCombat("combat")
+--mod:RegisterCombat("combat")
+mod:RegisterCombat("yell", L.YellPull)
 mod:SetMinSyncRevision(3712)
 mod:SetUsedIcons(3, 4, 5, 6, 7, 8)
 
@@ -61,7 +62,7 @@ mod:AddBoolOption("SetIconOnUnchainedMagic", true)
 mod:AddBoolOption("ClearIconsOnAirphase", true)
 mod:AddBoolOption("AnnounceFrostBeaconIcons", false)
 mod:AddBoolOption("AchievementCheck", false, "announce")
-mod:AddBoolOption("YellOnBeacon", false)
+mod:AddBoolOption("YellOnBeacon")
 mod:AddBoolOption("RangeFrame")
 
 local beaconTargets		= {}
@@ -69,7 +70,6 @@ local beaconIconTargets	= {}
 local unchainedTargets	= {}
 local warned_P2 = false
 local warnedfailed = false
-local phase = 0
 local unchainedIcons = 7
 local spamBeaconIcon = 0
 local activeBeacons	= false
@@ -150,7 +150,6 @@ function mod:OnCombatStart(delay)
 	table.wipe(beaconIconTargets)
 	table.wipe(unchainedTargets)
 	unchainedIcons = 7
-	phase = 1
 	self.vb.phase = 1
 	activeBeacons = false
 	if self.Options.RangeFrame then
@@ -186,6 +185,7 @@ function mod:SPELL_AURA_APPLIED(args)
 			specWarnFrostBeacon:ScheduleVoice(5, "counttwo")
 			specWarnFrostBeacon:ScheduleVoice(6, "countone")
 			if self.vb.phase == 1 and self.Options.YellOnBeacon then
+				SendChatMessage("AA", "SAY")
 				self:Schedule(0.31, sendIconMsg)
 			end
 			if self.vb.phase == 2 then
@@ -378,8 +378,7 @@ function mod:CHAT_MSG_MONSTER_YELL(msg)
 		activeBeacons = true
 	elseif (msg == L.YellPhase2 or msg:find(L.YellPhase2)) or (msg == L.YellPhase2Dem or msg:find(L.YellPhase2Dem)) then
 		beaconCount = 1
-		phase = phase + 1
-		self.vb.phase = self.vb.phase + 1
+		self.vb.phase = 2
 		warnPhase2:Show()
 		timerNextBeacon:Start(7, beaconCount)
 		timerNextAirphase:Cancel()

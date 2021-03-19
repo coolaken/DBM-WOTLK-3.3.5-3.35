@@ -34,7 +34,7 @@ local warnWoundingStrike	= mod:NewTargetNoFilterAnnounce(69651, 2)
 local warnAddsSoon			= mod:NewAnnounce("WarnAddsSoon", 2, AddsIcon)
 
 local timerCombatStart		= mod:NewCombatTimer(45)
-local timerBelowZeroCD		= mod:NewNextTimer(37.5, 69705)
+local timerBelowZeroCD		= mod:NewNextTimer(35.5, 69705)
 local timerBattleFuryActive	= mod:NewBuffActiveTimer(17, 72306, nil, "Tank|Healer")
 local timerAdds				= mod:NewTimer(60, "TimerAdds", AddsIcon)
 

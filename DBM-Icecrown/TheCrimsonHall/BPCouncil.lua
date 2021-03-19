@@ -40,7 +40,7 @@ local specWarnEmpoweredShockV	= mod:NewSpecialWarningRun(72039)
 local specWarnEmpoweredFlames	= mod:NewSpecialWarningRun(72040)
 local specWarnShadowPrison		= mod:NewSpecialWarningStack(72999, nil, 6)
 
-local timerTargetSwitch			= mod:NewTimer(47, "TimerTargetSwitch", 70952)	-- every 46-47seconds
+local timerTargetSwitch			= mod:NewTimer(46, "TimerTargetSwitch", 70952)	-- every 46-47seconds
 local timerDarkNucleusCD		= mod:NewCDTimer(10, 71943, nil, false)	-- usually every 10 seconds but sometimes more
 local timerConjureFlamesCD		= mod:NewCDTimer(20, 71718, nil, nil, nil, 3, nil, DBM_CORE_L.DEADLY_ICON)				-- every 20-30 seconds but never more often than every 20sec
 local timerGlitteringSparksCD	= mod:NewCDTimer(20, 72798, nil, nil, nil, 2)				-- This is pretty nasty on heroic
