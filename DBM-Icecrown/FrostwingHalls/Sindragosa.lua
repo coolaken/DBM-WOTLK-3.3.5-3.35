@@ -114,26 +114,25 @@ local function warnUnchainedTargets()
 	unchainedIcons = 7
 end
 
-local function sendIconMsg()
+local function warnIcon()
 	local FrostBeaconIndex = GetRaidTargetIndex("player")
-	local Myname = UnitName("player")
 	if FrostBeaconIndex == 8 then
-		SendChatMessage(Myname.."{rt8}".."左←", "SAY")
+		SendChatMessage("{rt8}".."左←", "SAY")
 		specWarnFrostBeacon:ScheduleVoice(0.32, "backleft")
 	elseif FrostBeaconIndex == 5 then
-		SendChatMessage(Myname.."{rt5}".."左←", "SAY")
+		SendChatMessage("{rt5}".."左←", "SAY")
 		specWarnFrostBeacon:ScheduleVoice(0.32, "backleft")
 	elseif FrostBeaconIndex == 7  then
-		SendChatMessage(Myname.."{rt7}".."中↓", "SAY")
+		SendChatMessage("{rt7}".."中↓", "SAY")
 		specWarnFrostBeacon:ScheduleVoice(0.32, "backcenter")
 	elseif FrostBeaconIndex == 4 then
-		SendChatMessage(Myname.."{rt4}".."右→", "SAY")
+		SendChatMessage("{rt4}".."右→", "SAY")
 		specWarnFrostBeacon:ScheduleVoice(0.32, "backright")
 	elseif FrostBeaconIndex == 6 then
-		SendChatMessage(Myname.."{rt6}".."右→", "SAY")
+		SendChatMessage("{rt6}".."右→", "SAY")
 		specWarnFrostBeacon:ScheduleVoice(0.32, "backright")
 	elseif FrostBeaconIndex == 3 then
-		SendChatMessage(Myname.."{rt3}".."中↓", "SAY")
+		SendChatMessage("{rt3}".."中↓", "SAY")
 		specWarnFrostBeacon:ScheduleVoice(0.32, "backcenter")
 	end
 end
@@ -185,8 +184,8 @@ function mod:SPELL_AURA_APPLIED(args)
 			specWarnFrostBeacon:ScheduleVoice(5, "counttwo")
 			specWarnFrostBeacon:ScheduleVoice(6, "countone")
 			if self.vb.phase == 1 and self.Options.YellOnBeacon then
-				SendChatMessage("AA", "SAY")
-				self:Schedule(0.31, sendIconMsg)
+				self:Unschedule(warnIcon)
+				self:Schedule(0.31, warnIcon)
 			end
 			if self.vb.phase == 2 then
 				specWarnFrostBeacon:ScheduleVoice(1, "backcenter")
@@ -370,8 +369,8 @@ function mod:CHAT_MSG_MONSTER_YELL(msg)
 			specWarnFrostBeacon:ScheduleVoice(37, "ex_so_bmkd")
 		end
 		timerUnchainedMagic:Start(55)
-		timerNextBlisteringCold:Start(80)--Not exact anywhere from 80-110seconds after airphase begin
-		specWarnBlisteringCold:ScheduleVoice(75, "gripsoon")
+		timerNextBlisteringCold:Start(77)--Not exact anywhere from 80-110seconds after airphase begin
+		specWarnBlisteringCold:ScheduleVoice(72, "gripsoon")
 		timerNextAirphase:Start()
 		timerNextGroundphase:Start()
 		warnGroundphaseSoon:Schedule(40)
@@ -380,6 +379,7 @@ function mod:CHAT_MSG_MONSTER_YELL(msg)
 		beaconCount = 1
 		self.vb.phase = 2
 		warnPhase2:Show()
+		warnPhase2:Play("phasechange")
 		timerNextBeacon:Start(7, beaconCount)
 		timerNextAirphase:Cancel()
 		timerNextGroundphase:Cancel()

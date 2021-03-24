@@ -901,6 +901,7 @@ L:SetOptionLocalization({
 })
 
 L:SetMiscLocalization({
+	KillOne = "我的生命……献给死神！",
 	YellCombatEnd	= "不！不！我还可以……做得更好。",
 	YellCombatEndEng	= "No! I can do... better! I can..."
 })

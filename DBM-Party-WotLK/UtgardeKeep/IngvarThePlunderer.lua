@@ -11,7 +11,8 @@ mod:RegisterKill("yell", L.YellCombatEnd, L.YellCombatEndEng)
 mod:RegisterEvents(
 	"SPELL_CAST_START",
 	"SPELL_AURA_APPLIED",
-	"SPELL_AURA_REMOVED"
+	"SPELL_AURA_REMOVED",
+	"CHAT_MSG_MONSTER_YELL"
 )
 
 local warningSmash		= mod:NewSpellAnnounce(42723, 1)
@@ -21,6 +22,8 @@ local timerSmash		= mod:NewCastTimer(3, 42723)
 local timerWoeStrike	= mod:NewTargetTimer(10, 42723, nil, nil, nil, 3)
 
 local specWarnSpelllock	= mod:NewSpecialWarningCast(42729)
+local timerRoleplay		= mod:NewRPTimer(20)
+
 
 
 function mod:SPELL_CAST_START(args)
@@ -48,5 +51,11 @@ function mod:SPELL_AURA_REMOVED(args)
 	if args:IsSpellID(42730, 59735) then
 		timerWoeStrike:Cancel()
 		self:SetIcon(args.destName, 0)
+	end
+end
+
+function mod:CHAT_MSG_MONSTER_YELL(msg)
+	if msg == L.KillOne or msg:find(L.KillOne) then
+		timerRoleplay:Start()
 	end
 end
