@@ -75,6 +75,7 @@ local spamBeaconIcon = 0
 local activeBeacons	= false
 local beaconIcons = 0
 local beaconCount = 0
+local FrostBeaconIndex = 0
 
 mod.vb.phase = 0
 
@@ -115,7 +116,7 @@ local function warnUnchainedTargets()
 end
 
 local function warnIcon()
-	local FrostBeaconIndex = GetRaidTargetIndex("player")
+	FrostBeaconIndex = GetRaidTargetIndex("player")
 	if FrostBeaconIndex == 8 then
 		SendChatMessage("{rt8}".."左←", "SAY")
 		specWarnFrostBeacon:ScheduleVoice(0.32, "backleft")
