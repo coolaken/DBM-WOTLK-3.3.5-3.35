@@ -193,13 +193,18 @@ L:SetOptionLocalization({
 L:SetMiscLocalization({
 	NormalHalion		= "物理领域 海里昂",
 	TwilightHalion		= "暮光领域 海里昂",
-	MeteorCast		= "天堂也将燃烧!",
-	Phase2			= "在暮光的国度只有磨难在等着你!有胆量的话就进去吧!",
-	Phase3			= "我是光明亦是黑暗!凡人，匍匐在死亡之翼的信使面前吧!",
-	twilightcutter		= "这些环绕的球体散发着黑暗能量!",
+	--MeteorCast		= "天堂也将燃烧!",
+	MeteorCast		= "天空在燃烧！",
+	--Phase2			= "在暮光的国度只有磨难在等着你!有胆量的话就进去吧!",
+	Phase2			= "暮光的世界将会让你痛不欲生！够胆量的就进来吧！",
+	--Phase3			= "我是光明亦是黑暗!凡人，匍匐在死亡之翼的信使面前吧!",
+	Phase3			= "我就是交织的光影！凡人，在死亡之翼的使者面前颤抖吧！",
+	--twilightcutter		= "这些环绕的球体散发着黑暗能量!",
+	twilightcutter		= "The orbiting spheres pulse with dark energy!",
 	YellCombustion		= "我中了炽焰燃烧！",
 	WhisperCombustion		= "你中了炽焰燃烧！快跑墙边！",
 	YellConsumption		= "我中了灵魂吞噬！",
 	WhisperConsumption		= "你中了灵魂吞噬！快跑墙边！",
-	Kill			= "享受这场胜利吧，凡人们，因为这是你们最后一次的胜利。这世界将会在主人回归时化为火海!"
+	--Kill			= "享受这场胜利吧，凡人们，因为这是你们最后一次的胜利。这世界将会在主人回归时化为火海!"
+	Kill			= "享受胜利吧，凡人们，这是你们最后的胜利。回归的主人将烧毁这个世界!"
 })

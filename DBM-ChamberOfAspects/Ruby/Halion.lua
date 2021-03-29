@@ -31,20 +31,20 @@ local warningShadowBreath			= mod:NewSpellAnnounce(75954, 2, nil, mod:IsTank() o
 local warningFieryBreath			= mod:NewSpellAnnounce(74526, 2, nil, mod:IsTank() or mod:IsHealer())
 local warningTwilightCutter			= mod:NewAnnounce("TwilightCutterCast", 4, 77844)
 
-local specWarnShadowConsumption		= mod:NewSpecialWarningRun(74792)
-local specWarnFieryConsumption		= mod:NewSpecialWarningRun(74562)
-local specWarnMeteorStrike			= mod:NewSpecialWarningMove(75952)
-local specWarnTwilightCutter		= mod:NewSpecialWarningSpell(77844)
+local specWarnShadowConsumption		= mod:NewSpecialWarningRun(74792) --灵魂吞噬
+local specWarnFieryConsumption		= mod:NewSpecialWarningRun(74562) --炽焰燃烧
+local specWarnMeteorStrike			= mod:NewSpecialWarningMove(75952) --流星打击
+local specWarnTwilightCutter		= mod:NewSpecialWarningSpell(77844) --暮光撕裂射线
 
-local timerShadowConsumptionCD		= mod:NewNextTimer(25, 74792)
-local timerFieryConsumptionCD		= mod:NewNextTimer(25, 74562)
-local timerMeteorCD					= mod:NewNextTimer(40, 74648)
-local timerMeteorCast				= mod:NewCastTimer(7, 74648)--7-8 seconds from boss yell the meteor impacts.
-local timerTwilightCutterCast		= mod:NewCastTimer(5, 77844)
-local timerTwilightCutter			= mod:NewBuffActiveTimer(10, 77844)
-local timerTwilightCutterCD			= mod:NewNextTimer(15, 77844)
-local timerShadowBreathCD			= mod:NewCDTimer(19, 75954, nil, mod:IsTank() or mod:IsHealer())--Same as debuff timers, same CD, can be merged into 1.
-local timerFieryBreathCD			= mod:NewCDTimer(19, 74526, nil, mod:IsTank() or mod:IsHealer())--But unique icons are nice pertaining to phase you're in ;)
+local timerShadowConsumptionCD		= mod:NewNextTimer(25, 74792, nil, nil, nil, 3)
+local timerFieryConsumptionCD		= mod:NewNextTimer(25, 74562, nil, nil, nil, 3)
+local timerMeteorCD					= mod:NewNextTimer(40, 74648, nil, nil, nil, 2)
+local timerMeteorCast				= mod:NewCastTimer(7, 74648, nil, nil, nil, 2, nil, DBM_CORE_L.IMPORTANT_ICON)--7-8 seconds from boss yell the meteor impacts.
+local timerTwilightCutterCast		= mod:NewCastTimer(5, 77844, nil, nil, nil, 7, nil, DBM_CORE_L.IMPORTANT_ICON)
+local timerTwilightCutter			= mod:NewBuffActiveTimer(10, 77844, nil, nil, nil, 2, nil, DBM_CORE_L.DEADLY_ICON)
+local timerTwilightCutterCD			= mod:NewNextTimer(15, 77844, nil, nil, nil, 2)
+local timerShadowBreathCD			= mod:NewCDTimer(19, 75954, nil, "Tank|Healer", nil, 2, nil, DBM_CORE_L.TANK_ICON)--Same as debuff timers, same CD, can be merged into 1.
+local timerFieryBreathCD			= mod:NewCDTimer(19, 74526, nil, "Tank|Healer", nil, 2, nil, DBM_CORE_L.TANK_ICON)--But unique icons are nice pertaining to phase you're in ;)
 
 local berserkTimer					= mod:NewBerserkTimer(480)
 
