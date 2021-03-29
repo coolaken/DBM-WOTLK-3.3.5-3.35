@@ -63,6 +63,7 @@ mod:AddBoolOption("ClearIconsOnAirphase", true)
 mod:AddBoolOption("AnnounceFrostBeaconIcons", false)
 mod:AddBoolOption("AchievementCheck", false, "announce")
 mod:AddBoolOption("YellOnBeacon")
+mod:AddBoolOption("YellOnBeaconPlanB", false)
 mod:AddBoolOption("RangeFrame")
 
 local beaconTargets		= {}
@@ -138,6 +139,29 @@ local function warnIcon()
 	end
 end
 
+local function warnIconPlanB()
+	FrostBeaconIndex = GetRaidTargetIndex("player")
+	if FrostBeaconIndex == 8 then
+		SendChatMessage("{rt8}".."左←", "SAY")
+		specWarnFrostBeacon:ScheduleVoice(0.32, "backleft")
+	elseif FrostBeaconIndex == 5 then
+		SendChatMessage("{rt5}".."左←", "SAY")
+		specWarnFrostBeacon:ScheduleVoice(0.32, "backleft")
+	elseif FrostBeaconIndex == 6  then
+		SendChatMessage("{rt6}".."中↓", "SAY")
+		specWarnFrostBeacon:ScheduleVoice(0.32, "backcenter")
+	elseif FrostBeaconIndex == 4 then
+		SendChatMessage("{rt4}".."右→", "SAY")
+		specWarnFrostBeacon:ScheduleVoice(0.32, "backright")
+	elseif FrostBeaconIndex == 7 then
+		SendChatMessage("{rt7}".."右→", "SAY")
+		specWarnFrostBeacon:ScheduleVoice(0.32, "backright")
+	elseif FrostBeaconIndex == 3 then
+		SendChatMessage("{rt3}".."中↓", "SAY")
+		specWarnFrostBeacon:ScheduleVoice(0.32, "backcenter")
+	end
+end
+
 
 function mod:OnCombatStart(delay)
 	berserkTimer:Start(-delay)
@@ -184,9 +208,12 @@ function mod:SPELL_AURA_APPLIED(args)
 			specWarnFrostBeacon:ScheduleVoice(4, "countthree")
 			specWarnFrostBeacon:ScheduleVoice(5, "counttwo")
 			specWarnFrostBeacon:ScheduleVoice(6, "countone")
-			if self.vb.phase == 1 and self.Options.YellOnBeacon then
+			if self.vb.phase == 1 and self.Options.YellOnBeacon and not self.Options.YellOnBeaconPlanB then
 				self:Unschedule(warnIcon)
 				self:Schedule(0.31, warnIcon)
+			elseif self.vb.phase == 1 and self.Options.YellOnBeaconPlanB and not self.Options.YellOnBeacon then
+				self:Unschedule(warnIconPlanB)
+				self:Schedule(0.31, warnIconPlanB)
 			end
 			if self.vb.phase == 2 then
 				specWarnFrostBeacon:ScheduleVoice(1, "backcenter")
