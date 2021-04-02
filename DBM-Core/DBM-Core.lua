@@ -71,9 +71,9 @@ local function showRealDate(curseDate)
 end
 
 DBM = {
-	Revision = parseCurseDate("20201225041541"),
-	DisplayVersion = "1.13.64 alpha", -- the string that is shown as version
-	ReleaseRevision = releaseDate(2020, 12, 7) -- the date of the latest stable version that is available, optionally pass hours, minutes, and seconds for multiple releases in one day
+	Revision = parseCurseDate("20210402041541"),
+	DisplayVersion = "3.35.11 alpha", -- the string that is shown as version
+	ReleaseRevision = releaseDate(2021, 4, 2) -- the date of the latest stable version that is available, optionally pass hours, minutes, and seconds for multiple releases in one day
 }
 DBM.HighestRelease = DBM.ReleaseRevision --Updated if newer version is detected, used by update nags to reflect critical fixes user is missing on boss pulls
 

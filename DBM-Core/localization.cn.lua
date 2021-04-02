@@ -154,8 +154,8 @@ L.WHISPER_COMBAT_END_WIPE_AT	    = "%s在%s（%s）的战斗中灭团了。"
 L.WHISPER_COMBAT_END_WIPE_STATS_AT	= "%s在%s（%s）的战斗中灭团了。该难度下总共失败%d次。"
 
 L.VERSIONCHECK_HEADER		        =  L.DEADLY_BOSS_MODS .. " - 版本检测"
-L.VERSIONCHECK_ENTRY		        = "%s: %s (r%d) %s"--One Boss mod
-L.VERSIONCHECK_ENTRY_TWO	        = "%s: %s (r%d) & %s (r%d)"--Two Boss mods
+L.VERSIONCHECK_ENTRY				= "%s: %s (%s) %s"--One Boss mod
+L.VERSIONCHECK_ENTRY_TWO			= "%s: %s (%s) & %s (%s)"--Two Boss mods
 L.VERSIONCHECK_ENTRY_NO_DBM	        = "%s：未安装" .. L.DEADLY_BOSS_MODS
 L.VERSIONCHECK_FOOTER		        = "团队中有%d名成员正在使用" .. L.DEADLY_BOSS_MODS .. "， %d名成员正在使用Bigwigs"
 L.VERSIONCHECK_OUTDATED		        = "下列%d名玩家的" .. L.DEADLY_BOSS_MODS .. "版本已经过期:%s"

@@ -520,6 +520,7 @@ L:SetOptionLocalization{
 }
 
 L:SetMiscLocalization{
+	YellPull			= "你们这些蠢货胆敢闯入这里。诺森德的冰风将卷走你们的灵魂！",
 	YellAirphase			= "你们的入侵结束了！无人可以生还！",
 	YellPhase2			= "绝望吧，体会主人那无穷无尽的力量吧！",
 	YellAirphaseDem			= "Rikk zilthuras rikk zila Aman adare tiriosh ",--Demonic, since curse of tonges is used by some guilds and it messes up yell detection.
@@ -530,8 +531,8 @@ L:SetMiscLocalization{
 	BeaconIconChatHeroic1			= "- {rt8} - {rt7} - {rt6} -",
 	BeaconIconChatHeroic2			= "- {rt5} - {rt4} - {rt3} -",
 	AchievementWarning		= "警告: %s中了5层秘法打击",
-	AchievementFailed		= ">> 成就失败: %s中了%d层秘法打击 <<",
-	YellPull			= "你们这些蠢货胆敢闯入这里。诺森德的冰风将卷走你们的灵魂！"
+	AchievementFailed		= ">> 成就失败: %s中了%d层秘法打击 <<"
+	
 }
 
 ---------------------

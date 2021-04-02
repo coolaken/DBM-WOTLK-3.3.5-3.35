@@ -555,6 +555,10 @@ L:SetTimerLocalization({
 L:SetOptionLocalization({
 })
 
+L:SetMiscLocalization({
+	Pull	= "我曾见证过无数帝国的崛起与衰落……也见证过无数物种的诞生与灭绝……千百年来，凡人种族的愚蠢都不曾改变过。你们出现在这里，更是印证了这一点。"
+})
+
 ----------------------
 --  Halls of Stone  --
 -----------------------

@@ -3,10 +3,9 @@ local L		= mod:GetLocalizedStrings()
 
 mod:SetRevision(("$Revision: 4512 $"):sub(12, -3))
 mod:SetCreatureID(36853)
---mod:RegisterCombat("combat")
-mod:RegisterCombat("yell", L.YellPull)
-mod:SetMinSyncRevision(3712)
 mod:SetUsedIcons(3, 4, 5, 6, 7, 8)
+mod:RegisterCombat("yell", L.YellPull)
+
 
 mod:RegisterEvents(
 	"SPELL_CAST_START",
@@ -62,7 +61,7 @@ mod:AddBoolOption("SetIconOnUnchainedMagic", true)
 mod:AddBoolOption("ClearIconsOnAirphase", true)
 mod:AddBoolOption("AnnounceFrostBeaconIcons", false)
 mod:AddBoolOption("AchievementCheck", false, "announce")
-mod:AddBoolOption("YellOnBeacon")
+mod:AddBoolOption("YellOnBeaconPlanA")
 mod:AddBoolOption("YellOnBeaconPlanB", false)
 mod:AddBoolOption("RangeFrame")
 
@@ -76,9 +75,37 @@ local spamBeaconIcon = 0
 local activeBeacons	= false
 local beaconIcons = 0
 local beaconCount = 0
-local FrostBeaconIndex = 0
+local frostBeaconIndex = 0
 
 mod.vb.phase = 0
+
+function mod:OnCombatStart(delay)
+	self.vb.phase = 1
+	berserkTimer:Start(-delay)
+	timerNextAirphase:Start(50-delay)
+	timerNextBlisteringCold:Start(33-delay)
+	specWarnBlisteringCold:ScheduleVoice(28, "gripsoon")
+	warned_P2 = false
+	warnedfailed = false
+	table.wipe(beaconTargets)
+	table.wipe(beaconIconTargets)
+	table.wipe(unchainedTargets)
+	unchainedIcons = 7
+	activeBeacons = false
+	if self.Options.RangeFrame then
+		if mod:IsDifficulty("heroic10") or mod:IsDifficulty("heroic25") then
+			DBM.RangeCheck:Show(20, nil, true, nil)
+		else
+			DBM.RangeCheck:Show(10, nil, true, nil)
+		end
+	end
+end
+
+function mod:OnCombatEnd()
+	if self.Options.RangeFrame then
+		DBM.RangeCheck:Hide(true)
+	end
+end
 
 local function ClearBeaconTargets()
 	table.wipe(beaconIconTargets)
@@ -116,80 +143,53 @@ local function warnUnchainedTargets()
 	unchainedIcons = 7
 end
 
-local function warnIcon()
-	FrostBeaconIndex = GetRaidTargetIndex("player")
-	if FrostBeaconIndex == 8 then
+function mod:warnIconPlanA()
+	frostBeaconIndex = GetRaidTargetIndex("player")
+	if frostBeaconIndex == 8 then
 		SendChatMessage("{rt8}".."左←", "SAY")
 		specWarnFrostBeacon:ScheduleVoice(0.32, "backleft")
-	elseif FrostBeaconIndex == 5 then
+	elseif frostBeaconIndex == 5 then
 		SendChatMessage("{rt5}".."左←", "SAY")
 		specWarnFrostBeacon:ScheduleVoice(0.32, "backleft")
-	elseif FrostBeaconIndex == 7  then
+	elseif frostBeaconIndex == 7  then
 		SendChatMessage("{rt7}".."中↓", "SAY")
 		specWarnFrostBeacon:ScheduleVoice(0.32, "backcenter")
-	elseif FrostBeaconIndex == 4 then
+	elseif frostBeaconIndex == 4 then
 		SendChatMessage("{rt4}".."右→", "SAY")
 		specWarnFrostBeacon:ScheduleVoice(0.32, "backright")
-	elseif FrostBeaconIndex == 6 then
+	elseif frostBeaconIndex == 6 then
 		SendChatMessage("{rt6}".."右→", "SAY")
 		specWarnFrostBeacon:ScheduleVoice(0.32, "backright")
-	elseif FrostBeaconIndex == 3 then
+	elseif frostBeaconIndex == 3 then
 		SendChatMessage("{rt3}".."中↓", "SAY")
 		specWarnFrostBeacon:ScheduleVoice(0.32, "backcenter")
 	end
 end
 
-local function warnIconPlanB()
-	FrostBeaconIndex = GetRaidTargetIndex("player")
-	if FrostBeaconIndex == 8 then
+function mod:warnIconPlanB()
+	frostBeaconIndex = GetRaidTargetIndex("player")
+	if frostBeaconIndex == 8 then
 		SendChatMessage("{rt8}".."左←", "SAY")
 		specWarnFrostBeacon:ScheduleVoice(0.32, "backleft")
-	elseif FrostBeaconIndex == 5 then
+	elseif frostBeaconIndex == 5 then
 		SendChatMessage("{rt5}".."左←", "SAY")
 		specWarnFrostBeacon:ScheduleVoice(0.32, "backleft")
-	elseif FrostBeaconIndex == 6  then
+	elseif frostBeaconIndex == 6  then
 		SendChatMessage("{rt6}".."中↓", "SAY")
 		specWarnFrostBeacon:ScheduleVoice(0.32, "backcenter")
-	elseif FrostBeaconIndex == 4 then
+	elseif frostBeaconIndex == 4 then
 		SendChatMessage("{rt4}".."右→", "SAY")
 		specWarnFrostBeacon:ScheduleVoice(0.32, "backright")
-	elseif FrostBeaconIndex == 7 then
+	elseif frostBeaconIndex == 7 then
 		SendChatMessage("{rt7}".."右→", "SAY")
 		specWarnFrostBeacon:ScheduleVoice(0.32, "backright")
-	elseif FrostBeaconIndex == 3 then
+	elseif frostBeaconIndex == 3 then
 		SendChatMessage("{rt3}".."中↓", "SAY")
 		specWarnFrostBeacon:ScheduleVoice(0.32, "backcenter")
 	end
 end
 
 
-function mod:OnCombatStart(delay)
-	berserkTimer:Start(-delay)
-	timerNextAirphase:Start(50-delay)
-	timerNextBlisteringCold:Start(33-delay)
-	specWarnBlisteringCold:ScheduleVoice(28, "gripsoon")
-	warned_P2 = false
-	warnedfailed = false
-	table.wipe(beaconTargets)
-	table.wipe(beaconIconTargets)
-	table.wipe(unchainedTargets)
-	unchainedIcons = 7
-	self.vb.phase = 1
-	activeBeacons = false
-	if self.Options.RangeFrame then
-		if mod:IsDifficulty("heroic10") or mod:IsDifficulty("heroic25") then
-			DBM.RangeCheck:Show(20, nil, true, nil)
-		else
-			DBM.RangeCheck:Show(10, nil, true, nil)
-		end
-	end
-end
-
-function mod:OnCombatEnd()
-	if self.Options.RangeFrame then
-		DBM.RangeCheck:Hide(true)
-	end
-end
 
 function mod:SPELL_CAST_START(args)
 	if args:IsSpellID(69649, 71056, 71057, 71058) or args:IsSpellID(73061, 73062, 73063, 73064) then--Frost Breath
@@ -208,17 +208,16 @@ function mod:SPELL_AURA_APPLIED(args)
 			specWarnFrostBeacon:ScheduleVoice(4, "countthree")
 			specWarnFrostBeacon:ScheduleVoice(5, "counttwo")
 			specWarnFrostBeacon:ScheduleVoice(6, "countone")
-			if self.vb.phase == 1 and self.Options.YellOnBeacon and not self.Options.YellOnBeaconPlanB then
-				self:Unschedule(warnIcon)
-				self:Schedule(0.31, warnIcon)
-			elseif self.vb.phase == 1 and self.Options.YellOnBeaconPlanB and not self.Options.YellOnBeacon then
-				self:Unschedule(warnIconPlanB)
-				self:Schedule(0.31, warnIconPlanB)
-			end
-			if self.vb.phase == 2 then
+			if self.vb.phase == 1 and self.Options.YellOnBeaconPlanA and not self.Options.YellOnBeaconPlanB then
+				self:UnscheduleMethod("warnIconPlanA")
+				self:ScheduleMethod(0.4, "warnIconPlanA")
+			elseif self.vb.phase == 1 and self.Options.YellOnBeaconPlanB and not self.Options.YellOnBeaconPlanA then
+				self:UnscheduleMethod("warnIconPlanB")
+				self:ScheduleMethod(0.4, "warnIconPlanB")
+			elseif self.vb.phase == 2 then
 				specWarnFrostBeacon:ScheduleVoice(1, "backcenter")
 				if mod:IsHealer() and isPAL then
-					if self.Options.YellOnBeacon then
+					if self.Options.YellOnBeaconPlanA or self.Options.YellOnBeaconPlanB then
 						SendChatMessage("NQ被点,注意刷坦!", "SAY")
 					end
 				end
