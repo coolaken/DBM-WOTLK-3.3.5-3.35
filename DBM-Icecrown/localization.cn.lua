@@ -514,7 +514,7 @@ L:SetOptionLocalization{
 	SetIconOnUnchainedMagic		= DBM_CORE_L.AUTO_ICONS_OPTION_TEXT:format(69762),
 	ClearIconsOnAirphase		= "空中阶段前清除所有标记",
 	AchievementCheck		= "公布'极限'成就警告到团队频道\n(需助理权限)",
-	YellOnBeacon			= "提示$spell:70126位置,每个团可能不一样!这边设置的是{rt8}{rt5}左,{rt7}{rt3}中,{rt6}{rt4}右",
+	YellOnBeaconPlanA			= "提示$spell:70126位置,每个团可能不一样!这边设置的是{rt8}{rt5}左,{rt7}{rt3}中,{rt6}{rt4}右",
 	YellOnBeaconPlanB			= "提示$spell:70126位置,每个团可能不一样!这边设置的是{rt8}{rt5}左,{rt6}{rt3}中,{rt7}{rt4}右",
 	RangeFrame			= "显示距离框(普通10码, 困难20码)"
 }
