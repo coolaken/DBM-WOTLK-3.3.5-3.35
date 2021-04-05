@@ -4895,6 +4895,7 @@ do
 					DBM:Schedule(0.99, DBM.AddMsg, DBM, L.INSTANCE_INFO_ALL_RESPONSES)
 					allResponded = true
 				end
+				DBM:Unschedule(showResults)
 				C_TimerAfter(1, showResults) --Delay results so we allow time for same sender to send more than 1 lockout, otherwise, if we get expectedResponses before all data is sent from 1 user, we clip some of their data.
 			end
 		end
@@ -5038,7 +5039,7 @@ do
 			self:Schedule(17, updateInstanceInfo, 45, true)
 			self:Schedule(32, updateInstanceInfo, 30)
 			self:Schedule(48, updateInstanceInfo, 15)
-			C_TimerAfter(62, showResults)
+			self:Schedule(62, showResults)
 		end
 	end
 
