@@ -27,8 +27,8 @@ local warnPhase3					= mod:NewPhaseAnnounce(3)
 local warningShadowConsumption		= mod:NewTargetNoFilterAnnounce(74792, 4)
 local warningFieryConsumption		= mod:NewTargetNoFilterAnnounce(74562, 4)
 local warningMeteor					= mod:NewSpellAnnounce(74648, 3)
-local warningShadowBreath			= mod:NewSpellAnnounce(75954, 2, nil, mod:IsTank() or mod:IsHealer())
-local warningFieryBreath			= mod:NewSpellAnnounce(74526, 2, nil, mod:IsTank() or mod:IsHealer())
+local warningShadowBreath			= mod:NewSpellAnnounce(75954, 2, nil, "Tank|Healer")
+local warningFieryBreath			= mod:NewSpellAnnounce(74526, 2, nil, "Tank|Healer")
 local warningTwilightCutter			= mod:NewAnnounce("TwilightCutterCast", 4, 77844)
 
 local specWarnShadowConsumption		= mod:NewSpecialWarningRun(74792) --灵魂吞噬
