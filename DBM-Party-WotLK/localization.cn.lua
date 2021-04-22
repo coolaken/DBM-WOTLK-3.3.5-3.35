@@ -229,6 +229,11 @@ L:SetTimerLocalization({
 L:SetOptionLocalization({
 })
 
+L:SetMiscLocalization({
+	Pull	= "阿尔萨斯·米奈希尔王子殿下，今天，你的灵魂已经被某种强大的黑暗力量侵蚀。你想要以死亡净化这座城市，现在你也要面对毁灭的命运了。"
+})
+
+
 -----------------
 --  Mal'Ganis  --
 -----------------

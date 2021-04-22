@@ -151,6 +151,29 @@ function mod:warnIconPlanA()
 	elseif frostBeaconIndex == 5 then
 		SendChatMessage("{rt5}".."左←", "SAY")
 		specWarnFrostBeacon:ScheduleVoice(0.32, "backleft")
+	elseif frostBeaconIndex == 6  then
+		SendChatMessage("{rt6}".."右→", "SAY")
+		specWarnFrostBeacon:ScheduleVoice(0.32, "backcenter")
+	elseif frostBeaconIndex == 4 then
+		SendChatMessage("{rt4}".."中↓", "SAY")
+		specWarnFrostBeacon:ScheduleVoice(0.32, "backright")
+	elseif frostBeaconIndex == 7 then
+		SendChatMessage("{rt7}".."中↓", "SAY")
+		specWarnFrostBeacon:ScheduleVoice(0.32, "backright")
+	elseif frostBeaconIndex == 3 then
+		SendChatMessage("{rt3}".."右→", "SAY")
+		specWarnFrostBeacon:ScheduleVoice(0.32, "backcenter")
+	end
+end
+
+function mod:warnIconPlanB()
+	frostBeaconIndex = GetRaidTargetIndex("player")
+	if frostBeaconIndex == 8 then
+		SendChatMessage("{rt8}".."左←", "SAY")
+		specWarnFrostBeacon:ScheduleVoice(0.32, "backleft")
+	elseif frostBeaconIndex == 5 then
+		SendChatMessage("{rt5}".."左←", "SAY")
+		specWarnFrostBeacon:ScheduleVoice(0.32, "backleft")
 	elseif frostBeaconIndex == 7  then
 		SendChatMessage("{rt7}".."中↓", "SAY")
 		specWarnFrostBeacon:ScheduleVoice(0.32, "backcenter")
@@ -165,31 +188,6 @@ function mod:warnIconPlanA()
 		specWarnFrostBeacon:ScheduleVoice(0.32, "backcenter")
 	end
 end
-
-function mod:warnIconPlanB()
-	frostBeaconIndex = GetRaidTargetIndex("player")
-	if frostBeaconIndex == 8 then
-		SendChatMessage("{rt8}".."左←", "SAY")
-		specWarnFrostBeacon:ScheduleVoice(0.32, "backleft")
-	elseif frostBeaconIndex == 5 then
-		SendChatMessage("{rt5}".."左←", "SAY")
-		specWarnFrostBeacon:ScheduleVoice(0.32, "backleft")
-	elseif frostBeaconIndex == 6  then
-		SendChatMessage("{rt6}".."中↓", "SAY")
-		specWarnFrostBeacon:ScheduleVoice(0.32, "backcenter")
-	elseif frostBeaconIndex == 4 then
-		SendChatMessage("{rt4}".."右→", "SAY")
-		specWarnFrostBeacon:ScheduleVoice(0.32, "backright")
-	elseif frostBeaconIndex == 7 then
-		SendChatMessage("{rt7}".."右→", "SAY")
-		specWarnFrostBeacon:ScheduleVoice(0.32, "backright")
-	elseif frostBeaconIndex == 3 then
-		SendChatMessage("{rt3}".."中↓", "SAY")
-		specWarnFrostBeacon:ScheduleVoice(0.32, "backcenter")
-	end
-end
-
-
 
 function mod:SPELL_CAST_START(args)
 	if args:IsSpellID(69649, 71056, 71057, 71058) or args:IsSpellID(73061, 73062, 73063, 73064) then--Frost Breath

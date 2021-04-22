@@ -27,13 +27,13 @@ local warnStickyOoze			= mod:NewSpellAnnounce(69774, 1)
 local warnUnstableOoze			= mod:NewAnnounce("WarnUnstableOoze", 2, 69558)
 local warnVileGas				= mod:NewTargetNoFilterAnnounce(72272, 3)
 
-local specWarnMutatedInfection	= mod:NewSpecialWarningYou(71224)
-local specWarnStickyOoze		= mod:NewSpecialWarningMove(69774)
-local specWarnOozeExplosion		= mod:NewSpecialWarningRun(69839)
-local specWarnSlimeSpray		= mod:NewSpecialWarningSpell(69508, false)--For people that need a bigger warning to move
-local specWarnRadiatingOoze		= mod:NewSpecialWarningSpell(69760, "-Tank")
-local specWarnLittleOoze		= mod:NewSpecialWarning("SpecWarnLittleOoze")
-local specWarnVileGas			= mod:NewSpecialWarningYou(72272)
+local specWarnMutatedInfection	= mod:NewSpecialWarningYou(71224, nil, nil, nil, 1, 2)
+local specWarnStickyOoze		= mod:NewSpecialWarningMove(69774, nil, nil, nil, 1, 2)
+local specWarnOozeExplosion		= mod:NewSpecialWarningRun(69839, nil, nil, nil, 1, 2)
+local specWarnSlimeSpray		= mod:NewSpecialWarningSpell(69508, false, nil, nil, 1, 2)--For people that need a bigger warning to move
+local specWarnRadiatingOoze		= mod:NewSpecialWarningSpell(69760, "-Tank", nil, nil, 1, 2)
+local specWarnLittleOoze		= mod:NewSpecialWarning("SpecWarnLittleOoze", nil, nil, nil, 1, 2)
+local specWarnVileGas			= mod:NewSpecialWarningYou(72272, nil, nil, nil, 1, 2)
 
 local timerStickyOoze			= mod:NewNextTimer(16, 69774, nil, "Tank", nil, 3)
 local timerWallSlime			= mod:NewNextTimer(20, 69789, nil, nil, nil, 2)
@@ -42,7 +42,7 @@ local timerMutatedInfection		= mod:NewTargetTimer(12, 71224, nil, nil, nil, 3, n
 local timerOozeExplosion		= mod:NewCastTimer(4, 69839, nil, nil, nil, 2, nil, DBM_CORE_L.DEADLY_ICON)
 local timerVileGasCD			= mod:NewNextTimer(30, 72272, nil, nil, nil, 3, nil, DBM_CORE_L.HEROIC_ICON)
 
-local sndWOP					= mod:NewSpecialWarning("SoundWOP", nil, nil, nil, 4, 2)
+
 
 --local soundMutatedInfection			= mod:NewSound(71224)
 mod:AddBoolOption("RangeFrame", "Melee")
@@ -93,24 +93,24 @@ function mod:SPELL_CAST_START(args)
 		timerSlimeSpray:Start()
 		warnSlimeSpray:Show()
 		specWarnSlimeSpray:Show()
-		sndWOP:Play("gasrain")
+		specWarnSlimeSpray:Play("gasrain")
 	elseif args:IsSpellID(69774) then
 		timerStickyOoze:Start()
 		warnStickyOoze:Show()
 	elseif args:IsSpellID(69839) then --Unstable Ooze Explosion (Big Ooze)
 		if GetTime() - spamOoze < 4 then --This will prevent spam but breaks if there are 2 oozes. GUID work is required
 			specWarnOozeExplosion:Cancel()
-			sndWOP:CancelVoice("countthree")
-			sndWOP:CancelVoice("counttwo")
-			sndWOP:CancelVoice("countone")
+			specWarnOozeExplosion:CancelVoice("countthree")
+			specWarnOozeExplosion:CancelVoice("counttwo")
+			specWarnOozeExplosion:CancelVoice("countone")
 		end
 		if GetTime() - spamOoze < 4 or GetTime() - spamOoze > 5 then --Attempt to ignore a cast that may fire as an ooze is already exploding.
 			timerOozeExplosion:Start()
 			specWarnOozeExplosion:Schedule(4)
-			sndWOP:Play("boom")
-			sndWOP:ScheduleVoice(1.5, "countthree")
-			sndWOP:ScheduleVoice(2.5, "counttwo")
-			sndWOP:ScheduleVoice(3.5, "countone")
+			specWarnOozeExplosion:Play("boom")
+			specWarnOozeExplosion:ScheduleVoice(1.5, "countthree")
+			specWarnOozeExplosion:ScheduleVoice(2.5, "counttwo")
+			specWarnOozeExplosion:ScheduleVoice(3.5, "countone")
 		end
 		spamOoze = GetTime()
 	end
@@ -128,7 +128,7 @@ function mod:SPELL_AURA_APPLIED(args)
 		timerMutatedInfection:Start(args.destName)
 		if args:IsPlayer() then
 			specWarnMutatedInfection:Show()
-			sndWOP:Play("infect")
+			specWarnMutatedInfection:Play("infect")
 --			soundMutatedInfection:Play()
 		end
 		if self.Options.InfectionIcon then
@@ -170,9 +170,9 @@ end
 function mod:SPELL_DAMAGE(args)
 	if args:IsSpellID(69761, 71212, 73026, 73027) and args:IsPlayer() then
 		specWarnRadiatingOoze:Show()
-		sndWOP:Play("runaway")
+		specWarnRadiatingOoze:Play("runaway")
 	elseif args:IsSpellID(69507, 71213, 73189, 73190) and args:IsPlayer() then
-		sndWOP:Play("runaway")
+		specWarnRadiatingOoze:Play("runaway")
 	elseif args:GetDestCreatureID() == 36899 and args:IsSrcTypePlayer() and not (args:IsSpellID(50288) or args:IsSpellID(53189, 53190, 53194, 53195)) then--Any spell damage except for starfall
 		if args.sourceName ~= UnitName("player") then
 			if self.Options.TankArrow then

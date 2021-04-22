@@ -3947,6 +3947,7 @@ do
 			end
 		end
 	end
+
 	local function SecondaryLoadCheck(self)
 		--local _, instanceType, difficulty, _, _, _, _, mapID, instanceGroupSize = GetInstanceInfo()
 		local _, instanceType, difficulty, _, instanceGroupSize = GetInstanceInfo()
@@ -6333,15 +6334,15 @@ function DBM:GetCurrentInstanceDifficulty()
 	elseif difficulty == 1 and instanceType == "party" then--5 man Normal Dungeon
 		return "normal5", difficultyName.." - ", difficulty, instanceGroupSize
 	elseif difficulty == 2 and instanceType == "party" then--5 man Heroic Dungeon
-		return "heroic5", difficultyName.." - ", difficulty, instanceGroupSize
+		return "heroic5", difficultyName.."H - ", difficulty, instanceGroupSize
 	elseif difficulty == 1 and instanceType == "raid" and instanceGroupSize == 10 then--Legacy 10 man Normal Raid
 		return "normal10", difficultyName.." - ", difficulty, instanceGroupSize
 	elseif difficulty == 2 and instanceType == "raid" and instanceGroupSize == 25 then--Legacy 25 man Normal Raid
 		return "normal25", difficultyName.." - ", difficulty, instanceGroupSize
 	elseif difficulty == 3 then--Legacy 10 man Heroic Raid
-		return "heroic10", difficultyName.." - ", difficulty, instanceGroupSize
+		return "heroic10", difficultyName.."H - ", difficulty, instanceGroupSize
 	elseif difficulty == 4 then--Legacy 25 man Heroic Raid
-		return "heroic25", difficultyName.." - ", difficulty, instanceGroupSize
+		return "heroic25", difficultyName.."H - ", difficulty, instanceGroupSize
 	elseif difficulty == 1 and instanceType == "raid" and instanceGroupSize == 40 then--Legacy 40 man raids, no longer returned as index 3 (normal 10man raids)
 		return "normal40", difficultyName.." - ",difficulty, instanceGroupSize
 	elseif difficulty == 1 and instanceType == "raid" and instanceGroupSize == 20 then--20 man classic raid
@@ -9259,15 +9260,15 @@ do
 	end
 
 	function bossModPrototype:NewPhaseAnnounce(stage, color, icon, ...)
-		return newAnnounce(self, "stage", stage, color or 2, icon or "136116", ...)
+		return newAnnounce(self, "stage", stage, color or 2, icon or 64823, ...)
 	end
 
 	function bossModPrototype:NewPhaseChangeAnnounce(color, icon, ...)
-		return newAnnounce(self, "stagechange", 0, color or 2, icon or "136116", ...)
+		return newAnnounce(self, "stagechange", 0, color or 2, icon or 64823, ...)
 	end
 
 	function bossModPrototype:NewPrePhaseAnnounce(stage, color, icon, ...)
-		return newAnnounce(self, "prestage", stage, color or 2, icon or "136116", ...)
+		return newAnnounce(self, "prestage", stage, color or 2, icon or 64823, ...)
 	end
 end
 

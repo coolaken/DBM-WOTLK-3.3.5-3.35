@@ -5,6 +5,7 @@ mod:SetRevision(("$Revision: 3726 $"):sub(12, -3))
 mod:SetCreatureID(28859)
 
 mod:RegisterCombat("yell", L.YellPull)
+mod:RegisterKill("yell", L.YellKill)
 
 mod:RegisterEvents(
 	"CHAT_MSG_RAID_BOSS_EMOTE",

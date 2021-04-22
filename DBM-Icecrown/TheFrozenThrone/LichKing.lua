@@ -39,13 +39,19 @@ local warnShamblingEnrage	= mod:NewTargetNoFilterAnnounce(72143, 3, nil, "Remove
 local warnNecroticPlague	= mod:NewTargetNoFilterAnnounce(73912, 4) --Phase 1+ Ability
 local warnNecroticPlagueJump= mod:NewAnnounce("WarnNecroticPlagueJump", 4, 73912) --Phase 1+ Ability
 local warnInfest			= mod:NewSpellAnnounce(73779, 3, nil, "Healer") --Phase 1 & 2 Ability
-local warnPhase2Soon		= mod:NewAnnounce("WarnPhase2Soon", 1, "Interface\\Icons\\Spell_Nature_WispSplode")
+local warnPhase2Soon		= mod:NewPrePhaseAnnounce(2, 2)
+local warnPhase2			= mod:NewPhaseAnnounce(2, 2)
+local warnPhase3Soon		= mod:NewPrePhaseAnnounce(3, 2)
+local warnPhase3			= mod:NewPhaseAnnounce(3, 2)
+local warnPhase4Soon		= mod:NewPrePhaseAnnounce(4, 2)
+local warnPhase4			= mod:NewPhaseAnnounce(4, 2)
+local warnPhase5Soon		= mod:NewPrePhaseAnnounce(5, 2)
+local warnPhase5			= mod:NewPhaseAnnounce(5, 2)
 local valkyrWarning			= mod:NewAnnounce("ValkyrWarning", 3, 71844)--Phase 2 Ability
 local warnDefileSoon		= mod:NewSoonAnnounce(73708, 3)	--Phase 2+ Ability
 local warnSoulreaper		= mod:NewSpellAnnounce(73797, 4, nil, "Tank|Healer") --Phase 2+ Ability
 local warnDefileCast		= mod:NewTargetNoFilterAnnounce(72762, 4) --Phase 2+ Ability
 local warnSummonValkyr		= mod:NewSpellAnnounce(69037, 3, 71844) --Phase 2 Add
-local warnPhase3Soon		= mod:NewAnnounce("WarnPhase3Soon", 1, "Interface\\Icons\\Spell_Nature_WispSplode")
 local warnSummonVileSpirit	= mod:NewSpellAnnounce(70498, 2) --Phase 3 Add
 local warnHarvestSoul		= mod:NewTargetNoFilterAnnounce(74325, 4) --Phase 3 Ability
 local warnTrapCast			= mod:NewTargetNoFilterAnnounce(73539, 3) --Phase 1 Heroic Ability
@@ -112,25 +118,24 @@ mod:AddBoolOption("AnnouncePlagueStack", false, "announce")
 mod:AddBoolOption("TrapArrow")
 mod:AddBoolOption("LKBugWorkaround", true)--Use old scan method without syncing or latency check (less reliable but not dependant on other DBM users in raid)
 
-local phase	= 0
+
 local lastPlagueCast = 0
 local infestcount = 1
 local soulreapercount = 1
 local warned_preP2 = false
-local warned_preP3 = false
+local warned_preP4 = false
 local warnedValkyrGUIDs = {}
 local LKTank
 
 mod.vb.phase = 0
 
 function mod:OnCombatStart(delay)
-	phase = 0
 	self.vb.phase = 0
 	lastPlagueCast = 0
 	infestcount = 1
 	soulreapercount = 1
 	warned_preP2 = false
-	warned_preP3 = false
+	warned_preP4 = false
 	LKTank = nil
 	self:NextPhase()
 	table.wipe(warnedValkyrGUIDs)
@@ -271,7 +276,11 @@ end
 
 function mod:SPELL_CAST_START(args)
 	if args:IsSpellID(68981, 74270, 74271, 74272) then -- Remorseless Winter (phase transition start) first cast
-		sndWOP:ScheduleVoice(54, "ptwo")
+		self:NextPhase()--2阶段开始 再加个声音?
+		warnPhase2:Show()
+		sndWOP:Play("phasechange")
+		warnPhase3Soon:Schedule(54)
+		sndWOP:ScheduleVoice(55, "pthree")
 		warnRemorselessWinter:Show()
 		timerPhaseTransition:Start()
 		timerRagingSpiritCD:Start(6)
@@ -286,7 +295,11 @@ function mod:SPELL_CAST_START(args)
 		timerNecroticPlagueCD:Cancel()
 		timerTrapCD:Cancel()
 	elseif args:IsSpellID(72259, 74273, 74274, 74275) then -- Remorseless Winter (phase transition start) second cast of fight
-		sndWOP:ScheduleVoice(54, "pthree")
+		self:NextPhase()--4阶段 再加个声音?
+		warnPhase4:Show()
+		sndWOP:Play("phasechange")
+		warnPhase5Soon:Schedule(54)
+		sndWOP:ScheduleVoice(55, "pfive")
 		warnRemorselessWinter:Show()
 		timerPhaseTransition:Start()
 		timerRagingSpiritCD:Start(6)
@@ -304,7 +317,13 @@ function mod:SPELL_CAST_START(args)
 		warnQuake:Show()
 		timerRagingSpiritCD:Cancel()
 		sndWOP:CancelVoice("ghostsoon")
+		if self.vb.phase == 2 then
+			warnPhase3:Show()
+		elseif self.vb.phase == 4 then
+			warnPhase5:Show()
+		end
 		self:NextPhase()
+		sndWOP:Play("phasechange")
 	elseif args:IsSpellID(70372) then -- Shambling Horror
 		warnShamblingSoon:Cancel()
 		warnShamblingHorror:Show()
@@ -368,6 +387,7 @@ function mod:SPELL_CAST_START(args)
 		sndWOP:ScheduleVoice(37, "defilesoon")
 		timerVileSpirit:Start(50)
 	elseif args:IsSpellID(72350) then -- Fury of Frostmourne
+		sndWOP:Play("phasechange")
 		self:NextPhase()
 		timerRoleplay:Start()
 		mod:SetWipeTime(160)--Change min wipe time mid battle to force dbm to keep module loaded for this long out of combat roleplay, hopefully without breaking mod.
@@ -603,11 +623,11 @@ function mod:UNIT_HEALTH(uId)
 	if self.vb.phase == 1 and not warned_preP2 and self:GetUnitCreatureId(uId) == 36597 and UnitHealth(uId) / UnitHealthMax(uId) <= 0.73 then
 		warned_preP2 = true
 		warnPhase2Soon:Show()
-		sndWOP:Play("phasechange")
-	elseif self.vb.phase == 2 and not warned_preP3 and self:GetUnitCreatureId(uId) == 36597 and UnitHealth(uId) / UnitHealthMax(uId) <= 0.43 then
-		warned_preP3 = true
-		warnPhase3Soon:Show()
-		sndWOP:Play("phasechange")
+		sndWOP:Play("ptwo")
+	elseif self.vb.phase == 3 and not warned_preP4 and self:GetUnitCreatureId(uId) == 36597 and UnitHealth(uId) / UnitHealthMax(uId) <= 0.43 then
+		warned_preP4 = true
+		warnPhase4Soon:Show()
+		sndWOP:Play("pfour")
 	end
 end
 
@@ -622,7 +642,7 @@ function mod:NextPhase()
 		if mod:IsDifficulty("heroic10") or mod:IsDifficulty("heroic25") then
 			timerTrapCD:Start()
 		end
-	elseif self.vb.phase == 2 then
+	elseif self.vb.phase == 3 then
 		timerSummonValkyr:Start(20)
 		sndWOP:ScheduleVoice(16, "valkysoon")
 		timerSoulreaperCD:Start(40, soulreapercount)
@@ -633,7 +653,7 @@ function mod:NextPhase()
 		end
 		warnDefileSoon:Schedule(33)
 		sndWOP:ScheduleVoice(33, "defilesoon")
-	elseif self.vb.phase == 3 then
+	elseif self.vb.phase == 5 then
 		soulreapercount = 1
 		timerVileSpirit:Start(20)
 		timerSoulreaperCD:Start(40, soulreapercount)
