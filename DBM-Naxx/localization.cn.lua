@@ -75,7 +75,8 @@ L:SetOptionLocalization({
 
 L:SetMiscLocalization({
 	YellWebWrap			= "我被缠绕住了！救我！",
-	PenShe				= "%s朝四周喷射蛛丝！",
+	--PenShe				= "%s朝四周喷射蛛丝！",
+	PenShe				= "%s sprays strands of web everywhere!",
 	ArachnophobiaTimer		= "蜘蛛克星"
 })
 
